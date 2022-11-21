@@ -4,18 +4,38 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import service.impl.NhaCungCapIMPL;
+import viewmodel.NhaCungCapviewmodel;
+
+
+
 /**
  *
  * @author FPTSHOP
  */
 public class NhaCungCap extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NhaCungCap
-     */
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private List<NhaCungCapviewmodel>listNCC= new ArrayList<>();
+    private NhaCungCapIMPL nccimpl = new NhaCungCapIMPL();
     public NhaCungCap() {
         initComponents();
         setLocationRelativeTo(null);
+        jTable1.setModel(dtm);
+        String [] x = {"Ma Nha Cung Cap","Ten Nha Cung Cap","SDT","Email"};
+        dtm.setColumnIdentifiers(x);
+        listNCC= nccimpl.getAll();
+        loaddata(listNCC);
+    }
+    private void loaddata(List<NhaCungCapviewmodel>lists){
+        dtm.setRowCount(0);
+        for (NhaCungCapviewmodel list : lists) {
+            dtm.addRow(list.todatarow());
+        }
     }
 
     /**
@@ -77,13 +97,33 @@ public class NhaCungCap extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Add");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +221,44 @@ public class NhaCungCap extends javax.swing.JFrame {
         NhaCungCap ncc = new NhaCungCap();
         ncc.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       int index = jTable1.getSelectedRow();
+       NhaCungCapviewmodel nccvmd = listNCC.get(index);
+       jTextField1.setText(nccvmd.getMaNhaCC());
+       jTextField2.setText(nccvmd.getTenNhaCC());
+       jTextField3.setText(nccvmd.getSDT());
+       jTextField4.setText(nccvmd.getEmail());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String maNCC = jTextField1.getText();
+        String TenNcc = jTextField2.getText();
+        String SDT = jTextField3.getText();
+        String email = jTextField4.getText();
+        NhaCungCapviewmodel nccvmd = new NhaCungCapviewmodel(maNCC, TenNcc, SDT, email);
+        JOptionPane.showMessageDialog(rootPane, nccimpl.add(nccvmd));
+        listNCC = nccimpl.getAll();
+        loaddata(listNCC);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       String maNCC = jTextField1.getText();
+        String TenNcc = jTextField2.getText();
+        String SDT = jTextField3.getText();
+        String email = jTextField4.getText();
+        NhaCungCapviewmodel nccvmd = new NhaCungCapviewmodel(TenNcc, SDT, email);
+        JOptionPane.showMessageDialog(this,nccimpl.update(nccvmd, maNCC));
+        listNCC = nccimpl.getAll();
+        loaddata(listNCC);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String maNCC = jTextField1.getText();
+        JOptionPane.showMessageDialog(rootPane,nccimpl.delete(maNCC));
+        listNCC = nccimpl.getAll();
+        loaddata(listNCC);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
