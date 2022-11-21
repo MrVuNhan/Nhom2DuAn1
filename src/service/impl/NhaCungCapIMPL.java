@@ -22,9 +22,9 @@ public class NhaCungCapIMPL implements NhaCungCapService{
 
     @Override
     public String add(NhaCungCapviewmodel nccvmd) {
-        if(nccvmd.getMaNhaCC().isEmpty()){
-            return "khong duoc de trong";
-        }
+//        if(nccvmd.getMaNhaCC().isEmpty()){
+//            return "khong duoc de trong";
+//        }
         if(nccvmd.getTenNhaCC().isEmpty()){
             return "khong duoc de trong";
         }

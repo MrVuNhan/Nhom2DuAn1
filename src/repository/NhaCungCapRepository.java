@@ -69,7 +69,7 @@ public class NhaCungCapRepository {
                 + "      [TenNcc] = ?\n"
                 + "      ,[SDT] = ?\n"
                 + "      ,[Email] = ?\n"
-                + " WHERE Ma like = ? ";
+                + " WHERE Ma like ? ";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, nccvmd.getTenNhaCC());
