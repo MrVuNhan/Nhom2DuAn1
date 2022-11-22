@@ -25,7 +25,7 @@ public class DBConnection {
   private final static String dbName = "DuAn";
   private final static String portNumber = "1433";
   private final static String userID = "sa";
-  private final static String password = "31072003";
+  private final static String password = "0395789472";
     public static void main(String[] args) {
       try {
           getConnection();
