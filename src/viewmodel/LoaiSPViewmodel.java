@@ -9,6 +9,7 @@ package viewmodel;
  * @author admin
  */
 public class LoaiSPViewmodel {
+
     private String maLoai;
     private String tenLoai;
     private String congDung;
@@ -45,8 +46,14 @@ public class LoaiSPViewmodel {
     public void setCongDung(String congDung) {
         this.congDung = congDung;
     }
-    
-    public Object[] toDataRow(){
-        return new Object[]{maLoai,tenLoai,congDung};
+
+    public Object[] toDataRow() {
+        return new Object[]{maLoai, tenLoai, congDung};
     }
+
+    @Override
+    public String toString() {
+        return tenLoai;
+    }
+
 }

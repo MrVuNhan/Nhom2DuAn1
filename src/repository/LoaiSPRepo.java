@@ -24,7 +24,7 @@ public class LoaiSPRepo {
                 + "      ,[TenLoai]\n"
                 + "      ,[CongDung]\n"
                 + "  FROM [dbo].[LoaiSanPham]";
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<LoaiSPViewmodel> listncc = new ArrayList<>();
             while (rs.next()) {
@@ -48,7 +48,7 @@ public class LoaiSPRepo {
                 + "           ,[CongDung])\n"
                 + "     VALUES (?,?,?)";
         int check = 0;
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, lspvmd.getMaLoai());
             ps.setObject(2, lspvmd.getTenLoai());
             ps.setObject(3, lspvmd.getCongDung());
@@ -64,7 +64,7 @@ public class LoaiSPRepo {
         String query = "DELETE FROM [dbo].[LoaiSanPham]\n"
                 + "      WHERE ma = ?";
         int check = 0;
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, Ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class LoaiSPRepo {
                 + "      ,[CongDung] = ?\n"
                 + " WHERE Ma like ? ";
         int check = 0;
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, lspvmd.getTenLoai());
             ps.setObject(2, lspvmd.getCongDung());
             ps.setObject(3, Ma);
