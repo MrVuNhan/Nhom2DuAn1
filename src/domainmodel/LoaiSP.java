@@ -2,33 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package viewmodel;
+package domainmodel;
 
 /**
  *
  * @author admin
  */
-public class LoaiSPViewmodel {
+public class LoaiSP {
 
     private String id;
     private String maLoai;
     private String tenLoai;
     private String congDung;
 
-    public LoaiSPViewmodel() {
+    public LoaiSP(String maLoai, String tenLoai, String congDung) {
+        this.maLoai = maLoai;
+        this.tenLoai = tenLoai;
+        this.congDung = congDung;
     }
 
-    public LoaiSPViewmodel(String id, String maLoai, String tenLoai, String congDung) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LoaiSP(String id, String maLoai, String tenLoai, String congDung) {
         this.id = id;
         this.maLoai = maLoai;
         this.tenLoai = tenLoai;
         this.congDung = congDung;
     }
 
-    public LoaiSPViewmodel(String maLoai, String tenLoai, String congDung) {
-        this.maLoai = maLoai;
-        this.tenLoai = tenLoai;
-        this.congDung = congDung;
+    public LoaiSP() {
     }
 
     public String getMaLoai() {
@@ -55,13 +63,6 @@ public class LoaiSPViewmodel {
         this.congDung = congDung;
     }
 
-    public Object[] toDataRow() {
-        return new Object[]{maLoai, tenLoai, congDung};
-    }
-
-    @Override
-    public String toString() {
-        return tenLoai;
-    }
+   
 
 }
