@@ -55,6 +55,8 @@ public class SanPhamCTRepo {
             return listSPCT;
         } catch (SQLException e) {
             e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(SanPhamCTRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -79,6 +81,8 @@ public class SanPhamCTRepo {
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(SanPhamCTRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return check > 0;
     }
