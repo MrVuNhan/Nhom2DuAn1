@@ -38,6 +38,13 @@ public class LoaiSanPham extends javax.swing.JFrame {
         }
     }
 
+    public void fillData(int index) {
+        LoaiSPViewmodel lSP = listLSP.get(index);
+        txtMaLSP.setText(String.valueOf(lSP.getMaLoai()));
+        txtCongDung.setText(String.valueOf(lSP.getCongDung()));
+        txtTenLSP.setText(String.valueOf(lSP.getTenLoai()));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,9 +58,9 @@ public class LoaiSanPham extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtMaLSP = new javax.swing.JTextField();
+        txtTenLSP = new javax.swing.JTextField();
+        txtCongDung = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
@@ -136,9 +143,9 @@ public class LoaiSanPham extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                            .addComponent(txtMaLSP)
+                            .addComponent(txtTenLSP)
+                            .addComponent(txtCongDung, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -166,17 +173,17 @@ public class LoaiSanPham extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaLSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenLSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCongDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
@@ -191,9 +198,9 @@ public class LoaiSanPham extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        String maLSP = jTextField1.getText();
-        String TenLSP = jTextField2.getText();
-        String congDung = jTextField3.getText();
+        String maLSP = txtMaLSP.getText();
+        String TenLSP = txtTenLSP.getText();
+        String congDung = txtCongDung.getText();
         LoaiSPViewmodel nccvmd = new LoaiSPViewmodel(maLSP, TenLSP, congDung);
         JOptionPane.showMessageDialog(this, lspimpl.update(nccvmd, maLSP));
         listLSP = lspimpl.getAll();
@@ -209,9 +216,9 @@ public class LoaiSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        String maLSP = jTextField1.getText();
-        String tenLSP = jTextField2.getText();
-        String congDung = jTextField3.getText();
+        String maLSP = txtMaLSP.getText();
+        String tenLSP = txtTenLSP.getText();
+        String congDung = txtCongDung.getText();
         LoaiSPViewmodel lspvmd = new LoaiSPViewmodel(maLSP, tenLSP, congDung);
         JOptionPane.showMessageDialog(rootPane, lspimpl.add(lspvmd));
         listLSP = lspimpl.getAll();
@@ -219,9 +226,9 @@ public class LoaiSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String maLSP = jTextField1.getText();
-        String TenLSP = jTextField2.getText();
-        String congDung = jTextField3.getText();
+        String maLSP = txtMaLSP.getText();
+        String TenLSP = txtTenLSP.getText();
+        String congDung = txtCongDung.getText();
         LoaiSPViewmodel lspvmd = new LoaiSPViewmodel(maLSP, TenLSP, congDung);
         JOptionPane.showMessageDialog(rootPane, lspimpl.add(lspvmd));
         listLSP = lspimpl.getAll();
@@ -229,7 +236,7 @@ public class LoaiSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        String maNCC = jTextField1.getText();
+        String maNCC = txtMaLSP.getText();
         JOptionPane.showMessageDialog(rootPane, lspimpl.delete(maNCC));
         listLSP = lspimpl.getAll();
         loaddata(listLSP);
@@ -282,8 +289,8 @@ public class LoaiSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtCongDung;
+    private javax.swing.JTextField txtMaLSP;
+    private javax.swing.JTextField txtTenLSP;
     // End of variables declaration//GEN-END:variables
 }

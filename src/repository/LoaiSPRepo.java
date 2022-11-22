@@ -19,8 +19,8 @@ import viewmodel.LoaiSPViewmodel;
 public class LoaiSPRepo {
 
     public List<LoaiSPViewmodel> getAll() {
-        String query = "SELECT [Id]\n"
-                + "      ,[Ma]\n"
+        String query = "SELECT \n"
+                + "      [Ma]\n"
                 + "      ,[TenLoai]\n"
                 + "      ,[CongDung]\n"
                 + "  FROM [dbo].[LoaiSanPham]";
