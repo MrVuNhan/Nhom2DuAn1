@@ -172,7 +172,7 @@ public class DangNhap extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Mời điền pass");
             }
         } catch (Exception e) {
-    JOptionPane.showMessageDialog(rootPane, "Looix");
+    JOptionPane.showMessageDialog(rootPane, "Tài khoản không tôn tại");
         }
     }//GEN-LAST:event_btnLogActionPerformed
 
