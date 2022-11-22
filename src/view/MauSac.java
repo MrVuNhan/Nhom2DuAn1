@@ -4,6 +4,13 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import service.impl.MauSacimpl;
+import viewmodel.MauSacViewmodel;
+
 /**
  *
  * @author FPTSHOP
@@ -13,9 +20,23 @@ public class MauSac extends javax.swing.JFrame {
     /**
      * Creates new form MauSac
      */
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private List<MauSacViewmodel>listms = new ArrayList<>();
+    private MauSacimpl msimpl = new MauSacimpl();
     public MauSac() {
         initComponents();
         setLocationRelativeTo(null);
+        jTable1.setModel(dtm);
+        String [] x = {"Ma Mau Sac","Ten Mau Sac"};
+        dtm.setColumnIdentifiers(x);
+        listms=msimpl.getAll();
+        loaddata(listms);
+    }
+    private void loaddata(List<MauSacViewmodel>listx){
+        dtm.setRowCount(0);
+        for (MauSacViewmodel mauSacViewmodel : listx) {
+            dtm.addRow(mauSacViewmodel.todatarow());
+        }
     }
 
     /**
@@ -63,9 +84,19 @@ public class MauSac extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnDel.setText("Delete");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +106,11 @@ public class MauSac extends javax.swing.JFrame {
         });
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +189,12 @@ public class MauSac extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        String ma = jTextField1.getText();
+        String ten = jTextField2.getText();
+        MauSacViewmodel msvmd = new MauSacViewmodel(ten);
+        JOptionPane.showMessageDialog(rootPane, msimpl.update(msvmd, ma));
+        listms=msimpl.getAll();
+        loaddata(listms);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -163,6 +204,29 @@ public class MauSac extends javax.swing.JFrame {
         MauSac ms = new MauSac();
         ms.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int index = jTable1.getSelectedRow();
+         MauSacViewmodel msvmd = listms.get(index);
+         jTextField1.setText(msvmd.getMaMS());
+         jTextField2.setText(msvmd.getTenMS());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String ma = jTextField1.getText();
+        String ten = jTextField2.getText();
+        MauSacViewmodel msvmd = new MauSacViewmodel(ma, ten);
+        JOptionPane.showMessageDialog(this, msimpl.add(msvmd));
+        listms=msimpl.getAll();
+        loaddata(listms);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+       String ma = jTextField1.getText();
+       JOptionPane.showMessageDialog(rootPane, msimpl.delete(ma));
+        listms=msimpl.getAll();
+        loaddata(listms);
+    }//GEN-LAST:event_btnDelActionPerformed
 
     /**
      * @param args the command line arguments
