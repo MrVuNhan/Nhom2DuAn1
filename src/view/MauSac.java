@@ -21,18 +21,20 @@ public class MauSac extends javax.swing.JFrame {
      * Creates new form MauSac
      */
     private DefaultTableModel dtm = new DefaultTableModel();
-    private List<MauSacViewmodel>listms = new ArrayList<>();
+    private List<MauSacViewmodel> listms = new ArrayList<>();
     private MauSacimpl msimpl = new MauSacimpl();
+
     public MauSac() {
         initComponents();
         setLocationRelativeTo(null);
         jTable1.setModel(dtm);
-        String [] x = {"Ma Mau Sac","Ten Mau Sac"};
+        String[] x = {"Ma Mau Sac", "Ten Mau Sac"};
         dtm.setColumnIdentifiers(x);
-        listms=msimpl.getAll();
+        listms = msimpl.getAll();
         loaddata(listms);
     }
-    private void loaddata(List<MauSacViewmodel>listx){
+
+    private void loaddata(List<MauSacViewmodel> listx) {
         dtm.setRowCount(0);
         for (MauSacViewmodel mauSacViewmodel : listx) {
             dtm.addRow(mauSacViewmodel.todatarow());
@@ -193,7 +195,7 @@ public class MauSac extends javax.swing.JFrame {
         String ten = jTextField2.getText();
         MauSacViewmodel msvmd = new MauSacViewmodel(ten);
         JOptionPane.showMessageDialog(rootPane, msimpl.update(msvmd, ma));
-        listms=msimpl.getAll();
+        listms = msimpl.getAll();
         loaddata(listms);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -207,26 +209,38 @@ public class MauSac extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int index = jTable1.getSelectedRow();
-         MauSacViewmodel msvmd = listms.get(index);
-         jTextField1.setText(msvmd.getMaMS());
-         jTextField2.setText(msvmd.getTenMS());
+        MauSacViewmodel msvmd = listms.get(index);
+        jTextField1.setText(msvmd.getMaMS());
+        jTextField2.setText(msvmd.getTenMS());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String ma = jTextField1.getText();
         String ten = jTextField2.getText();
+        if (checkMa(ma)) {
+            JOptionPane.showMessageDialog(this, "Trùng mã");
+            return;
+        }
         MauSacViewmodel msvmd = new MauSacViewmodel(ma, ten);
         JOptionPane.showMessageDialog(this, msimpl.add(msvmd));
-        listms=msimpl.getAll();
+        listms = msimpl.getAll();
         loaddata(listms);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-       String ma = jTextField1.getText();
-       JOptionPane.showMessageDialog(rootPane, msimpl.delete(ma));
-        listms=msimpl.getAll();
+        String ma = jTextField1.getText();
+        JOptionPane.showMessageDialog(rootPane, msimpl.delete(ma));
+        listms = msimpl.getAll();
         loaddata(listms);
     }//GEN-LAST:event_btnDelActionPerformed
+    private boolean checkMa(String ma) {
+        for (MauSacViewmodel x : listms) {
+            if (x.getMaMS().equals(ma)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * @param args the command line arguments

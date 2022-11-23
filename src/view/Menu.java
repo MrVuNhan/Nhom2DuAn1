@@ -161,7 +161,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChatLieuActionPerformed
 
     private void btnSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSizeActionPerformed
-        Size sz = new Size();
+        SizeView sz = new SizeView();
         this.dispose();
         sz.setVisible(true);
         Menu me = new Menu();

@@ -15,14 +15,14 @@ import viewmodel.SanPhamChiTietViewModel;
  * @author FPTSHOP
  */
 public class SanPhamCTServiceimpl implements SanPhamCTService {
-    
+
     private SanPhamCTRepo re = new SanPhamCTRepo();
-    
+
     @Override
     public List<SanPhamChiTietViewModel> getAll() {
         return re.getAll();
     }
-    
+
     @Override
     public String add(SanPhamCT sp) {
         boolean add = re.add(sp);
@@ -32,7 +32,7 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
             return ":((";
         }
     }
-    
+
     @Override
     public String deleta(String id) {
         boolean add = re.xoa(id);
@@ -42,5 +42,15 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
             return ":((";
         }
     }
-    
+
+    @Override
+    public String update(SanPhamCT sp, String ma) {
+        boolean update = re.update(sp, ma);
+        if (update) {
+            return ":))";
+        } else {
+            return ":((";
+        }
+    }
+
 }

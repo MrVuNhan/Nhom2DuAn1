@@ -4,18 +4,21 @@
  */
 package service;
 
-import domainmodel.SanPhamCT;
+import domainmodel.SanPhamH;
 import java.util.List;
-import viewmodel.SanPhamChiTietViewModel;
+import viewmodel.SanPhamViewModel;
 
 /**
  *
  * @author FPTSHOP
  */
-public interface SanPhamCTService {
-    List<SanPhamChiTietViewModel> getAll();
-    
-    String add(SanPhamCT sp);
-    String update(SanPhamCT sp, String ma);
-    String deleta(String id);
+public interface SanPhamSer {
+
+    List<SanPhamViewModel> getAll();
+
+    String add(SanPhamH sp);
+
+    String update(SanPhamH sp, String ma);
+
+    String delele(String ma);
 }

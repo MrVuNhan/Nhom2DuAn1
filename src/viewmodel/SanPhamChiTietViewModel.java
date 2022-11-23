@@ -137,15 +137,15 @@ public class SanPhamChiTietViewModel {
         this.trangThai = trangThai;
     }
     
-    public String trangThai1(int trangThai) {
-        if (trangThai == 0) {
-            return "Còn hàng";
-        } else {
+    public String trangThai1(int slt) {
+        if (slt == 0) {
             return "Hết hàng";
+        } else {
+            return "Còn hàng";
         }
     }
     
     public Object[] toDataRow() {
-        return new Object[]{id, tenSP, loaiSP, mauSac, chatLieu, Size, Nsx, slt, giaNhap, giaBan, moTa, trangThai1(trangThai)};
+        return new Object[]{id, tenSP, loaiSP, mauSac, chatLieu, Size, Nsx, slt, giaNhap, giaBan, moTa, trangThai1(slt)};
     }
 }

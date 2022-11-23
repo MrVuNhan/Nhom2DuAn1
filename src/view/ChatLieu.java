@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import service.impl.ChatLieuIml;
 import viewmodel.ChatlieuViewModel;
+import viewmodel.MauSacViewmodel;
 
 /**
  *
@@ -204,6 +205,7 @@ public class ChatLieu extends javax.swing.JFrame {
         String ten = txtTen.getText();
         String dacTinh = txtDT.getText();
         String quyTrinh = txtQT.getText();
+
         if (gr == null) {
             ChatlieuViewModel ss = new ChatlieuViewModel(ma, ten, dacTinh, quyTrinh);
             JOptionPane.showMessageDialog(rootPane, chatLieu.add(ss));
@@ -224,7 +226,7 @@ public class ChatLieu extends javax.swing.JFrame {
             String quyTrinh = txtQT.getText();
             if (gr != null) {
                 ChatlieuViewModel ss = new ChatlieuViewModel(ma, ten, dacTinh, quyTrinh);
-                JOptionPane.showMessageDialog(rootPane, chatLieu.add(ss));
+                JOptionPane.showMessageDialog(rootPane, chatLieu.update(ss, ma));
                 listCl = chatLieu.getAll();
                 showDaTaHD(listCl);
             } else {
@@ -238,8 +240,8 @@ public class ChatLieu extends javax.swing.JFrame {
     private void btnDeteleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeteleActionPerformed
         try {
             JOptionPane.showMessageDialog(rootPane, chatLieu.delete(txtMa.getText()));
-                listCl = chatLieu.getAll();
-                showDaTaHD(listCl);
+            listCl = chatLieu.getAll();
+            showDaTaHD(listCl);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Chọn đối tượng thay đổi");
         }

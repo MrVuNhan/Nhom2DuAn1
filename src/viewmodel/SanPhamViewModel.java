@@ -2,22 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domainmodel;
+package viewmodel;
 
 /**
  *
  * @author FPTSHOP
  */
-public class SanPhamH {
+public class SanPhamViewModel {
 
     private String id;
     private String maSP;
     private String tenSP;
 
-    public SanPhamH() {
+    public SanPhamViewModel() {
     }
 
-    public SanPhamH(String maSP, String tenSP) {
+    public SanPhamViewModel(String id, String maSP, String tenSP) {
+        this.id = id;
         this.maSP = maSP;
         this.tenSP = tenSP;
     }
@@ -46,4 +47,7 @@ public class SanPhamH {
         this.tenSP = tenSP;
     }
 
+    public Object[] toDataRow() {
+        return new Object[]{id, maSP, tenSP};
+    }
 }

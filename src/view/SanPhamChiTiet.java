@@ -10,12 +10,27 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import service.ChatLieuService;
 import service.LoaiSPService;
+import service.MauSacService;
+import service.NhaCungCapService;
 import service.SanPhamCTService;
+import service.SanPhamSer;
+import service.SizeService;
+import service.impl.ChatLieuIml;
 import service.impl.LoaiSPImpl;
+import service.impl.MauSacimpl;
+import service.impl.NhaCungCapIMPL;
 import service.impl.SanPhamCTServiceimpl;
+import service.impl.SanPhamSerimpl;
+import service.impl.SizeServiceimpl;
+import viewmodel.ChatlieuViewModel;
 import viewmodel.LoaiSPViewmodel;
+import viewmodel.MauSacViewmodel;
+import viewmodel.NhaCungCapviewmodel;
 import viewmodel.SanPhamChiTietViewModel;
+import viewmodel.SanPhamViewModel;
+import viewmodel.SizeViewModel;
 
 /**
  *
@@ -26,11 +41,32 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<SanPhamChiTietViewModel> listSPCT = new ArrayList<>();
     private SanPhamCTService serSPCT = new SanPhamCTServiceimpl();
-    //Loại sản phẩm
+
+    //Sản phẩm
     private DefaultComboBoxModel dcbm1 = new DefaultComboBoxModel();
+    private List<SanPhamViewModel> listCbbSP = new ArrayList<>();
+    private SanPhamSer serSp = new SanPhamSerimpl();
+    //Loại sản phẩm
+    private DefaultComboBoxModel dcbm2 = new DefaultComboBoxModel();
     private List<LoaiSPViewmodel> listCbbLoai = new ArrayList<>();
     private LoaiSPService serLoai = new LoaiSPImpl();
-    //
+    //Màu sắc
+    private DefaultComboBoxModel dcbm3 = new DefaultComboBoxModel();
+    private List<MauSacViewmodel> listCbbMs = new ArrayList<>();
+    private MauSacService serMs = new MauSacimpl();
+
+    //Chất liệu
+    private DefaultComboBoxModel dcbm4 = new DefaultComboBoxModel();
+    private List<ChatlieuViewModel> listCbbCl = new ArrayList<>();
+    private ChatLieuService serCl = new ChatLieuIml();
+    //Size
+    private DefaultComboBoxModel dcbm5 = new DefaultComboBoxModel();
+    private List<SizeViewModel> listCbbSz = new ArrayList<>();
+    private SizeService serSz = new SizeServiceimpl();
+    //Nhà cung cấp
+    private DefaultComboBoxModel dcbm6 = new DefaultComboBoxModel();
+    private List<NhaCungCapviewmodel> listCbbNcc = new ArrayList<>();
+    private NhaCungCapService serNcc = new NhaCungCapIMPL();
 
     /**
      * Creates new form NewJFrame
@@ -38,24 +74,81 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     public SanPhamChiTiet() {
         initComponents();
         tbSanPhamCT.setModel(dtm);
-        String[] e = {"Id", "Tên SP", "Loại", "Màu", "Chất", "Size", "Nhà cc", "SLT", "Giá N", "Giá B", "Mô tả","Trạng thái"};
+        String[] e = {"Id", "Tên SP", "Loại", "Màu", "Chất", "Size", "Nhà cc", "SLT", "Giá N", "Giá B", "Mô tả", "Trạng thái"};
         dtm.setColumnIdentifiers(e);
-        
+
         listSPCT = serSPCT.getAll();
         loadTable(listSPCT);
-        
+
+        loadCacCbb();
+    }
+
+    public void loadCacCbb() {
+        //Sản phẩm
+        listCbbSP = serSp.getAll();
+        loadCbbSp(listCbbSP);
         //LoaiSP
         listCbbLoai = serLoai.getAll();
         loadCbbLoai(listCbbLoai);
+        //Màu sắc
+        listCbbMs = serMs.getAll();
+        loadCbbMs(listCbbMs);
+        //Chất liệu
+        listCbbCl = serCl.getAll();
+        loadCbbCl(listCbbCl);
+        //Size
+        listCbbSz = serSz.getAll();
+        loadCbbSz(listCbbSz);
+        //Nhasx
+        listCbbNcc = serNcc.getAll();
+        loadCbbNcc(listCbbNcc);
+    }
+
+    public void loadCbbSp(List<SanPhamViewModel> listSp) {
+        cbbTenSp.setModel(dcbm1);
+        listCbbLoai = serLoai.getAll();
+        for (SanPhamViewModel x : listSp) {
+            dcbm1.addElement(x.getTenSP());
+        }
     }
 
     public void loadCbbLoai(List<LoaiSPViewmodel> listLoai) {
-        cbbLoaiSp.setModel(dcbm1);
-
+        cbbLoaiSp.setModel(dcbm2);
         listCbbLoai = serLoai.getAll();
-
         for (LoaiSPViewmodel x : listLoai) {
-            dcbm1.addElement(x.getCongDung());
+            dcbm2.addElement(x.getTenLoai());
+        }
+    }
+
+    public void loadCbbMs(List<MauSacViewmodel> listMs) {
+        cbbMauSac.setModel(dcbm3);
+        listCbbLoai = serLoai.getAll();
+        for (MauSacViewmodel x : listMs) {
+            dcbm3.addElement(x.getTenMS());
+        }
+    }
+
+    public void loadCbbCl(List<ChatlieuViewModel> listCl) {
+        cbbChatLieu.setModel(dcbm4);
+        listCbbLoai = serLoai.getAll();
+        for (ChatlieuViewModel x : listCl) {
+            dcbm4.addElement(x.getTen());
+        }
+    }
+
+    public void loadCbbSz(List<SizeViewModel> listSz) {
+        cbbSize.setModel(dcbm5);
+        listCbbLoai = serLoai.getAll();
+        for (SizeViewModel x : listSz) {
+            dcbm5.addElement(x.getTen());
+        }
+    }
+
+    public void loadCbbNcc(List<NhaCungCapviewmodel> listLoai) {
+        cbbNhaSX.setModel(dcbm6);
+        listCbbNcc = serNcc.getAll();
+        for (NhaCungCapviewmodel x : listLoai) {
+            dcbm6.addElement(x.getTenNhaCC());
         }
 
     }
@@ -66,7 +159,8 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
             dtm.addRow(x.toDataRow());
         }
     }
-    public void fillData(int index){
+
+    public void fillData(int index) {
         SanPhamChiTietViewModel sp = listSPCT.get(index);
         cbbTenSp.setSelectedItem(sp.getTenSP());
         cbbLoaiSp.setSelectedItem(sp.getLoaiSP());
@@ -79,14 +173,15 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         txtGN.setText(String.valueOf(sp.getGiaNhap()));
         txtGB.setText(String.valueOf(sp.getGiaBan()));
         teaMoTa.setText(sp.getMoTa());
-        if(sp.getTrangThai()==0){
-            cbCon.setSelected(true);
-            cbHet.setSelected(false);
-        }else{
+        if (sp.getSlt() == 0) {
             cbCon.setSelected(false);
             cbHet.setSelected(true);
+        } else {
+            cbCon.setSelected(true);
+            cbHet.setSelected(false);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,7 +193,7 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnOut = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -123,12 +218,9 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         txtGB = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         btnTim2 = new javax.swing.JButton();
-        btnTim1 = new javax.swing.JButton();
-        cbbTimKiem = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbSanPhamCT = new javax.swing.JTable();
@@ -149,10 +241,10 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         jLabel1.setText("Sản phẩm chi tiết");
 
-        jButton1.setText("OUT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnOut.setText("OUT");
+        btnOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnOutActionPerformed(evt);
             }
         });
 
@@ -199,15 +291,9 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Tìm kiếm theo thông tin:");
 
-        jLabel14.setText("Trạng Thái:");
-
         jLabel15.setText("Tìm Theo Tên:");
 
         btnTim2.setText("Tìm");
-
-        btnTim1.setText("Tìm");
-
-        cbbTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -219,39 +305,25 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbbTimKiem, 0, 167, Short.MAX_VALUE)
-                            .addComponent(txtTimKiem))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTim2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTim1)))))
-                .addContainerGap(405, Short.MAX_VALUE))
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTim2)))
+                .addContainerGap(409, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(btnTim1)
-                    .addComponent(cbbTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTim2))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -424,15 +496,15 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(114, 114, 114)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnOut)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -485,30 +557,30 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
                             .addComponent(cbHet)
                             .addComponent(jLabel18)
                             .addComponent(lbId))
-                        .addGap(12, 12, 12))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)))
+                        .addGap(117, 117, 117)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnOut)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutActionPerformed
         Menu me = new Menu();
         this.dispose();
         me.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnOutActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         cbbTenSp.setSelectedIndex(0);
@@ -523,7 +595,6 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         teaMoTa.setText("");
         cbCon.setSelected(false);
         cbHet.setSelected(false);
-        cbbTimKiem.setSelectedIndex(0);
         txtTimKiem.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
@@ -533,21 +604,21 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     }//GEN-LAST:event_tbSanPhamCTMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String tenSP =cbbTenSp.getSelectedItem().toString();
-        String loaiSP = cbbLoaiSp.getSelectedItem().toString();
-        String mau = cbbMauSac.getSelectedItem().toString();
-        String chatLieu = cbbChatLieu.getSelectedItem().toString();
-        String size = cbbSize.getSelectedItem().toString();
-        String nsx = cbbNhaSX.getSelectedItem().toString();
+        String tenSP = (String) cbbTenSp.getSelectedItem();
+        String loaiSP = (String) cbbLoaiSp.getSelectedItem();
+        String mau = (String) cbbMauSac.getSelectedItem();
+        String chatLieu = (String) cbbChatLieu.getSelectedItem();
+        String size = (String) cbbSize.getSelectedItem();
+        String nsx = (String) cbbNhaSX.getSelectedItem();
         String slt = txtSLT.getText();
         String gn = txtGN.getText();
         String gb = txtGB.getText();
         String mota = teaMoTa.getText();
         int trangThai = 0;
-        if(cbCon.isSelected()==true){
+        if (cbCon.isSelected() == true) {
             trangThai += 0;
-        }else{
-            trangThai +=1;
+        } else {
+            trangThai += 1;
         }
         SanPhamCT sp = new SanPhamCT(tenSP, loaiSP, mau, chatLieu, size, nsx, Integer.valueOf(slt), Double.valueOf(gn), Double.valueOf(gb), mota, trangThai);
         JOptionPane.showMessageDialog(this, serSPCT.add(sp));
@@ -556,7 +627,27 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        
+        String id = lbId.getText();
+        String tenSP = (String) cbbTenSp.getSelectedItem();
+        String loaiSP = (String) cbbLoaiSp.getSelectedItem();
+        String mau = (String) cbbMauSac.getSelectedItem();
+        String chatLieu = (String) cbbChatLieu.getSelectedItem();
+        String size = (String) cbbSize.getSelectedItem();
+        String nsx = (String) cbbNhaSX.getSelectedItem();
+        String slt = txtSLT.getText();
+        String gn = txtGN.getText();
+        String gb = txtGB.getText();
+        String mota = teaMoTa.getText();
+        int trangThai = 0;
+        if (cbCon.isSelected() == true) {
+            trangThai += 0;
+        } else {
+            trangThai += 1;
+        }
+        SanPhamCT sp = new SanPhamCT(tenSP, loaiSP, mau, chatLieu, size, nsx, Integer.valueOf(slt), Double.valueOf(gn), Double.valueOf(gb), mota, trangThai);
+        JOptionPane.showMessageDialog(this, serSPCT.update(sp, id));
+        listSPCT = serSPCT.getAll();
+        loadTable(listSPCT);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -605,7 +696,7 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnTim1;
+    private javax.swing.JButton btnOut;
     private javax.swing.JButton btnTim2;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnXoa;
@@ -618,14 +709,11 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbNhaSX;
     private javax.swing.JComboBox<String> cbbSize;
     private javax.swing.JComboBox<String> cbbTenSp;
-    private javax.swing.JComboBox<String> cbbTimKiem;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;

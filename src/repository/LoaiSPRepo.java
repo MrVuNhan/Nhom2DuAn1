@@ -81,9 +81,10 @@ public class LoaiSPRepo {
                 + " WHERE Ma like ? ";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, lspvmd.getTenLoai());
-            ps.setObject(2, lspvmd.getCongDung());
-            ps.setObject(3, Ma);
+            ps.setObject(1, lspvmd.getMaLoai());
+            ps.setObject(2, lspvmd.getTenLoai());
+            ps.setObject(3, lspvmd.getCongDung());
+            ps.setObject(4, Ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import service.impl.LoaiSPImpl;
 import viewmodel.LoaiSPViewmodel;
+import viewmodel.MauSacViewmodel;
 
 /**
  *
@@ -24,7 +25,7 @@ public class LoaiSanPham extends javax.swing.JFrame {
     public LoaiSanPham() {
         initComponents();
         setLocationRelativeTo(null);
-        jTable1.setModel(dtm);
+        tbLoaiSP.setModel(dtm);
         String[] x = {"Ma Loai SP", "Ten Loai SP", "Cong Dung"};
         dtm.setColumnIdentifiers(x);
         listLSP = lspimpl.getAll();
@@ -62,7 +63,7 @@ public class LoaiSanPham extends javax.swing.JFrame {
         txtTenLSP = new javax.swing.JTextField();
         txtCongDung = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbLoaiSP = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -80,7 +81,7 @@ public class LoaiSanPham extends javax.swing.JFrame {
 
         jLabel4.setText("Công Dụng:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbLoaiSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,12 +92,12 @@ public class LoaiSanPham extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbLoaiSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tbLoaiSPMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbLoaiSP);
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -215,20 +216,19 @@ public class LoaiSanPham extends javax.swing.JFrame {
         lsp.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        String maLSP = txtMaLSP.getText();
-        String tenLSP = txtTenLSP.getText();
-        String congDung = txtCongDung.getText();
-        LoaiSPViewmodel lspvmd = new LoaiSPViewmodel(maLSP, tenLSP, congDung);
-        JOptionPane.showMessageDialog(rootPane, lspimpl.add(lspvmd));
-        listLSP = lspimpl.getAll();
-        loaddata(listLSP);
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void tbLoaiSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLoaiSPMouseClicked
+        int row = tbLoaiSP.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tbLoaiSPMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String maLSP = txtMaLSP.getText();
         String TenLSP = txtTenLSP.getText();
         String congDung = txtCongDung.getText();
+        if (checkMa(maLSP)) {
+            JOptionPane.showMessageDialog(this, "Trùng mã");
+            return;
+        }
         LoaiSPViewmodel lspvmd = new LoaiSPViewmodel(maLSP, TenLSP, congDung);
         JOptionPane.showMessageDialog(rootPane, lspimpl.add(lspvmd));
         listLSP = lspimpl.getAll();
@@ -241,6 +241,14 @@ public class LoaiSanPham extends javax.swing.JFrame {
         listLSP = lspimpl.getAll();
         loaddata(listLSP);
     }//GEN-LAST:event_btnDeleteActionPerformed
+    private boolean checkMa(String ma) {
+        for (LoaiSPViewmodel x : listLSP) {
+            if (x.getMaLoai().equals(ma)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * @param args the command line arguments
@@ -288,7 +296,7 @@ public class LoaiSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbLoaiSP;
     private javax.swing.JTextField txtCongDung;
     private javax.swing.JTextField txtMaLSP;
     private javax.swing.JTextField txtTenLSP;

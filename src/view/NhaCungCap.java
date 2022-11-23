@@ -9,9 +9,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import service.impl.NhaCungCapIMPL;
+import viewmodel.ChatlieuViewModel;
 import viewmodel.NhaCungCapviewmodel;
-
-
 
 /**
  *
@@ -20,18 +19,20 @@ import viewmodel.NhaCungCapviewmodel;
 public class NhaCungCap extends javax.swing.JFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
-    private List<NhaCungCapviewmodel>listNCC= new ArrayList<>();
+    private List<NhaCungCapviewmodel> listNCC = new ArrayList<>();
     private NhaCungCapIMPL nccimpl = new NhaCungCapIMPL();
+
     public NhaCungCap() {
         initComponents();
         setLocationRelativeTo(null);
         tbNcc.setModel(dtm);
-        String [] x = {"Ma Nha Cung Cap","Ten Nha Cung Cap","SDT","Email"};
+        String[] x = {"Ma Nha Cung Cap", "Ten Nha Cung Cap", "SDT", "Email"};
         dtm.setColumnIdentifiers(x);
-        listNCC= nccimpl.getAll();
+        listNCC = nccimpl.getAll();
         loaddata(listNCC);
     }
-    private void loaddata(List<NhaCungCapviewmodel>lists){
+
+    private void loaddata(List<NhaCungCapviewmodel> lists) {
         dtm.setRowCount(0);
         for (NhaCungCapviewmodel list : lists) {
             dtm.addRow(list.todatarow());
@@ -223,12 +224,12 @@ public class NhaCungCap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tbNccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNccMouseClicked
-       int index = tbNcc.getSelectedRow();
-       NhaCungCapviewmodel nccvmd = listNCC.get(index);
-       txtMaNcc.setText(nccvmd.getMaNhaCC());
-       txtTenNcc.setText(nccvmd.getTenNhaCC());
-       txtSDTNCC.setText(nccvmd.getSDT());
-       txtEmailNcc.setText(nccvmd.getEmail());
+        int index = tbNcc.getSelectedRow();
+        NhaCungCapviewmodel nccvmd = listNCC.get(index);
+        txtMaNcc.setText(nccvmd.getMaNhaCC());
+        txtTenNcc.setText(nccvmd.getTenNhaCC());
+        txtSDTNCC.setText(nccvmd.getSDT());
+        txtEmailNcc.setText(nccvmd.getEmail());
     }//GEN-LAST:event_tbNccMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -236,6 +237,14 @@ public class NhaCungCap extends javax.swing.JFrame {
         String TenNcc = txtTenNcc.getText();
         String SDT = txtSDTNCC.getText();
         String email = txtEmailNcc.getText();
+        if (checkMa(maNCC)) {
+            JOptionPane.showMessageDialog(this, "Trùng mã");
+            return;
+        }
+        if (checkSdt(SDT)) {
+            JOptionPane.showMessageDialog(this, "Trùng sdt");
+            return;
+        }
         NhaCungCapviewmodel nccvmd = new NhaCungCapviewmodel(maNCC, TenNcc, SDT, email);
         JOptionPane.showMessageDialog(rootPane, nccimpl.add(nccvmd));
         listNCC = nccimpl.getAll();
@@ -243,22 +252,39 @@ public class NhaCungCap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-       String maNCC = txtMaNcc.getText();
+        String maNCC = txtMaNcc.getText();
         String TenNcc = txtTenNcc.getText();
         String SDT = txtSDTNCC.getText();
         String email = txtEmailNcc.getText();
         NhaCungCapviewmodel nccvmd = new NhaCungCapviewmodel(TenNcc, SDT, email);
-        JOptionPane.showMessageDialog(this,nccimpl.update(nccvmd, maNCC));
+        JOptionPane.showMessageDialog(this, nccimpl.update(nccvmd, maNCC));
         listNCC = nccimpl.getAll();
         loaddata(listNCC);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         String maNCC = txtMaNcc.getText();
-        JOptionPane.showMessageDialog(rootPane,nccimpl.delete(maNCC));
+        JOptionPane.showMessageDialog(rootPane, nccimpl.delete(maNCC));
         listNCC = nccimpl.getAll();
         loaddata(listNCC);
     }//GEN-LAST:event_btnDeleteActionPerformed
+    private boolean checkMa(String ma) {
+        for (NhaCungCapviewmodel x : listNCC) {
+            if (x.getMaNhaCC().equals(ma)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkSdt(String sdt) {
+        for (NhaCungCapviewmodel x : listNCC) {
+            if (x.getSDT().equals(sdt)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * @param args the command line arguments

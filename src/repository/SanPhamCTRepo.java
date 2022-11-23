@@ -87,6 +87,44 @@ public class SanPhamCTRepo {
         return check > 0;
     }
 
+    public boolean update(SanPhamCT sp, String ma) {
+        String query = "UPDATE [dbo].[ChiTietSP]\n"
+                + "   SET [IdSP] = (Select sp.id from SanPham sp where sp.TenSP =?)\n"
+                + "      ,[IdLSP] = (Select lsp.id from LoaiSanPham lsp where lsp.TenLoai =?)\n"
+                + "      ,[IdMS] = (Select ms.id from MauSac ms where ms.TenMau =?)\n"
+                + "      ,[IdCL] = (Select cl.id from ChatLieu cl where cl.TenCL =?)\n"
+                + "      ,[IdSz] = (Select sz.id from Size sz where sz.TenSize =?)\n"
+                + "      ,[IdNcc] = (Select ncc.id from NhaCungCap ncc where ncc.TenNcc =?)\n"
+                + "      ,[SoLuongTon] = ?\n"
+                + "      ,[GiaNhap] = ?\n"
+                + "      ,[GiaBan] = ?\n"
+                + "      ,[MoTa] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + " WHERE Id like ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setObject(1, sp.getTenSP());
+            ps.setObject(2, sp.getLoaiSP());
+            ps.setObject(3, sp.getMauSac());
+            ps.setObject(4, sp.getChatLieu());
+            ps.setObject(5, sp.getSize());
+            ps.setObject(6, sp.getNsx());
+            ps.setObject(7, sp.getSlt());
+            ps.setObject(8, sp.getGiaNhap());
+            ps.setObject(9, sp.getGiaBan());
+            ps.setObject(10, sp.getMoTa());
+            ps.setObject(11, sp.getTrangThai());
+            ps.setObject(12, ma);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(SanPhamCTRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check > 0;
+    }
+
     public boolean xoa(String id) {
         String query = "DELETE FROM [dbo].[ChiTietSP]\n"
                 + "      WHERE Id = ?";
