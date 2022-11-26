@@ -25,14 +25,15 @@ public class SanPhamCTRepo {
 
     public List<SanPhamChiTietViewModel> getAll() {
         String query = "SELECT dbo.ChiTietSP.Id, dbo.SanPham.TenSP, dbo.LoaiSanPham.TenLoai, dbo.MauSac.TenMau, dbo.ChatLieu.TenCL, dbo.Size.TenSize, dbo.NhaCungCap.TenNcc, dbo.ChiTietSP.SoLuongTon, dbo.ChiTietSP.GiaNhap, dbo.ChiTietSP.GiaBan, \n"
-                + "                  dbo.ChiTietSP.MoTa, dbo.ChiTietSP.TrangThai\n"
-                + "FROM     dbo.ChatLieu INNER JOIN\n"
-                + "                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
-                + "                  dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
-                + "                  dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
-                + "                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
-                + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
-                + "                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id";
+                + "                                  dbo.ChiTietSP.MoTa, dbo.ChiTietSP.TrangThai\n"
+                + "                FROM     dbo.ChatLieu INNER JOIN\n"
+                + "                                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
+                + "                                 dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
+                + "                                 dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
+                + "                                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
+                + "                                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
+                + "                                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id\n"
+                + "Order by Id asc";
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<SanPhamChiTietViewModel> listSPCT = new ArrayList<>();

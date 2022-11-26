@@ -465,8 +465,8 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
     private void tbMuaHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMuaHangMouseClicked
-        int row = tbMuaHang.getSelectedRow();
-        fillData1(row);
+//        int row = tbMuaHang.getSelectedRow();
+//        fillData1(row);
     }//GEN-LAST:event_tbMuaHangMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -479,7 +479,7 @@ public class BanHang extends javax.swing.JFrame {
         String ngTao = txtNgTao.getText();
         String tenNV = txtTenNV.getText();
         String tenKH = txtKH.getText();
-        int tt =0;
+        int tt = 0;
         HoaDonBH hd = new HoaDonBH(ma, tenNV, Date.from(Instant.now()), tt, tenKH);
         JOptionPane.showMessageDialog(this, serHDBH.add(hd));
         lisHDBH = serHDBH.getAll();
@@ -524,7 +524,12 @@ public class BanHang extends javax.swing.JFrame {
     public void fillData1(int index) {
         HoaDonCTBHViewModel hd = lisHDCTBH.get(index);
         txtThanhTien.setText(String.valueOf(hd.getSl() * hd.getDonGia()));
-        
+        Double i = 0.0;
+        for (HoaDonCTBHViewModel x : lisHDCTBH) {
+            i = i + x.tinhTien();
+        }
+        String tt = String.valueOf(i);
+        txtThanhTien.setText(tt);
     }
 
     /**

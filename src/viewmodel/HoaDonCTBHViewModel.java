@@ -97,11 +97,11 @@ public class HoaDonCTBHViewModel {
         this.donGia = donGia;
     }
     
-    public Double tinhTien(int sl, Double donGia) {
-        return sl * donGia;
+    public Double tinhTien() {
+        return this.sl * this.donGia;
     }
     
     public Object[] toDataRow() {
-        return new Object[]{tenSP, tenLSP, tenMS, tenCL, tenSz, tenNsx, sl, donGia, tinhTien(sl, donGia)};
+        return new Object[]{tenSP, tenLSP, tenMS, tenCL, tenSz, tenNsx, sl, donGia, tinhTien()};
     }
 }
