@@ -1,9 +1,8 @@
-
 package domainmodel;
 
-
 public class HoaDonCT {
-    private String idHD;    
+
+    private String idHD;
     private String idCTSP;
     private int soLuong;
     private double donGia;
@@ -54,5 +53,5 @@ public class HoaDonCT {
     public String toString() {
         return "HoaDonCT{" + "idHD=" + idHD + ", idCTSP=" + idCTSP + ", soLuong=" + soLuong + ", donGia=" + donGia + '}';
     }
-    
+
 }

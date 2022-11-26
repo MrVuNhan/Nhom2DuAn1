@@ -148,4 +148,8 @@ public class SanPhamChiTietViewModel {
     public Object[] toDataRow() {
         return new Object[]{id, tenSP, loaiSP, mauSac, chatLieu, Size, Nsx, slt, giaNhap, giaBan, moTa, trangThai1(slt)};
     }
+    
+    public Object[]toDataRow1(){
+        return new Object[]{tenSP, loaiSP, mauSac, chatLieu, Size, Nsx, slt, giaBan, moTa, trangThai1(slt),id,giaNhap};
+    }
 }

@@ -260,17 +260,7 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
 
         jLabel8.setText("Nhà SX:");
 
-        cbbTenSp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Áo", "Dép", "Quần" }));
-
         cbbLoaiSp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbbMauSac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đỏ", "Trắng", "Đen" }));
-
-        cbbChatLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vải", "Sắt" }));
-
-        cbbSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "x", "xx", "X" }));
-
-        cbbNhaSX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nokia", "Samsung" }));
 
         jLabel9.setText("Số Lượng Tồn:");
 

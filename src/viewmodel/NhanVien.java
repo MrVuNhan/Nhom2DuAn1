@@ -9,8 +9,9 @@ package viewmodel;
  * @author lenovo
  */
 public class NhanVien {
-    private String ma,ten,sdt,diachi,emailString,ngaysinh,matkhau;
-    private int gioiTinh,trangThai;
+
+    private String ma, ten, sdt, diachi, emailString, ngaysinh, matkhau;
+    private int gioiTinh, trangThai;
 
     public NhanVien() {
     }
@@ -98,22 +99,24 @@ public class NhanVien {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-    public String gtinh(){
-        if (gioiTinh==1) {
+
+    public String gtinh() {
+        if (gioiTinh == 1) {
             return "Nam";
-        }else{
+        } else {
             return "Nữ";
         }
     }
-    public String tthai(){
-        if (trangThai==1) {
+
+    public String tthai() {
+        if (trangThai == 1) {
             return "Còn Làm";
-        }else{
+        } else {
             return "Nghỉ Làm";
         }
     }
-    public Object[]toDataRow(){
+
+    public Object[] toDataRow() {
         return new Object[]{ma,};
     }
 }

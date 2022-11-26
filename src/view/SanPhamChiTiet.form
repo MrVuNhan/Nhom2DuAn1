@@ -263,11 +263,7 @@
     <Component class="javax.swing.JComboBox" name="cbbTenSp">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="&#xc1;o"/>
-            <StringItem index="1" value="D&#xe9;p"/>
-            <StringItem index="2" value="Qu&#x1ea7;n"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -292,11 +288,7 @@
     <Component class="javax.swing.JComboBox" name="cbbMauSac">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="&#x110;&#x1ecf;"/>
-            <StringItem index="1" value="Tr&#x1eaf;ng"/>
-            <StringItem index="2" value="&#x110;en"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -306,10 +298,7 @@
     <Component class="javax.swing.JComboBox" name="cbbChatLieu">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="V&#x1ea3;i"/>
-            <StringItem index="1" value="S&#x1eaf;t"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -319,11 +308,7 @@
     <Component class="javax.swing.JComboBox" name="cbbSize">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="x"/>
-            <StringItem index="1" value="xx"/>
-            <StringItem index="2" value="X"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -333,10 +318,7 @@
     <Component class="javax.swing.JComboBox" name="cbbNhaSX">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="Nokia"/>
-            <StringItem index="1" value="Samsung"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
