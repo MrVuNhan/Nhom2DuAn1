@@ -21,32 +21,90 @@ import viewmodel.HoaDonViewModel;
 public class HoaDonRepository {
     public List<HoaDonViewModel> getAll(){
         ArrayList<HoaDonViewModel> list = new ArrayList<>();
-                    String select = "select hd.Ma,hd.tennguoinhan,hd.ngaytao,hd.ngaythu,hd.trangthai,hdct.soluong,hdct.dongia,sp.tensp,nv.tennv from \n"
-                    +"NhanVien nv join HoaDon hd on hd.IDNV = nv.ID join ChiTietHD hdct on hd.id = hdct.idhd \n"
-                    +"join ChiTietSP ctsp on hdct.idCTSP = ctsp.id join sanpham sp on ctsp.idSP=sp.id";
-        try {
-            Connection con = DBConnection.getConnection();
-
-            PreparedStatement pstm = con.prepareStatement(select);
-            ResultSet rs = pstm.executeQuery();
+                    String select = "select * from hoadon";
+        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(select)) {
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {                
                 String ma = rs.getString("ma");
-                String tensanpham = rs.getString("tensanpham");
-                String tennguoinhan = rs.getString("tennguoinhan");
-                int soluong = rs.getInt("soluong");
-                double dongia = rs.getDouble("dongia");
                 String ngaytao = rs.getString("ngaytao");
                 String ngaythu = rs.getString("ngaythu");
+                String tinhtrang = rs.getString("tinhtrang");
+                String tennguoinhan = rs.getString("tennguoinhan");
+                String diachi = rs.getString("diachi");
+                int sdt = rs.getInt("sdt");
                 String trangthai = rs.getString("trangthai");
-                HoaDonViewModel hdvm = new HoaDonViewModel(ma, tensanpham, tennguoinhan, soluong, dongia, ngaytao, ngaythu, trangthai);
+                HoaDonViewModel hdvm = new HoaDonViewModel( ma, ngaytao, ngaythu, tinhtrang, tennguoinhan, diachi, sdt, trangthai);
                 list.add(hdvm);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
             return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
     }
-    
-    
-    
+    public boolean add(HoaDonViewModel hdvm){
+        String insert = "INSERT INTO [dbo].[HoaDon]\n"
+                + "([Ma]\n"
+                + ",[NgayTao]\n"
+                + ",[NgayThu]\n"
+                + ",[TinhTrang]\n"
+                + ",[tenNguoiNhan]\n"
+                + ",[Diachi]\n"
+                + ",[SDT]\n"
+                + ",[TrangThai])\n"
+                + "VALUES\n"
+                + "(?,?,?,?,?,?,?,?)";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(insert)){
+            ps.setObject(1, hdvm.getMa());
+            ps.setObject(2, hdvm.getNgayTao());
+            ps.setObject(3, hdvm.getNgayThu());
+            ps.setObject(4, hdvm.getTinhTrang());
+            ps.setObject(5, hdvm.getTenNguoiNhan());
+            ps.setObject(6, hdvm.getDiaChi());
+            ps.setObject(7, hdvm.getSdt());
+            ps.setObject(8, hdvm.getTrangThai());
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check>0;
+    }
+    public boolean update(HoaDonViewModel hdvm, String ma) {
+        String update = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET [Ma] = ?\n"
+                + "      ,[NgayTao] = ?\n"
+                + "      ,[TinhTrang]=?\n"
+                + "      ,[tenNguoiNhan]=?\n"
+                + "      ,[Diachi]=?\n"
+                + "      ,[SDT]=?\n"
+                + "      ,[TrangThai]=?"
+                + " WHERE Ma = ?";
+        int check = 0;
+        try( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(update)) {
+            ps.setObject(1, hdvm.getMa());
+            ps.setObject(2, hdvm.getNgayTao());
+            ps.setObject(3, hdvm.getNgayThu());
+            ps.setObject(4, hdvm.getTinhTrang());
+            ps.setObject(5, hdvm.getTenNguoiNhan());
+            ps.setObject(6, hdvm.getDiaChi());
+            ps.setObject(7, hdvm.getSdt());
+            ps.setObject(8, hdvm.getTrangThai());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check >0;
+    }
+    public boolean delete(String ma){
+        String delete ="DELETE FROM [dbo].[HoaDon]\n"
+                + "      WHERE Ma = ?";
+        int check = 0;
+        try( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(delete)) {
+            ps.setObject(1, ma);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check >0;
+    }
 }

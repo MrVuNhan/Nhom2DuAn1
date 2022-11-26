@@ -2,26 +2,26 @@
 package viewmodel;
 
 public class HoaDonViewModel {
-    private String ma;
-    private String tenSP;
-    private String tenNguoiNhan;
-    private int soLuong;
-    private double donGia;
+   private String ma;
     private String ngayTao;
     private String ngayThu;
+    private String tinhTrang;
+    private String tenNguoiNhan;
+    private String diaChi;
+    private int sdt;
     private String trangThai;
 
     public HoaDonViewModel() {
     }
-    
-    public HoaDonViewModel(String ma, String tenSP, String tenNguoiNhan, int soLuong, double donGia, String ngayTao, String ngayThu, String trangThai) {
+
+    public HoaDonViewModel(String ma, String ngayTao, String ngayThu, String tinhTrang, String tenNguoiNhan, String diaChi, int sdt, String trangThai) {
         this.ma = ma;
-        this.tenSP = tenSP;
-        this.tenNguoiNhan = tenNguoiNhan;
-        this.soLuong = soLuong;
-        this.donGia = donGia;
         this.ngayTao = ngayTao;
         this.ngayThu = ngayThu;
+        this.tinhTrang = tinhTrang;
+        this.tenNguoiNhan = tenNguoiNhan;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
         this.trangThai = trangThai;
     }
 
@@ -31,38 +31,6 @@ public class HoaDonViewModel {
 
     public void setMa(String ma) {
         this.ma = ma;
-    }
-
-    public String getTenSP() {
-        return tenSP;
-    }
-
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
-    }
-
-    public String getTenNguoiNhan() {
-        return tenNguoiNhan;
-    }
-
-    public void setTenNguoiNhan(String tenNguoiNhan) {
-        this.tenNguoiNhan = tenNguoiNhan;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public double getDonGia() {
-        return donGia;
-    }
-
-    public void setDonGia(double donGia) {
-        this.donGia = donGia;
     }
 
     public String getNgayTao() {
@@ -81,6 +49,38 @@ public class HoaDonViewModel {
         this.ngayThu = ngayThu;
     }
 
+    public String getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
+    public String getTenNguoiNhan() {
+        return tenNguoiNhan;
+    }
+
+    public void setTenNguoiNhan(String tenNguoiNhan) {
+        this.tenNguoiNhan = tenNguoiNhan;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    public int getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(int sdt) {
+        this.sdt = sdt;
+    }
+
     public String getTrangThai() {
         return trangThai;
     }
@@ -88,6 +88,8 @@ public class HoaDonViewModel {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-    
+    public Object[] toDataRow() {
+        return new Object[]{ma,ngayTao,ngayThu,tinhTrang,tenNguoiNhan,diaChi,sdt,trangThai};
+    }
     
 }
