@@ -13,4 +13,6 @@ import viewmodel.HoaDonModel;
  */
 public interface TraHangServisert {
     List<HoaDonModel> getall();
+    List<HoaDonModel> getallbymahoadon(String mahd);
+    
 }
