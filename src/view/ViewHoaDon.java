@@ -120,6 +120,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
         });
 
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("SDT");
 
@@ -303,6 +308,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private void cboChuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboChuaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        String ma = txtMa.getText();
+        List<HoaDonViewModel> listTim = hdsv.search(listhdvm, ma);
+        showDataTable(listhdvm);
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
