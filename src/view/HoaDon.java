@@ -24,7 +24,7 @@ public class HoaDon extends javax.swing.JPanel {
     public HoaDon() {
         initComponents();
         tblHoaDon.setModel(model);
-        String[] a = {"Id", "Mã SP", "Tên SP"};
+        String[] a = {"Ma", "NgayTao", "NgayThu","TinhTrang","TenNguoiNhan","DiaChi","SDT","TrangThai"};
         model.setColumnIdentifiers(a);
         listhdvm = hdsv.getAll();
         showDataTable(listhdvm);
@@ -130,7 +130,12 @@ public class HoaDon extends javax.swing.JPanel {
         cboDa.setText("Da Thanh Toan");
 
         buttonGroup1.add(cboChua);
-        cboChua.setText("Chua Thanh Toan");
+        cboChua.setText("Da Hoan Tra");
+        cboChua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboChuaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -138,9 +143,6 @@ public class HoaDon extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel4)
@@ -189,7 +191,10 @@ public class HoaDon extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(cboDa)
                                         .addGap(18, 18, 18)
-                                        .addComponent(cboChua)))))))
+                                        .addComponent(cboChua))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -294,6 +299,40 @@ public class HoaDon extends javax.swing.JPanel {
         showDataTable(listhdvm);
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void cboChuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboChuaActionPerformed
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HoaDon().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
