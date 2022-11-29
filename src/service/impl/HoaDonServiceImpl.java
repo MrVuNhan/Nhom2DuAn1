@@ -69,6 +69,11 @@ public class HoaDonServiceImpl implements HoaDonService{
         }
     }
 
+    @Override
+    public List<HoaDonViewModel> search(List<HoaDonViewModel> listTim, String tim) {
+        return re.search(listTim, tim);
+    }
+
 
     
     
