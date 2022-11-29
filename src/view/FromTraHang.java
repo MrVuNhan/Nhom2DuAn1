@@ -18,6 +18,7 @@ import viewmodel.HoaDonModel;
 public class FromTraHang extends javax.swing.JFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
+     private DefaultTableModel dtmhdct = new DefaultTableModel();
     private List<HoaDonModel> listhoadon = new ArrayList<>();
     private TraHangServisert ser = new Trahangimpl();
 
@@ -27,21 +28,26 @@ public class FromTraHang extends javax.swing.JFrame {
     public FromTraHang() {
         initComponents();
         tbhthoadon.setModel(dtm);
-        String [] a = {"Ma HD","Ten NV","Ngay Tao","Ngay Thu","So Luong","Don Gia","Tong Tien","Trang Thai"};
+        String[] a = {"Ma HD", "Ten NV", "Ngay Tao", "Ngay Thu", "So Luong", "Don Gia", "Tong Tien", "Trang Thai"};
+        String[] b = {"Ten KH","Ma HD","Ngay Tra","Tong Tien Hoan Tra"};
         dtm.setColumnIdentifiers(a);
+        tbhthoadonduoi.setModel(dtmhdct);
+        dtmhdct.setColumnIdentifiers(b);
         listhoadon = ser.getall();
         showdata(listhoadon);
-        
+
     }
-    private void showdata(List<HoaDonModel> list){
+
+    private void showdata(List<HoaDonModel> list) {
         dtm.setRowCount(0);
         for (HoaDonModel hoaDon1 : list) {
             dtm.addRow(hoaDon1.todata());
         }
     }
-    private void fiildata(int index){
+
+    private void fiildata(int index) {
         HoaDonModel hd1 = listhoadon.get(index);
-        
+
     }
 
     /**
@@ -245,11 +251,15 @@ public class FromTraHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbhthoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbhthoadonMouseClicked
-                    
+        int row = tbhthoadon.getSelectedRow();
+        String ma = (String) tbhthoadon.getValueAt(row,0);
+       ArrayList<HoaDonModel> listhoadonct = (ArrayList<HoaDonModel>) ser.getallbymahoadon(ma);
+        showdatahdct(listhoadonct);
+
     }//GEN-LAST:event_tbhthoadonMouseClicked
 
     private void tbhthoadonduoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbhthoadonduoiMouseClicked
-        
+
     }//GEN-LAST:event_tbhthoadonduoiMouseClicked
 
     /**
@@ -307,4 +317,11 @@ public class FromTraHang extends javax.swing.JFrame {
     private javax.swing.JTextField txttienth;
     private javax.swing.JTextField txttongtien;
     // End of variables declaration//GEN-END:variables
+
+    private void showdatahdct(ArrayList<HoaDonModel> listhoadonct) {
+         dtmhdct.setRowCount(0);
+        for (HoaDonModel hoaDon1 : listhoadonct) {
+            dtmhdct.addRow(hoaDon1.todata());
+        }
+    }
 }

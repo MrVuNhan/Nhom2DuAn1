@@ -23,7 +23,7 @@ public class TraHangreponsitory {
                 + "FROM   dbo.ChiTietHD INNER JOIN\n"
                 + "             dbo.HoaDon ON dbo.ChiTietHD.IdHD = dbo.HoaDon.Id INNER JOIN\n"
                 + "             dbo.KhachHang ON dbo.HoaDon.IdKH = dbo.KhachHang.Id INNER JOIN\n"
-                + "             dbo.NhanVien ON dbo.HoaDon.IdNV = dbo.NhanVien.Id where ";
+                + "             dbo.NhanVien ON dbo.HoaDon.IdNV = dbo.NhanVien.Id  ";
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<HoaDonModel> listhoadon = new ArrayList();
