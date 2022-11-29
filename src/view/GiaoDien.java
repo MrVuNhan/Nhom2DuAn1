@@ -43,7 +43,6 @@ public class GiaoDien extends javax.swing.JFrame {
         bttthongke = new javax.swing.JButton();
         bttthoat = new javax.swing.JButton();
         PnlPhai = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         Pnlbanhang = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -96,6 +95,7 @@ public class GiaoDien extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -217,10 +217,6 @@ public class GiaoDien extends javax.swing.JFrame {
 
         PnlPhai.setBackground(new java.awt.Color(102, 255, 204));
         PnlPhai.setLayout(new java.awt.CardLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel2.setText("Phần Mềm Quản Lý Của Hàng Quần Áo MONO ");
-        PnlPhai.add(jLabel2, "card2");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -695,6 +691,10 @@ public class GiaoDien extends javax.swing.JFrame {
         );
 
         PnlPhai.add(FnlTraHang, "card4");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel2.setText("Phần Mềm Quản Lý Của Hàng Quần Áo MONO ");
+        PnlPhai.add(jLabel2, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

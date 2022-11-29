@@ -39,6 +39,9 @@ public class FromTraHang extends javax.swing.JFrame {
             dtm.addRow(hoaDon1.todata());
         }
     }
+    private void fiildata(int index){
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

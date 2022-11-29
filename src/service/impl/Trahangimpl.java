@@ -19,5 +19,10 @@ public class Trahangimpl implements TraHangServisert{
     public List<HoaDonModel> getall() {
         return  rep.getall();
     }
+
+    @Override
+    public List<HoaDonModel> getallbymahoadon(String mahd) {
+         return  rep.getallbymahoadon(mahd);
+    }
     
 }
