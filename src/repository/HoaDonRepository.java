@@ -42,6 +42,30 @@ public class HoaDonRepository {
         }
         return null;
     }
+    public List<HoaDonViewModel> search(List<HoaDonViewModel> listTim, String tim){
+        List<HoaDonViewModel> list = new ArrayList<>();
+        String search ="select * from hoadon where Ma=?";
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(tim)){
+            ps.setObject(1, tim);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {                
+                String ma = rs.getString("ma");
+                String ngaytao = rs.getString("ngaytao");
+                String ngaythu = rs.getString("ngaythu");
+                String tinhtrang = rs.getString("tinhtrang");
+                String tennguoinhan = rs.getString("tennguoinhan");
+                String diachi = rs.getString("diachi");
+                int sdt = rs.getInt("sdt");
+                String trangthai = rs.getString("trangthai");
+                HoaDonViewModel hdvm = new HoaDonViewModel( ma, ngaytao, ngaythu, tinhtrang, tennguoinhan, diachi, sdt, trangthai);
+                list.add(hdvm);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
     public boolean add(HoaDonViewModel hdvm){
         String insert = "INSERT INTO [dbo].[HoaDon]\n"
                 + "([Ma]\n"
