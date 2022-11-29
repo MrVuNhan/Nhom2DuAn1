@@ -744,8 +744,8 @@ public class GiaoDien extends javax.swing.JFrame {
     }//GEN-LAST:event_bttthoatActionPerformed
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
-        int row = tbHoaDon.getSelectedRow();
-        fillData(row);
+//        int row = tbHoaDon.getSelectedRow();
+//        fillData(row);
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
@@ -754,10 +754,10 @@ public class GiaoDien extends javax.swing.JFrame {
         String tenNV = txtTenNV.getText();
         String tenKH = txtKH.getText();
         int tt = 0;
-        HoaDonBH hd = new HoaDonBH(ma, tenNV, Date.from(Instant.now()), tt, tenKH);
-        JOptionPane.showMessageDialog(this, serHDBH.add(hd));
-        lisHDBH = serHDBH.getAll();
-        loadTable1(lisHDBH);
+//        HoaDonBH hd = new HoaDonBH(ma, tenNV, Date.from(Instant.now()), tt, tenKH);
+//        JOptionPane.showMessageDialog(this, serHDBH.add(hd));
+//        lisHDBH = serHDBH.getAll();
+//        loadTable1(lisHDBH);
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void tbSanPhamComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tbSanPhamComponentAdded
@@ -765,8 +765,8 @@ public class GiaoDien extends javax.swing.JFrame {
     }//GEN-LAST:event_tbSanPhamComponentAdded
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        lisHDCTBH.clear();
-        loadTable3(lisHDCTBH);
+//        lisHDCTBH.clear();
+//        loadTable3(lisHDCTBH);
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tbMuaHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMuaHangMouseClicked
