@@ -9,26 +9,39 @@ package viewmodel;
  * @author vungo
  */
 public class HoaDonModel {
-     private String mahd;
-    private String tennv;
+
+    private String mahd;
+    private String tenkh;
     private String ngaytao;
     private String ngaythu;
-    private int    soluong;
-    private double dongia;
+    private String diachi;
+    private String sdt;
     private int trangthai;
+    private int soluong;
+    private double dongia;
+    private String ngaytra;
 
     public HoaDonModel() {
     }
 
-    public HoaDonModel(String mahd, String tennv, String ngaytao, String ngaythu, int soluong, double dongia, int trangthai) {
+    public HoaDonModel(String mahd, String tenkh, String ngaytao, String ngaythu, String diachi, String sdt, int trangthai) {
         this.mahd = mahd;
-        this.tennv = tennv;
+        this.tenkh = tenkh;
         this.ngaytao = ngaytao;
         this.ngaythu = ngaythu;
-        this.soluong = soluong;
-        this.dongia = dongia;
+        this.diachi = diachi;
+        this.sdt = sdt;
         this.trangthai = trangthai;
     }
+
+    public HoaDonModel(String mahd, String tenkh, int soluong, double dongia, String ngaytra) {
+        this.mahd = mahd;
+        this.tenkh = tenkh;
+        this.soluong = soluong;
+        this.dongia = dongia;
+        this.ngaytra = ngaytra;
+    }
+    
 
     public String getMahd() {
         return mahd;
@@ -38,12 +51,12 @@ public class HoaDonModel {
         this.mahd = mahd;
     }
 
-    public String getTennv() {
-        return tennv;
+    public String getTenkh() {
+        return tenkh;
     }
 
-    public void setTennv(String tennv) {
-        this.tennv = tennv;
+    public void setTenkh(String tenkh) {
+        this.tenkh = tenkh;
     }
 
     public String getNgaytao() {
@@ -62,20 +75,20 @@ public class HoaDonModel {
         this.ngaythu = ngaythu;
     }
 
-    public int getSoluong() {
-        return soluong;
+    public String getDiachi() {
+        return diachi;
     }
 
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
+    public void setDiachi(String diachi) {
+        this.diachi = diachi;
     }
 
-    public double getDongia() {
-        return dongia;
+    public String getSdt() {
+        return sdt;
     }
 
-    public void setDongia(double dongia) {
-        this.dongia = dongia;
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
     }
 
     public int getTrangthai() {
@@ -85,19 +98,27 @@ public class HoaDonModel {
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
-    public double tongtien(int soluong , double dongia){
+
+    // trạng thái tính tổng tiền 
+    public double tongtien(int soluong, double dongia) {
         return soluong * dongia;
     }
-    public String trangthai1( int trangthai){
-        if(trangthai==0){
+
+    // trang thái đã thu hoặc chưa thu
+    public String trangthai1(int trangthai) {
+        if (trangthai == 0) {
             return "Da Thu";
-        }
-        else{
+        } else {
             return "chua thu";
         }
     }
-    public Object[] todata(){
-        return new Object[] {mahd,tennv,ngaytao,ngaythu,soluong,dongia,tongtien(soluong, dongia),trangthai1(trangthai)};
+
+    public Object[] todata() {
+        return new Object[]{mahd, tenkh, ngaytao, ngaythu, diachi, sdt, trangthai1(trangthai)};
     }
-    
+
+    public Object[] todatarow() {
+        return new Object[]{mahd,tenkh, soluong, dongia, ngaytra};
+    }
+
 }
