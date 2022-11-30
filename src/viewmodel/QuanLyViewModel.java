@@ -34,6 +34,10 @@ public class QuanLyViewModel {
         this.trangthai = trangthai;
     }
 
+    public QuanLyViewModel(String ma) {
+        this.ma = ma;
+    }
+
     public String getId() {
         return id;
     }

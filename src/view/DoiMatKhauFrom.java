@@ -4,18 +4,25 @@
  */
 package view;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import repository.QuanLyRepo;
+import service.impl.UsersImpl;
+import viewmodel.QuanLyViewModel;
+
 /**
  *
  * @author Asus
  */
 public class DoiMatKhauFrom extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DoiMatKhauFrom
-     */
+    private UsersImpl use = new UsersImpl();
+
     public DoiMatKhauFrom() {
         initComponents();
+        setLocationRelativeTo(null);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -163,6 +170,28 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         String user = txtTK.getText();
         String oldPass = txtOldMK.getText();
+        String newPass = txtNewMK.getText();
+        String newPass2 = txtNew2MK.getText();
+        QuanLyViewModel a = use.getOne(user, oldPass);
+        if (user.isEmpty() || oldPass.isEmpty() || newPass.isEmpty() || newPass2.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Mời điền đủ giữ liệu");
+        } else if (oldPass.equalsIgnoreCase(newPass2)) {
+            JOptionPane.showMessageDialog(rootPane, "Mật khẩu mới trùng với mật khẩu cũ");
+            txtNewMK.requestFocus();
+            txtNewMK.setBackground(Color.YELLOW);
+        } else if (!newPass.equalsIgnoreCase(newPass2)) {
+            JOptionPane.showMessageDialog(rootPane, "Mật khẩu mới hiện đang không trùng khớp");
+            txtNew2MK.requestFocus();
+            txtNew2MK.setBackground(Color.YELLOW);
+        } else {
+            if (user.equals(a.getMa()) && oldPass.equals(a.getMatKhau())) {
+                QuanLyViewModel ss = new QuanLyViewModel(user);
+                JOptionPane.showMessageDialog(rootPane, use.upPass(ss, user));
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Mật khẩu sai hoặc pass đang sai");
+            }
+        }
+
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     /**

@@ -13,4 +13,6 @@ import viewmodel.QuanLyViewModel;
 public interface UsersSeverces {
 
     QuanLyViewModel getOne(String user, String password);
+
+    String upPass(QuanLyViewModel ql, String Ma);
 }

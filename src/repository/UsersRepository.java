@@ -29,4 +29,18 @@ public class UsersRepository {
         }
         return null;
     }
+    public boolean upPass(QuanLyViewModel ql, String Ma) {
+        String query = "UPDATE [dbo].[QuanLy]\n"
+                + "   SET [MatKhau] = ?\n"
+                + " WHERE Ma = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ql.getMatKhau());
+            ps.setObject(2, Ma);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
 }

@@ -21,4 +21,13 @@ public class UsersImpl implements UsersSeverces {
         return us.getOne(user, password);
     }
 
+    @Override
+    public String upPass(QuanLyViewModel ql, String Ma) {
+        boolean A = us.upPass(ql, Ma);
+        if (A) {
+            return "Đỏi mật khẩu thành công";
+        } else {
+            return "Đổi mật khẩu thất bại";
+        }
+    }
 }
