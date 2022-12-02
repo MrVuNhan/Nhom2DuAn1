@@ -20,6 +20,7 @@ public class FromTraHang extends javax.swing.JFrame {
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dtmhdct = new DefaultTableModel();
     private List<HoaDonModel> listhoadon = new ArrayList<>();
+    private List<HoaDonModel> listhdct = new ArrayList<>();
     private TraHangServisert ser = new Trahangimpl();
 
     /**
@@ -34,8 +35,8 @@ public class FromTraHang extends javax.swing.JFrame {
         tbhthoadonduoi.setModel(dtmhdct);
         dtmhdct.setColumnIdentifiers(b);
         listhoadon = ser.getall();
+        // listhdct = ser.getallbymahoadon(mahd);
         showdata(listhoadon);
-        showdatahdct(listhoadon);
 
     }
 
@@ -45,17 +46,24 @@ public class FromTraHang extends javax.swing.JFrame {
             dtm.addRow(hoaDon1.todata());
         }
     }
-    private void showdatahdct( List<HoaDonModel> list){
+
+    private void showdatahdct(List<HoaDonModel> list) {
         dtmhdct.setRowCount(0);
         for (HoaDonModel hoaDon2 : list) {
             dtmhdct.addRow(hoaDon2.todatarow());
         }
     }
 
-    
-
-    private void fiildata(int index) {
-        HoaDonModel hd1 = listhoadon.get(index);
+    private void fiildata(List<HoaDonModel> list, int index) {
+//        HoaDonModel hd1 = listhoadon.get(index);
+//        txtmahd.setText(hd1.getMahd());
+//        txttenkh.setText(hd1.getTenkh());
+//        txtngaytra.setText(hd1.getNgaytra());
+//        txtsltl.setText(String.valueOf(hd1.getSoluong()));    
+        txtmahd.setText(list.get(index).getMahd());
+        txttenkh.setText(list.get(index).getTenkh());
+        txtngaytra.setText(list.get(index).getNgaytra());
+        txtsltl.setText(String.valueOf(list.get(index).getSoluong()));
 
     }
 
@@ -87,6 +95,8 @@ public class FromTraHang extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbhthoadonduoi = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        txtsltl = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -183,15 +193,21 @@ public class FromTraHang extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel8.setText("Số lượng trả");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txttienth, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,22 +216,25 @@ public class FromTraHang extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtngaytra, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txttienth, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtmahd, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txttenkh, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtmahd, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                    .addComponent(txttenkh, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                    .addComponent(txtsltl))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(36, 36, 36))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(btthoantra, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(btthoantra, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel8)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -223,7 +242,7 @@ public class FromTraHang extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txttenkh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -231,11 +250,15 @@ public class FromTraHang extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtmahd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txttienth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(jLabel8)
+                    .addComponent(txtsltl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txttienth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtngaytra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -299,10 +322,33 @@ public class FromTraHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbhthoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbhthoadonMouseClicked
+        int row = tbhthoadon.getSelectedRow();
+        HoaDonModel hd = listhoadon.get(row);
+        listhdct = ser.getallbymahoadon(hd.getMahd());
+        showdatahdct(listhdct);
+        // for (HoaDonModel hoaDon11 : listhoadon) {
+        //     System.out.println(hoaDon11.getMahd());
+        // }
+        // listhdct.add(hd);
+
 
     }//GEN-LAST:event_tbhthoadonMouseClicked
 
     private void tbhthoadonduoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbhthoadonduoiMouseClicked
+        int roww = tbhthoadonduoi.getSelectedRow();
+        int t = 0;
+        HoaDonModel hdd = listhdct.get(roww);
+        HoaDonModel hd = listhoadon.get(roww);
+        listhdct = ser.getallbymahoadon(hd.getMahd());
+        showdatahdct(listhdct);
+        for (HoaDonModel hoaDonModel : listhoadon) {
+            t = (int) (t + hoaDonModel.tongtien());
+        }
+        String o = String.valueOf(t);
+        txttienth.setText(o);
+        showdatahdct(listhdct);
+
+        fiildata(listhdct, roww);
 
     }//GEN-LAST:event_tbhthoadonduoiMouseClicked
 
@@ -351,6 +397,7 @@ public class FromTraHang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -361,6 +408,7 @@ public class FromTraHang extends javax.swing.JFrame {
     private javax.swing.JTable tbhthoadonduoi;
     private javax.swing.JTextField txtmahd;
     private javax.swing.JTextField txtngaytra;
+    private javax.swing.JTextField txtsltl;
     private javax.swing.JTextField txttenkh;
     private javax.swing.JTextField txttienth;
     private javax.swing.JTextField txttongtien;

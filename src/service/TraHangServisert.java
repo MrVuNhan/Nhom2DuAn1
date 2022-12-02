@@ -12,7 +12,13 @@ import viewmodel.HoaDonModel;
  * @author vungo
  */
 public interface TraHangServisert {
+
     List<HoaDonModel> getall();
+
     List<HoaDonModel> getallbymahoadon(String mahd);
-    
+
+    String add(HoaDonModel hd11);
+
+    String update(HoaDonModel hd11, int soluong);
+
 }

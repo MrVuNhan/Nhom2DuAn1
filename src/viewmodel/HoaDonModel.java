@@ -95,13 +95,38 @@ public class HoaDonModel {
         return trangthai;
     }
 
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public double getDongia() {
+        return dongia;
+    }
+
+    public void setDongia(double dongia) {
+        this.dongia = dongia;
+    }
+
+    public String getNgaytra() {
+        return ngaytra;
+    }
+
+    public void setNgaytra(String ngaytra) {
+        this.ngaytra = ngaytra;
+    }
+    
+
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
 
     // trạng thái tính tổng tiền 
-    public double tongtien(int soluong, double dongia) {
-        return soluong * dongia;
+    public double tongtien() {
+        return this.soluong*this.dongia;
     }
 
     // trang thái đã thu hoặc chưa thu
@@ -118,7 +143,7 @@ public class HoaDonModel {
     }
 
     public Object[] todatarow() {
-        return new Object[]{mahd,tenkh, soluong, dongia, ngaytra};
+        return new Object[]{mahd,tenkh, soluong, dongia, ngaytra,tongtien()};
     }
 
 }
