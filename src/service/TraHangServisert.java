@@ -15,10 +15,19 @@ public interface TraHangServisert {
 
     List<HoaDonModel> getall();
 
-    List<HoaDonModel> getallbymahoadon(String mahd);
+    String getallbymahoadon(HoaDonModel hd,String mahd);
 
-    String add(HoaDonModel hd11);
+    String updateCTHD(String idHD, int soluongTra);
 
-    String update(HoaDonModel hd11, int soluong);
+    String update(String idKH, String idHD, String idCTSP,String tenKH,int soLuong,double donGia);
+    
+    String getoneIDKH(String maKH);
+    
+    String getOneIDHD(String maHD);
+    
+    String getIDCTHD(String idHD);
+    
+    Integer getSoLuong(String idHD);
+
 
 }

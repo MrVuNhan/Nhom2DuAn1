@@ -10,6 +10,7 @@ package viewmodel;
  */
 public class HoaDonModel {
 
+    private String maKH;
     private String mahd;
     private String tenkh;
     private String ngaytao;
@@ -24,7 +25,8 @@ public class HoaDonModel {
     public HoaDonModel() {
     }
 
-    public HoaDonModel(String mahd, String tenkh, String ngaytao, String ngaythu, String diachi, String sdt, int trangthai) {
+    public HoaDonModel(String maKH, String mahd, String tenkh, String ngaytao, String ngaythu, String diachi, String sdt, int trangthai) {
+        this.maKH = maKH;
         this.mahd = mahd;
         this.tenkh = tenkh;
         this.ngaytao = ngaytao;
@@ -34,6 +36,18 @@ public class HoaDonModel {
         this.trangthai = trangthai;
     }
 
+
+
+   
+
+    public String getMaKH() {
+        return maKH;
+    }
+
+    public void setMaKH(String maKH) {
+        this.maKH = maKH;
+    }
+
     public HoaDonModel(String mahd, String tenkh, int soluong, double dongia, String ngaytra) {
         this.mahd = mahd;
         this.tenkh = tenkh;
@@ -41,7 +55,6 @@ public class HoaDonModel {
         this.dongia = dongia;
         this.ngaytra = ngaytra;
     }
-    
 
     public String getMahd() {
         return mahd;
@@ -118,15 +131,18 @@ public class HoaDonModel {
     public void setNgaytra(String ngaytra) {
         this.ngaytra = ngaytra;
     }
-    
 
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
 
     // trạng thái tính tổng tiền 
-    public double tongtien() {
-        return this.soluong*this.dongia;
+    public double tongtien(int soLuong, double donGia) {
+        return soluong * dongia;
+    }
+
+    public HoaDonModel(int soluong) {
+        this.soluong = soluong;
     }
 
     // trang thái đã thu hoặc chưa thu
@@ -139,11 +155,16 @@ public class HoaDonModel {
     }
 
     public Object[] todata() {
-        return new Object[]{mahd, tenkh, ngaytao, ngaythu, diachi, sdt, trangthai1(trangthai)};
+        return new Object[]{maKH,mahd, tenkh, ngaytao, ngaythu, diachi, sdt, trangthai1(trangthai)};
     }
 
     public Object[] todatarow() {
-        return new Object[]{mahd,tenkh, soluong, dongia, ngaytra,tongtien()};
+        return new Object[]{mahd, tenkh, soluong, dongia, tongtien(soluong, dongia)};
+    }
+
+    @Override
+    public String toString() {
+        return "HoaDonModel{" + "mahd=" + mahd + ", tenkh=" + tenkh + ", ngaytao=" + ngaytao + ", ngaythu=" + ngaythu + ", diachi=" + diachi + ", sdt=" + sdt + ", trangthai=" + trangthai + ", soluong=" + soluong + ", dongia=" + dongia + ", ngaytra=" + ngaytra + '}';
     }
 
 }

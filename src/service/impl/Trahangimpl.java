@@ -23,29 +23,48 @@ public class Trahangimpl implements TraHangServisert {
     }
 
     @Override
-    public List<HoaDonModel> getallbymahoadon(String mahd) {
-        return rep.getallbymahoadon(mahd);
+    public String getallbymahoadon(HoaDonModel hd, String mahd) {
+        return rep.getallbymahoadon(hd, mahd);
     }
 
     @Override
-    public String add(HoaDonModel hd11) {
-        
-        boolean test = rep.add(hd11);
+    public String updateCTHD(String idHD, int soluongTra) {
+
+        boolean test = rep.updateCTHD(idHD, soluongTra);
         if (test) {
-            return "Add thành công";
+            return "update CTHD thành công";
         } else {
-            return "Add thất bại";
+            return "update CTHD  thất bại";
         }
     }
 
     @Override
-    public String update(HoaDonModel hd11, int soluong) {
-        
-        boolean testhu = rep.update(hd11, soluong);
+    public String update(String idKH, String idHD, String idCTSP, String tenKH, int soLuong, double donGia) {
+        boolean testhu = rep.update(idKH, idHD, idCTSP, tenKH, soLuong, donGia);
         if (testhu) {
             return "UpDate thành công";
         } else {
             return "UpDate thất bại";
         }
+    }
+
+    @Override
+    public String getoneIDKH(String maKH) {
+        return rep.getIDKH(maKH);
+    }
+
+    @Override
+    public String getOneIDHD(String maHD) {
+        return rep.getIDHD(maHD);
+    }
+
+    @Override
+    public String getIDCTHD(String idHD) {
+        return rep.getIDCTHD(idHD);
+    }
+
+    @Override
+    public Integer getSoLuong(String idHD) {
+        return rep.getSoLuong(idHD);
     }
 }
