@@ -36,7 +36,7 @@ public class FromTraHang extends javax.swing.JFrame {
     public FromTraHang() {
         initComponents();
         tbhthoadon.setModel(dtm);
-        String[] a = {"Ma HD", "Ten KH", "Ngay Tao", "Ngay Thu", "Dia Chi ", "SDT", "Trang Thai"};
+        String[] a = {"Ma KH","Ma HD", "Ten KH", "Ngay Tao", "Ngay Thu", "Dia Chi ", "SDT", "Trang Thai"};
         String[] b = {"Ma HD", "Ten KH", "So Luong", "Don Gia", "Tong Tien"};
         dtm.setColumnIdentifiers(a);
         tbhthoadonduoi.setModel(dtmhdct);
