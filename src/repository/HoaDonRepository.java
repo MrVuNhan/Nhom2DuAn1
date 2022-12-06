@@ -32,7 +32,7 @@ public class HoaDonRepository {
                 String tennguoinhan = rs.getString("tennguoinhan");
                 String diachi = rs.getString("diachi");
                 int sdt = rs.getInt("sdt");
-                String trangthai = rs.getString("trangthai");
+                int trangthai = rs.getInt("trangthai");
                 HoaDonViewModel hdvm = new HoaDonViewModel( ma, ngaytao, ngaythu, tinhtrang, tennguoinhan, diachi, sdt, trangthai);
                 list.add(hdvm);
             }
@@ -56,7 +56,7 @@ public class HoaDonRepository {
                 String tennguoinhan = rs.getString("tennguoinhan");
                 String diachi = rs.getString("diachi");
                 int sdt = rs.getInt("sdt");
-                String trangthai = rs.getString("trangthai");
+                int  trangthai = rs.getInt("trangthai");
                 HoaDonViewModel hdvm = new HoaDonViewModel( ma, ngaytao, ngaythu, tinhtrang, tennguoinhan, diachi, sdt, trangthai);
                 list.add(hdvm);
             }
@@ -113,6 +113,7 @@ public class HoaDonRepository {
             ps.setObject(6, hdvm.getDiaChi());
             ps.setObject(7, hdvm.getSdt());
             ps.setObject(8, hdvm.getTrangThai());
+            ps.setObject(9,ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);

@@ -9,12 +9,12 @@ public class HoaDonViewModel {
     private String tenNguoiNhan;
     private String diaChi;
     private int sdt;
-    private String trangThai;
+    private int  trangThai;
 
     public HoaDonViewModel() {
     }
 
-    public HoaDonViewModel(String ma, String ngayTao, String ngayThu, String tinhTrang, String tenNguoiNhan, String diaChi, int sdt, String trangThai) {
+    public HoaDonViewModel(String ma, String ngayTao, String ngayThu, String tinhTrang, String tenNguoiNhan, String diaChi, int sdt, int trangThai) {
         this.ma = ma;
         this.ngayTao = ngayTao;
         this.ngayThu = ngayThu;
@@ -23,6 +23,10 @@ public class HoaDonViewModel {
         this.diaChi = diaChi;
         this.sdt = sdt;
         this.trangThai = trangThai;
+    }
+
+    public HoaDonViewModel(String ma, String ngaytao, String ngaythu, String tinhtrang, String tennguoinhan, String diachi, int sdt, String trangthai) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getMa() {
@@ -81,11 +85,11 @@ public class HoaDonViewModel {
         this.sdt = sdt;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
     public Object[] toDataRow() {

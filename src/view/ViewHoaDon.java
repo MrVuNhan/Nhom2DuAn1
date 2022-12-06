@@ -39,6 +39,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,10 +56,10 @@ public class ViewHoaDon extends javax.swing.JFrame {
         txtNgayThu = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cboDa = new javax.swing.JRadioButton();
+        radiothanhtoan = new javax.swing.JRadioButton();
         txtMa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        cboChua = new javax.swing.JRadioButton();
+        radiohoantra = new javax.swing.JRadioButton();
         btnTimKiem = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -102,7 +103,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         jLabel5.setText("Ten Nguoi Nhan");
 
-        cboDa.setText("Da Thanh Toan");
+        buttonGroup1.add(radiothanhtoan);
+        radiothanhtoan.setText("Da Thanh Toan");
+        radiothanhtoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radiothanhtoanActionPerformed(evt);
+            }
+        });
 
         txtMa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,10 +119,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         jLabel6.setText("Dia Chi");
 
-        cboChua.setText("Da Hoan Tra");
-        cboChua.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(radiohoantra);
+        radiohoantra.setText("Da Hoan Tra");
+        radiohoantra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboChuaActionPerformed(evt);
+                radiohoantraActionPerformed(evt);
             }
         });
 
@@ -139,6 +147,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblHoaDon);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,9 +206,9 @@ public class ViewHoaDon extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(btnThem))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(cboDa)
+                                        .addComponent(radiothanhtoan)
                                         .addGap(18, 18, 18)
-                                        .addComponent(cboChua))))))
+                                        .addComponent(radiohoantra))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(215, 215, 215)
                         .addComponent(jLabel1)))
@@ -240,8 +253,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
                     .addComponent(txtTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboDa)
-                    .addComponent(cboChua))
+                    .addComponent(radiothanhtoan)
+                    .addComponent(radiohoantra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -259,7 +272,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
         String diachi = txtDiaChi.getText();
         String sdt = txtSDT.getText();
         int trangThai = 0;
-        if (cboDa.isSelected() == true) {
+        if (radiothanhtoan.isSelected() == true) {
             trangThai += 0;
         } else {
             trangThai += 1;
@@ -268,7 +281,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Trùng mã");
             return;
         }
-        HoaDonViewModel hdvm = new HoaDonViewModel(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt), diachi);
+        HoaDonViewModel hdvm = new HoaDonViewModel(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt),trangThai);
         JOptionPane.showMessageDialog(this, hdsv.add(hdvm));
         listhdvm = hdsv.getAll();
         showDataTable(listhdvm);
@@ -290,12 +303,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
         String diachi = txtDiaChi.getText();
         String sdt = txtSDT.getText();
         int trangThai = 0;
-        if (cboDa.isSelected() == true) {
+        if (radiothanhtoan.isSelected() == true) {
             trangThai += 0;
         } else {
             trangThai += 1;
         }
-        HoaDonViewModel hdvm = new HoaDonViewModel(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt), diachi);
+        HoaDonViewModel hdvm = new HoaDonViewModel(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt),trangThai);
         JOptionPane.showMessageDialog(this, hdsv.update(hdvm, ma));
         listhdvm = hdsv.getAll();
         showDataTable(listhdvm);
@@ -305,15 +318,25 @@ public class ViewHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaActionPerformed
 
-    private void cboChuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuaActionPerformed
+    private void radiohoantraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiohoantraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboChuaActionPerformed
+    }//GEN-LAST:event_radiohoantraActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         String ma = txtMa.getText();
         List<HoaDonViewModel> listTim = hdsv.search(listhdvm, ma);
-        showDataTable(listhdvm);
+        showDataTable(listTim);
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        // TODO add your handling code here:
+        int row = tblHoaDon.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tblHoaDonMouseClicked
+
+    private void radiothanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiothanhtoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radiothanhtoanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,8 +378,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JRadioButton cboChua;
-    private javax.swing.JRadioButton cboDa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -367,6 +389,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton radiohoantra;
+    private javax.swing.JRadioButton radiothanhtoan;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMa;
@@ -392,6 +416,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
         txtTen.setText(hdvm.getTenNguoiNhan());
         txtDiaChi.setText(hdvm.getDiaChi());
         txtSDT.setText(String.valueOf(hdvm.getSdt()));
+        if(hdvm.getTrangThai()==0){
+            radiothanhtoan.setSelected(true);
+        }
+        else{
+            radiohoantra.setSelected(true);
+        }
 
     }
 

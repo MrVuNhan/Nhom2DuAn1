@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -78,9 +82,9 @@
                                       <Component id="btnThem" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cboDa" min="-2" max="-2" attributes="0"/>
+                                      <Component id="radiothanhtoan" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cboChua" min="-2" max="-2" attributes="0"/>
+                                      <Component id="radiohoantra" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -130,8 +134,8 @@
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtTinhTrang" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cboDa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cboChua" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="radiothanhtoan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="radiohoantra" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="225" max="-2" attributes="0"/>
@@ -215,10 +219,16 @@
         <Property name="text" type="java.lang.String" value="Ten Nguoi Nhan"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="cboDa">
+    <Component class="javax.swing.JRadioButton" name="radiothanhtoan">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Da Thanh Toan"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radiothanhtoanActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMa">
       <Events>
@@ -230,12 +240,15 @@
         <Property name="text" type="java.lang.String" value="Dia Chi"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="cboChua">
+    <Component class="javax.swing.JRadioButton" name="radiohoantra">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Da Hoan Tra"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboChuaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radiohoantraActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTimKiem">
@@ -272,6 +285,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblHoaDonMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
