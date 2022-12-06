@@ -4,6 +4,7 @@
  */
 package repository;
 
+import domainmodel.HoaDon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,7 +67,7 @@ public class HoaDonRepository {
         }
         return null;
     }
-    public boolean add(HoaDonViewModel hdvm){
+    public boolean add(HoaDon hd){
         String insert = "INSERT INTO [dbo].[HoaDon]\n"
                 + "([Ma]\n"
                 + ",[NgayTao]\n"
@@ -80,20 +81,20 @@ public class HoaDonRepository {
                 + "(?,?,?,?,?,?,?,?)";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(insert)){
-            ps.setObject(1, hdvm.getMa());
-            ps.setObject(2, hdvm.getNgayTao());
-            ps.setObject(3, hdvm.getNgayThu());
-            ps.setObject(4, hdvm.getTinhTrang());
-            ps.setObject(5, hdvm.getTenNguoiNhan());
-            ps.setObject(6, hdvm.getDiaChi());
-            ps.setObject(7, hdvm.getSdt());
-            ps.setObject(8, hdvm.getTrangThai());
+            ps.setObject(1, hd.getMa());
+            ps.setObject(2, hd.getNgayTao());
+            ps.setObject(3, hd.getNgayThu());
+            ps.setObject(4, hd.getTinhTrang());
+            ps.setObject(5, hd.getTenNguoiNhan());
+            ps.setObject(6, hd.getDiaChi());
+            ps.setObject(7, hd.getSdt());
+            ps.setObject(8, hd.getTrangThai());
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return check>0;
     }
-    public boolean update(HoaDonViewModel hdvm, String ma) {
+    public boolean update(HoaDon hd, String ma) {
         String update = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET [Ma] = ?\n"
                 + "      ,[NgayTao] = ?\n"
@@ -105,14 +106,14 @@ public class HoaDonRepository {
                 + " WHERE Ma = ?";
         int check = 0;
         try( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(update)) {
-            ps.setObject(1, hdvm.getMa());
-            ps.setObject(2, hdvm.getNgayTao());
-            ps.setObject(3, hdvm.getNgayThu());
-            ps.setObject(4, hdvm.getTinhTrang());
-            ps.setObject(5, hdvm.getTenNguoiNhan());
-            ps.setObject(6, hdvm.getDiaChi());
-            ps.setObject(7, hdvm.getSdt());
-            ps.setObject(8, hdvm.getTrangThai());
+            ps.setObject(1, hd.getMa());
+            ps.setObject(2, hd.getNgayTao());
+            ps.setObject(3, hd.getNgayThu());
+            ps.setObject(4, hd.getTinhTrang());
+            ps.setObject(5, hd.getTenNguoiNhan());
+            ps.setObject(6, hd.getDiaChi());
+            ps.setObject(7, hd.getSdt());
+            ps.setObject(8, hd.getTrangThai());
             ps.setObject(9,ma);
             check = ps.executeUpdate();
         } catch (Exception e) {

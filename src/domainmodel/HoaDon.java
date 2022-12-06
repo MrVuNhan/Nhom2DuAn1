@@ -3,10 +3,7 @@ package domainmodel;
 
 
 public class HoaDon {
-    private String id;
-    private String idKH;
-    private String idNV;
-    private String idKM;
+
     private String ma;
     private String ngayTao;
     private String ngayThu;
@@ -14,16 +11,12 @@ public class HoaDon {
     private String tenNguoiNhan;
     private String diaChi;
     private int sdt;
-    private String trangThai;
+    private int trangThai;
 
     public HoaDon() {
     }
 
-    public HoaDon(String id, String idKH, String idNV, String idKM, String ma, String ngayTao, String ngayThu, String tinhTrang, String tenNguoiNhan, String diaChi, int sdt, String trangThai) {
-        this.id = id;
-        this.idKH = idKH;
-        this.idNV = idNV;
-        this.idKM = idKM;
+    public HoaDon(String ma, String ngayTao, String ngayThu, String tinhTrang, String tenNguoiNhan, String diaChi, int sdt, int trangThai) {
         this.ma = ma;
         this.ngayTao = ngayTao;
         this.ngayThu = ngayThu;
@@ -32,38 +25,6 @@ public class HoaDon {
         this.diaChi = diaChi;
         this.sdt = sdt;
         this.trangThai = trangThai;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIdKH() {
-        return idKH;
-    }
-
-    public void setIdKH(String idKH) {
-        this.idKH = idKH;
-    }
-
-    public String getIdNV() {
-        return idNV;
-    }
-
-    public void setIdNV(String idNV) {
-        this.idNV = idNV;
-    }
-
-    public String getIdKM() {
-        return idKM;
-    }
-
-    public void setIdKM(String idKM) {
-        this.idKM = idKM;
     }
 
     public String getMa() {
@@ -122,18 +83,20 @@ public class HoaDon {
         this.sdt = sdt;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
     @Override
     public String toString() {
-        return "HoaDon{" + "id=" + id + ", idKH=" + idKH + ", idNV=" + idNV + ", idKM=" + idKM + ", ma=" + ma + ", ngayTao=" + ngayTao + ", ngayThu=" + ngayThu + ", tinhTrang=" + tinhTrang + ", tenNguoiNhan=" + tenNguoiNhan + ", diaChi=" + diaChi + ", sdt=" + sdt + ", trangThai=" + trangThai + '}';
+        return "HoaDon{" + "ma=" + ma + ", ngayTao=" + ngayTao + ", ngayThu=" + ngayThu + ", tinhTrang=" + tinhTrang + ", tenNguoiNhan=" + tenNguoiNhan + ", diaChi=" + diaChi + ", sdt=" + sdt + ", trangThai=" + trangThai + '}';
     }
+
+    
 
     
 }

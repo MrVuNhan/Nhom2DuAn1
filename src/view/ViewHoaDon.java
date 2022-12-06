@@ -4,6 +4,7 @@
  */
 package view;
 
+import domainmodel.HoaDon;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -281,8 +282,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Trùng mã");
             return;
         }
-        HoaDonViewModel hdvm = new HoaDonViewModel(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt),trangThai);
-        JOptionPane.showMessageDialog(this, hdsv.add(hdvm));
+        HoaDon hd = new HoaDon(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt), trangThai);
+        JOptionPane.showMessageDialog(this, hdsv.add(hd));
         listhdvm = hdsv.getAll();
         showDataTable(listhdvm);
     }//GEN-LAST:event_btnThemActionPerformed
@@ -308,8 +309,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
         } else {
             trangThai += 1;
         }
-        HoaDonViewModel hdvm = new HoaDonViewModel(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt),trangThai);
-        JOptionPane.showMessageDialog(this, hdsv.update(hdvm, ma));
+        HoaDon hd = new HoaDon(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt), trangThai);
+        JOptionPane.showMessageDialog(this, hdsv.update(hd, ma));
         listhdvm = hdsv.getAll();
         showDataTable(listhdvm);
     }//GEN-LAST:event_btnSuaActionPerformed

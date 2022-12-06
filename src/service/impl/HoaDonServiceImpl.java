@@ -4,6 +4,7 @@
  */
 package service.impl;
 
+import domainmodel.HoaDon;
 import java.util.List;
 import repository.HoaDonRepository;
 import service.HoaDonService;
@@ -22,26 +23,8 @@ public class HoaDonServiceImpl implements HoaDonService{
     }
 
     @Override
-    public String add(HoaDonViewModel hdmv) {
-        boolean add = re.add(hdmv);
-        if(hdmv.getMa().isEmpty()){
-            return "khong dc de trong";
-        }
-        if(hdmv.getNgayTao().isEmpty()){
-            return "khong dc de trong";
-        }
-        if(hdmv.getNgayThu().isEmpty()){
-            return "khong dc de trong";
-        }
-        if(hdmv.getTinhTrang().isEmpty()){
-            return "khong dc de trong";
-        }
-        if(hdmv.getTenNguoiNhan().isEmpty()){
-            return "khong dc de trong";
-        }
-        if(hdmv.getDiaChi().isEmpty()){
-            return "khong dc de trong";
-        }
+    public String add(HoaDon hd) {
+        boolean add = re.add(hd);
         if(add){
             return "thanh cong";
         }else{
@@ -50,8 +33,8 @@ public class HoaDonServiceImpl implements HoaDonService{
     }
 
     @Override
-    public String update(HoaDonViewModel hdvm, String ma) {
-        boolean update = re.update(hdvm, ma);
+    public String update(HoaDon hd, String ma) {
+        boolean update = re.update(hd, ma);
         if(update){
             return "thanh cong";
         }else{
@@ -73,4 +56,5 @@ public class HoaDonServiceImpl implements HoaDonService{
     public List<HoaDonViewModel> search(List<HoaDonViewModel> listTim, String tim) {
         return re.search(listTim, tim);
     }  
+
 }

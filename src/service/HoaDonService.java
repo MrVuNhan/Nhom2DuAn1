@@ -4,6 +4,7 @@
  */
 package service;
 
+import domainmodel.HoaDon;
 import java.util.List;
 import viewmodel.HoaDonViewModel;
 
@@ -13,8 +14,8 @@ import viewmodel.HoaDonViewModel;
  */
 public interface HoaDonService {
     List<HoaDonViewModel> getAll();
-    String add(HoaDonViewModel hdmv);
-    String update(HoaDonViewModel hdvm,String ma);
+    String add(HoaDon hd);
+    String update(HoaDon hd,String ma);
     String delete(String ma);
     List<HoaDonViewModel> search(List<HoaDonViewModel> listTim, String tim);
 }
