@@ -19,7 +19,7 @@ public interface TraHangServisert {
 
     String updateCTHD(String idHD, int soluongTra);
 
-    String update(String idKH, String idHD, String idCTSP,String tenKH,int soLuong,double donGia);
+    String update(String idKH, String idHD,String tenKH,int soLuong,double donGia);
     
     String getoneIDKH(String maKH);
     

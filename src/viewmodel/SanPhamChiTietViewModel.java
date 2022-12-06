@@ -25,7 +25,11 @@ public class SanPhamChiTietViewModel {
     
     public SanPhamChiTietViewModel() {
     }
-    
+
+    public SanPhamChiTietViewModel(int slt) {
+        this.slt = slt;
+    }
+
     public SanPhamChiTietViewModel(String id, String tenSP, String loaiSP, String mauSac, String chatLieu, String Size, String Nsx, int slt, Double giaNhap, Double giaBan, String moTa, int trangThai) {
         this.id = id;
         this.tenSP = tenSP;
@@ -40,6 +44,9 @@ public class SanPhamChiTietViewModel {
         this.moTa = moTa;
         this.trangThai = trangThai;
     }
+    
+   
+    
     
     public String getId() {
         return id;

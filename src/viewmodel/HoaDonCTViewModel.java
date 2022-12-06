@@ -9,12 +9,21 @@ package viewmodel;
  * @author syduong
  */
 public class HoaDonCTViewModel {
+    private String id;
     private String idHD;    
     private String idCTSP;
     private int soLuong;
     private double donGia;
 
     public HoaDonCTViewModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public HoaDonCTViewModel(String idHD, String idCTSP, int soLuong, double donGia) {

@@ -33,8 +33,8 @@ public class SanPhamCTRepo {
                 + "                                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
                 + "                                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
                 + "                                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id\n"
-                + "Order by Id asc";
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+                + "Order by ChiTietSP.IdSP asc";
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<SanPhamChiTietViewModel> listSPCT = new ArrayList<>();
             while (rs.next()) {
@@ -62,12 +62,50 @@ public class SanPhamCTRepo {
         return null;
     }
 
+    public SanPhamChiTietViewModel getOneSPCT(SanPhamChiTietViewModel sp, int SoLuongMua, String idSP) {
+        String query = "select SanPham.TenSP,LoaiSanPham.TenLoai,MauSac.TenMau,ChatLieu.TenCL,\n"
+                + "			 size.TenSize ,NhaCungCap.TenNcc,ChiTietSP.SoLuongTon,ChiTietSP.GiaBan\n"
+                + "			 from SanPham\n"
+                + "			 join ChiTietSP on SanPham.id = ChiTietSP.IdSP\n"
+                + "			 join NhaCungCap on ChiTietSP.IdNcc = NhaCungCap.Id\n"
+                + "			 join ChatLieu on ChiTietSP.IdCL = ChatLieu.Id\n"
+                + "			 join Size on ChiTietSP.IdSz = Size.Id\n"
+                + "			 join MauSac on ChiTietSP.IdMS = MauSac.Id\n"
+                + "			 join LoaiSanPham on ChiTietSP.IdLSP = LoaiSanPham.Id\n"
+                + "\n"
+                + "			 where ChiTietSP.IdSP = ? ";
+           try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setObject(1, idSP);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                sp.setId(idSP);
+                sp.setTenSP(rs.getString("TenSP"));
+                sp.setLoaiSP(rs.getString("TenLoai"));
+                sp.setMauSac(rs.getString("TenMau"));
+                sp.setChatLieu(rs.getString("TenCL"));
+                sp.setSize(rs.getString("TenSize"));
+                sp.setNsx(rs.getString("TenNCC"));
+                sp.setSlt(SoLuongMua);
+                sp.setGiaBan(rs.getDouble("GiaBan"));
+               
+                
+            }
+           
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(SanPhamCTRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sp;
+    }
+
     public boolean add(SanPhamCT sp) {
         String query = "insert into ChiTietSP(IdSP,IdLSP,IdMS,IdCL,IdSz,IdNcc,SoLuongTon,GiaNhap,GiaBan,MoTa,TrangThai)\n"
                 + "select sp.Id,lsp.Id,ms.Id,cl.Id,sz.Id,ncc.Id,?,?,?,?,? From SanPham sp , LoaiSanPham lsp , MauSac ms , ChatLieu cl, Size sz , NhaCungCap ncc \n"
                 + "where sp.TenSP = ? and lsp.TenLoai =? and ms.TenMau =? and cl.TenCL = ? and sz.TenSize =? and ncc.TenNcc =?";
         int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, sp.getSlt());
             ps.setObject(2, sp.getGiaNhap());
             ps.setObject(3, sp.getGiaBan());
@@ -103,7 +141,7 @@ public class SanPhamCTRepo {
                 + "      ,[TrangThai] = ?\n"
                 + " WHERE Id like ?";
         int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setObject(1, sp.getTenSP());
             ps.setObject(2, sp.getLoaiSP());
@@ -130,7 +168,7 @@ public class SanPhamCTRepo {
         String query = "DELETE FROM [dbo].[ChiTietSP]\n"
                 + "      WHERE Id = ?";
         int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, id);
             check = ps.executeUpdate();
         } catch (SQLException e) {
@@ -140,4 +178,11 @@ public class SanPhamCTRepo {
         }
         return check > 0;
     }
+    public static void main(String[] args) {
+        List<SanPhamChiTietViewModel> list = new SanPhamCTRepo().getAll();
+        for (SanPhamChiTietViewModel x : list) {
+            System.out.println(x.getId());
+        }
+    }
+    
 }

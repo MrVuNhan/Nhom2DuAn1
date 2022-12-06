@@ -22,7 +22,7 @@ public class DBConnection {
   }
 
   private final static String serverName = "localhost"; //127.0.0.1
-  private final static String dbName = "DuAn";
+  private final static String dbName = "DuAn1";
   private final static String portNumber = "1433";
   private final static String userID = "sa";
   private final static String password = "0395789472";

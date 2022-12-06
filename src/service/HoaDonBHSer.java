@@ -7,6 +7,7 @@ package service;
 import domainmodel.HoaDonBH;
 import java.util.List;
 import viewmodel.HoaDonBHViewModel;
+import viewmodel.NhanVien;
 
 /**
  *
@@ -15,6 +16,18 @@ import viewmodel.HoaDonBHViewModel;
 public interface HoaDonBHSer {
 
     List<HoaDonBHViewModel> getAll();
-    
-    String add(HoaDonBH hd);
+
+    List<HoaDonBHViewModel> getAll1();
+
+    String add(String ma, String IDNV);
+
+    String getIDNV(String maNV);
+
+    String addCTHD(String idHD, String idCTSP, int soLuong, double DonGia);
+
+    String getIDHD(String maHD);
+
+    boolean updateCTSP(String idCTSP, int soLuong);
+
+    boolean updateTTHD(String idHD);
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import repository.HoaDonBHRepo;
 import service.HoaDonBHSer;
 import viewmodel.HoaDonBHViewModel;
+import viewmodel.NhanVien;
 
 /**
  *
@@ -24,13 +25,48 @@ public class HoaDonBHSerimpl implements HoaDonBHSer {
     }
 
     @Override
-    public String add(HoaDonBH hd) {
-        boolean add = re.add(hd);
+    public String add(String ma, String IDNV) {
+        boolean add = re.add(ma, IDNV);
         if (add) {
-            return ":))";
+            return "add thanh cong";
         } else {
-            return ":((";
+            return " add that bai";
         }
+    }
+
+    @Override
+    public String getIDNV(String maNV) {
+        return re.getOneIDNV(maNV);
+    }
+
+    @Override
+    public String addCTHD(String idHD, String idCTSP, int soLuong, double DonGia) {
+        boolean add = re.addCTHD(idHD, idCTSP, soLuong, DonGia);
+        if (add) {
+            return "add thanh cong";
+        } else {
+            return " add that bai";
+        }
+    }
+
+    @Override
+    public String getIDHD(String maHD) {
+        return re.getOneIDHD(maHD);
+    }
+
+    @Override
+    public boolean updateCTSP(String idCTSP, int soLuong) {
+        return re.updateSLCT(idCTSP, soLuong);
+    }
+
+    @Override
+    public List<HoaDonBHViewModel> getAll1() {
+        return re.getAll1();
+    }
+
+    @Override
+    public boolean updateTTHD(String idHD) {
+        return re.updateTTHD(idHD);
     }
 
 }

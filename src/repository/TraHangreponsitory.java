@@ -83,29 +83,27 @@ public class TraHangreponsitory {
         return check > 0;
     }
 
-    public boolean update(String idKH, String idHD, String idCTSP, String tenKH, int soLuong, double donGia) {
+    public boolean update(String idKH, String idHD, String tenKH, int soLuong, double donGia) {
         String query = "INSERT INTO [dbo].[trahang]\n"
                 + "           (\n"
                 + "           [IdKH]\n"
                 + "           ,[IdHD]\n"
-                + "           ,[IdCTSP]\n"
                 + "           ,[TenKH]\n"
                 + "           ,[NgayTra]\n"
                 + "           ,[SoLuong]\n"
-                + "           ,[TongTienTL])\n"
+                + "           ,[DonGia])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?)";
         long mil = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(mil);
         int check = 0;
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, idKH);
             ps.setObject(2, idHD);
-            ps.setObject(3, idCTSP);
-            ps.setObject(4, tenKH);
-            ps.setObject(5, date);
-            ps.setObject(6, soLuong);
-            ps.setObject(7, soLuong * donGia);
+            ps.setObject(3, tenKH);
+            ps.setObject(4, date);
+            ps.setObject(5, soLuong);
+            ps.setObject(6, donGia);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);

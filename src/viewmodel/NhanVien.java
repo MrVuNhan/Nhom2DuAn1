@@ -10,13 +10,14 @@ package viewmodel;
  */
 public class NhanVien {
 
-    private String ma, ten, sdt, diachi, emailString, ngaysinh, matkhau;
+    private String id,ma, ten, sdt, diachi, emailString, ngaysinh, matkhau;
     private int gioiTinh, trangThai;
 
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String sdt, String diachi, String emailString, String ngaysinh, String matkhau, int gioiTinh, int trangThai) {
+    public NhanVien(String id, String ma, String ten, String sdt, String diachi, String emailString, String ngaysinh, String matkhau, int gioiTinh, int trangThai) {
+        this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.sdt = sdt;
@@ -27,6 +28,16 @@ public class NhanVien {
         this.gioiTinh = gioiTinh;
         this.trangThai = trangThai;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 
     public String getMa() {
         return ma;
@@ -119,4 +130,10 @@ public class NhanVien {
     public Object[] toDataRow() {
         return new Object[]{ma,};
     }
+
+    @Override
+    public String toString() {
+        return "NhanVien{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", sdt=" + sdt + ", diachi=" + diachi + ", emailString=" + emailString + ", ngaysinh=" + ngaysinh + ", matkhau=" + matkhau + ", gioiTinh=" + gioiTinh + ", trangThai=" + trangThai + '}';
+    }
+    
 }

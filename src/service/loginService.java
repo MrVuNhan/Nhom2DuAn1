@@ -2,12 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domainmodel;
+package service;
+
+import java.util.List;
+import viewmodel.NhanVien;
 
 /**
  *
- * @author lenovo
+ * @author vungo
  */
-public class NhanVien {
+public interface loginService {
+
+    List<NhanVien> getALLNV();
     
 }

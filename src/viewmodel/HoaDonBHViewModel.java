@@ -11,7 +11,7 @@ import java.util.Date;
  * @author FPTSHOP
  */
 public class HoaDonBHViewModel {
-
+    private String id ;
     private String ma;
     private String tenNV;
     private Date ngayTao;
@@ -21,13 +21,33 @@ public class HoaDonBHViewModel {
     public HoaDonBHViewModel() {
     }
 
-    public HoaDonBHViewModel(String ma, String tenNV, Date ngayTao, int trangThai, String tenKH) {
+    public HoaDonBHViewModel(String id, String ma, String tenNV, Date ngayTao, int trangThai, String tenKH) {
+        this.id = id;
         this.ma = ma;
         this.tenNV = tenNV;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
         this.tenKH = tenKH;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public HoaDonBHViewModel(String id, String ma, String tenNV, Date ngayTao, int trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.tenNV = tenNV;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+    }
+
+    
+    
 
     public String getMa() {
         return ma;
@@ -78,6 +98,6 @@ public class HoaDonBHViewModel {
     }
 
     public Object[] toDataRow() {
-        return new Object[]{ma, tenNV, ngayTao, trangThaiHD(trangThai), tenKH};
+        return new Object[]{ma, tenNV, ngayTao, trangThaiHD(trangThai)};
     }
 }

@@ -39,8 +39,8 @@ public class Trahangimpl implements TraHangServisert {
     }
 
     @Override
-    public String update(String idKH, String idHD, String idCTSP, String tenKH, int soLuong, double donGia) {
-        boolean testhu = rep.update(idKH, idHD, idCTSP, tenKH, soLuong, donGia);
+    public String update(String idKH, String idHD, String tenKH, int soLuong, double donGia) {
+        boolean testhu = rep.update(idKH, idHD,  tenKH, soLuong, donGia);
         if (testhu) {
             return "UpDate thành công";
         } else {

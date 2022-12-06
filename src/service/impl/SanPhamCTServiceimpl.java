@@ -53,4 +53,9 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
         }
     }
 
+    @Override
+    public SanPhamChiTietViewModel getOneSP(SanPhamChiTietViewModel sp, int soLuong, String idSP) {
+        return re.getOneSPCT(sp, soLuong, idSP);
+    }
+
 }

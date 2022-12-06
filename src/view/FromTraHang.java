@@ -29,14 +29,20 @@ public class FromTraHang extends javax.swing.JFrame {
     private TraHangServisert ser = new Trahangimpl();
 
     private int row;
+    private String ma;
+
+    public FromTraHang() {
+        initComponents();
+    }
 
     /**
      * Creates new form FromTraHang
      */
-    public FromTraHang() {
+    public FromTraHang(String user) {
         initComponents();
+        ma = user;
         tbhthoadon.setModel(dtm);
-        String[] a = {"Ma KH","Ma HD", "Ten KH", "Ngay Tao", "Ngay Thu", "Dia Chi ", "SDT", "Trang Thai"};
+        String[] a = {"Ma KH", "Ma HD", "Ten KH", "Ngay Tao", "Ngay Thu", "Dia Chi ", "SDT", "Trang Thai"};
         String[] b = {"Ma HD", "Ten KH", "So Luong", "Don Gia", "Tong Tien"};
         dtm.setColumnIdentifiers(a);
         tbhthoadonduoi.setModel(dtmhdct);
@@ -97,9 +103,7 @@ public class FromTraHang extends javax.swing.JFrame {
         txtsltl = new javax.swing.JTextField();
         lbThanhToan = new javax.swing.JLabel();
         lbDonGia = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -268,9 +272,12 @@ public class FromTraHang extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Tìm kiếm");
-
-        jLabel7.setText("Tìm Kiếm theo tên ");
+        jButton2.setText("Thoát");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,26 +293,21 @@ public class FromTraHang extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(288, 288, 288)
-                                .addComponent(jLabel1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel1)
+                                .addGap(162, 162, 162)
+                                .addComponent(jButton2)))))
                 .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -365,7 +367,7 @@ public class FromTraHang extends javax.swing.JFrame {
         } else {
             lbThanhToan.setText(setText(soLuong, hd.getDongia()) + " ");
             lbDonGia.setText(setDonGia(hd.getDongia()) + " ");
-            JOptionPane.showMessageDialog(this, ser.update(idKH, idHD, idCTSP,
+            JOptionPane.showMessageDialog(this, ser.update(idKH, idHD, 
                     hd.getTenkh(), soLuong, tienThua));
             JOptionPane.showMessageDialog(this, ser.updateCTHD(idHD, soLuong));
             listhoadon.add(hd1);
@@ -379,6 +381,12 @@ public class FromTraHang extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btthoantraActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Menu login = new Menu(ma);
+        login.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,19 +426,18 @@ public class FromTraHang extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btthoantra;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbDonGia;
     private javax.swing.JLabel lbThanhToan;
     private javax.swing.JTable tbhthoadon;

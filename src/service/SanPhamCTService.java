@@ -18,4 +18,6 @@ public interface SanPhamCTService {
     String add(SanPhamCT sp);
     String update(SanPhamCT sp, String ma);
     String deleta(String id);
+    
+    SanPhamChiTietViewModel getOneSP(SanPhamChiTietViewModel sp , int soLuong , String idSP);
 }

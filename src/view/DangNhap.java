@@ -4,25 +4,30 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
-import service.impl.UsersImpl;
-import viewmodel.QuanLyViewModel;
+import service.impl.loginImpl;
+import service.loginService;
+import viewmodel.NhanVien;
 
 /**
  *
  * @author FPTSHOP
  */
 public class DangNhap extends javax.swing.JFrame {
-
-    private UsersImpl us = new UsersImpl();
+    
+    private loginService login = new loginImpl();
     private boolean showPass = false;
-
+    private List<NhanVien> listNV = new ArrayList<>();
+    
     public DangNhap() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Đăng nhập hệ thống");
+        listNV = login.getALLNV();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,29 +156,40 @@ public class DangNhap extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-       String user = txtName.getText();
-       String pass = txtPass.getText();
-        try {
-            QuanLyViewModel ql = us.getOne(user, pass);
-            if (user.equals(ql.getMa()) && pass.equals(ql.getMatKhau())) {
-                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
-                Menu me = new Menu();
-                this.dispose();
-                me.setVisible(true);
-                ChatLieu cl = new ChatLieu();
-                cl.setVisible(false);
-            } else if (user.isEmpty() || pass.isEmpty()) {
-                JOptionPane.showMessageDialog(rootPane, "Mời điển đủ thông tin");
-            } else if(user.isEmpty()){
-                JOptionPane.showMessageDialog(rootPane, "Mời điền tên");
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Mời điền pass");
+public boolean checkLoginNV(String ma, String matKhau) {
+        for (NhanVien nv : listNV) {
+            if (ma.equalsIgnoreCase(nv.getMa()) && matKhau.equalsIgnoreCase(nv.getMatkhau())) {
+                return true;
             }
-        } catch (Exception e) {
-    JOptionPane.showMessageDialog(rootPane, "Tài khoản không tôn tại");
         }
+        return false;
+    }
+
+    public boolean validateForm() {
+        if (txtName.getText().isEmpty() && txtPass.getText().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+    
+    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        if (validateForm()) {
+            String user = txtName.getText();
+            String pass = txtPass.getText();
+            if (checkLoginNV(user, pass)) {
+                JOptionPane.showMessageDialog(this, "Login successfully!");
+                Menu fnv = new Menu(user);
+                fnv.setVisible(true);
+                this.dispose();
+            }   else{
+                 JOptionPane.showMessageDialog(this, "Login Loi!");
+            }         
+        } else {
+            JOptionPane.showMessageDialog(this, "Username or Pass incorrect!");
+            
+        }
+        
+
     }//GEN-LAST:event_btnLogActionPerformed
 
     private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed
