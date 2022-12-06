@@ -23,6 +23,11 @@ public class SanPhamViewModel {
         this.tenSP = tenSP;
     }
 
+    public SanPhamViewModel(String maSP, String tenSP) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+    }
+
     public String getId() {
         return id;
     }
