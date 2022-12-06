@@ -171,29 +171,38 @@ public class FormThongKe extends javax.swing.JFrame {
         String thang = txtThang.getText();
         String nam = txtNam.getText();
         String all = nam + "-" + thang + "-" + ngay;
+        DecimalFormat ds = new DecimalFormat("###,###,###,###");
         if (ngay.isEmpty() && thang.isEmpty() && nam.isEmpty()) {
             JOptionPane.showMessageDialog(this, "mời điền ngày tháng năm muốn tìm kiếm");
-        } else if (!ngay.isBlank()&& thang.isEmpty() && nam.isEmpty() ) {
+        } else if (!ngay.isBlank() && thang.isEmpty() && nam.isEmpty()) {
             List<ThongKeViewModle> listSearch = thongKe.listNgay(ngay);
-                showDaTaHD(listSearch);
-        } else if (!thang.isEmpty()&& ngay.isEmpty() && nam.isEmpty()) {
+            showDaTaHD(listSearch);
+            
+            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+        } else if (!thang.isEmpty() && ngay.isEmpty() && nam.isEmpty()) {
             List<ThongKeViewModle> listSearch = thongKe.listThang(thang);
-                showDaTaHD(listSearch);
-        } else if (!nam.isEmpty()&& ngay.isEmpty() && thang.isEmpty()) {
+            showDaTaHD(listSearch);
+            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+        } else if (!nam.isEmpty() && ngay.isEmpty() && thang.isEmpty()) {
             List<ThongKeViewModle> listSearch = thongKe.listNam(nam);
-                showDaTaHD(listSearch);
-        }else if (!ngay.isEmpty() && !thang.isEmpty() && nam.isEmpty()){
-             List<ThongKeViewModle> listSearch = thongKe.listNgayThang(ngay, thang);
-                showDaTaHD(listSearch);
-        }else if(ngay.isEmpty() && !thang.isEmpty() && !nam.isEmpty()){
+            showDaTaHD(listSearch);
+            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+        } else if (!ngay.isEmpty() && !thang.isEmpty() && nam.isEmpty()) {
+            List<ThongKeViewModle> listSearch = thongKe.listNgayThang(ngay, thang);
+            showDaTaHD(listSearch);
+            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+        } else if (ngay.isEmpty() && !thang.isEmpty() && !nam.isEmpty()) {
             List<ThongKeViewModle> listSearch = thongKe.listNamThang(thang, nam);
-                showDaTaHD(listSearch);
-        }else if(!ngay.isEmpty() && thang.isEmpty() && !nam.isEmpty()){
+            showDaTaHD(listSearch);
+            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+        } else if (!ngay.isEmpty() && thang.isEmpty() && !nam.isEmpty()) {
             List<ThongKeViewModle> listSearch = thongKe.listNamNgay(ngay, nam);
-                showDaTaHD(listSearch);
-        }else {
+            showDaTaHD(listSearch);
+            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+        } else {
             List<ThongKeViewModle> listSearch = thongKe.listAll(all);
-                showDaTaHD(listSearch);
+            showDaTaHD(listSearch);
+            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
