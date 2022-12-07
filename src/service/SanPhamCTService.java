@@ -14,7 +14,7 @@ import viewmodel.SanPhamChiTietViewModel;
  */
 public interface SanPhamCTService {
     List<SanPhamChiTietViewModel> getAll();
-    
+    List<SanPhamChiTietViewModel> search(List<SanPhamChiTietViewModel> listTim ,String ma);
     String add(SanPhamCT sp);
     String update(SanPhamCT sp, String ma);
     String deleta(String id);

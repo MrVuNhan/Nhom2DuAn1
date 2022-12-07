@@ -284,6 +284,11 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         jLabel15.setText("Tìm Theo Tên:");
 
         btnTim2.setText("Tìm");
+        btnTim2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTim2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -646,6 +651,12 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         listSPCT = serSPCT.getAll();
         loadTable(listSPCT);
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTim2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim2ActionPerformed
+//        String id = lbId.getText();
+//        List<SanPhamChiTietViewModel> listTim = serSPCT.search(listSPCT, id);
+//        loadTable(listTim);
+    }//GEN-LAST:event_btnTim2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -512,7 +512,7 @@ public class BanHang extends javax.swing.JFrame {
                 sp.getSlt(), sp.getGiaBan()));
         serHDBH.updateCTSP(sp.getId(), sp.getSlt());
         serHDBH.updateTTHD(idHD);
-
+        
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
 

@@ -27,9 +27,9 @@ public class SizeServiceimpl implements SizeService {
     public String add(Size sz) {
         boolean add = re.add(sz);
         if (add) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
 
@@ -37,9 +37,9 @@ public class SizeServiceimpl implements SizeService {
     public String update(Size sz, String ma) {
         boolean update= re.update(sz, ma);
         if (update){
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
 
@@ -47,9 +47,9 @@ public class SizeServiceimpl implements SizeService {
     public String delele(String ma) {
         boolean xoa = re.delete(ma);
         if (xoa) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
 

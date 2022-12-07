@@ -27,9 +27,9 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
     public String add(SanPhamCT sp) {
         boolean add = re.add(sp);
         if (add) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
 
@@ -37,9 +37,9 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
     public String deleta(String id) {
         boolean add = re.xoa(id);
         if (add) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
 
@@ -47,15 +47,20 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
     public String update(SanPhamCT sp, String ma) {
         boolean update = re.update(sp, ma);
         if (update) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
 
     @Override
     public SanPhamChiTietViewModel getOneSP(SanPhamChiTietViewModel sp, int soLuong, String idSP) {
         return re.getOneSPCT(sp, soLuong, idSP);
+    }
+
+    @Override
+    public List<SanPhamChiTietViewModel> search(List<SanPhamChiTietViewModel> listTim, String ma) {
+        return re.search(listTim, ma);
     }
 
 }

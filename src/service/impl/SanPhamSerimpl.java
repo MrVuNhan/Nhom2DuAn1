@@ -27,9 +27,9 @@ public class SanPhamSerimpl implements SanPhamSer {
     public String add(SanPhamH sp) {
         boolean add = rs.add(sp);
         if (add) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
     
@@ -37,9 +37,9 @@ public class SanPhamSerimpl implements SanPhamSer {
     public String update(SanPhamH sp, String ma) {
         boolean up = rs.update(sp, ma);
         if (up) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
     
@@ -47,9 +47,9 @@ public class SanPhamSerimpl implements SanPhamSer {
     public String delele(String ma) {
         boolean xoa = rs.delete(ma);
         if (xoa) {
-            return ":))";
+            return "Thành công";
         } else {
-            return ":((";
+            return "Thất bại";
         }
     }
     
