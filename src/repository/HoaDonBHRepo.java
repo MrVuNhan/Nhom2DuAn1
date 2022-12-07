@@ -196,10 +196,33 @@ public class HoaDonBHRepo {
         }
         return check > 0;
     }
+//    public List<HoaDonBHViewModel> search(List<HoaDonBHViewModel> listTim, String tim){
+//        List<HoaDonBHViewModel> list = new ArrayList<>();
+//        String search ="select * from hoadon where Ma=?";
+//        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(tim)){
+//            ps.setObject(1, tim);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {                
+//                String id = rs.getString("id");
+//                String ma = rs.getString("ma");
+//                string 
+//                int  trangthai = rs.getInt("trangthai");
+//                HoaDonBHViewModel hdvm = new HoaDonBHViewModell(ma, ma, tim, ngaytao, trangthai);
+//                list.add(hdvm);
+//            }
+//            return list;
+//        } catch (Exception e) {
+//            e.printStackTrace(System.out);
+//        }
+//        return null;
     
     public static void main(String[] args) {
-        List<HoaDonBHViewModel> list = new HoaDonBHRepo().getAll();
-        list.forEach(l -> System.out.printf("%s \n", l.getId()));
+//        List<HoaDonBHViewModel> list = new HoaDonBHRepo().getAll();
+//        list.forEach(l -> System.out.printf("%s \n", l.getId()));
+
+          String maHD = "hd06";
+          String id = new HoaDonBHRepo().getOneIDHD(maHD);
+          System.out.println(id);
         
     }
     

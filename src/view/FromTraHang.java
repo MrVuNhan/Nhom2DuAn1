@@ -375,9 +375,8 @@ public class FromTraHang extends javax.swing.JFrame {
             txtmahd.setText("");
             txttenkh.setText("");
             txtsltl.setText("");
-
             showdatahdct(listhdct);
-            showdata(listhoadon);
+//            showdata(listhoadon);
         }
 
     }//GEN-LAST:event_btthoantraActionPerformed
