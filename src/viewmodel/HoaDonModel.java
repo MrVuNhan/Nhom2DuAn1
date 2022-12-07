@@ -148,9 +148,9 @@ public class HoaDonModel {
     // trang thái đã thu hoặc chưa thu
     public String trangthai1(int trangthai) {
         if (trangthai == 0) {
-            return "Da Thu";
+            return " Chưa Thử ";
         } else {
-            return "chua thu";
+            return "Đã Thử ";
         }
     }
 

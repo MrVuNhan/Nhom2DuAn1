@@ -9,6 +9,7 @@ import java.util.List;
 import repository.HoaDonBHRepo;
 import service.HoaDonBHSer;
 import viewmodel.HoaDonBHViewModel;
+import viewmodel.KhachHangViewModel;
 import viewmodel.NhanVien;
 
 /**
@@ -65,8 +66,13 @@ public class HoaDonBHSerimpl implements HoaDonBHSer {
     }
 
     @Override
-    public boolean updateTTHD(String idHD) {
-        return re.updateTTHD(idHD);
+    public String getIDKH(String tenKH) {
+        return re.getOneIDKH(tenKH);
+    }
+
+    @Override
+    public boolean updateTTHD(String idHD, String idKH, String ten, String dc, String sdt) {
+        return re.updateTTHD(idHD, idKH, ten, dc, sdt);
     }
 
 }

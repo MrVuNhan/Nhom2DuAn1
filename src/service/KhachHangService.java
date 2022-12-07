@@ -23,4 +23,6 @@ public interface KhachHangService {
     String update(KhachHang kh, String ma);
 
     String xoa(String ma);
+    
+    KhachHangViewModel getOneKH(String idKH);
 }

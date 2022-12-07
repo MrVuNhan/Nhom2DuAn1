@@ -98,4 +98,10 @@ public class KhachHangViewModel {
     public Object[] toDataRow() {
         return new Object[]{ma, ten, gioiTinh(gioiTinh), ngaySinh, sdt, diaChi, id};
     }
+
+    @Override
+    public String toString() {
+        return "KhachHangViewModel{" + "ma=" + ma + ", ten=" + ten + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", diaChi=" + diaChi + '}';
+    }
+    
 }

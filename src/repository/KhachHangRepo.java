@@ -31,7 +31,7 @@ public class KhachHangRepo {
                 + "      ,[SDT]\n"
                 + "      ,[DiaChi]\n"
                 + "  FROM [dbo].[KhachHang]";
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<KhachHangViewModel> listKH = new ArrayList<>();
             while (rs.next()) {
@@ -64,7 +64,7 @@ public class KhachHangRepo {
                 + "      ,[DiaChi]\n"
                 + "  FROM [dbo].[KhachHang]"
                 + "Where Ma = ?";
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             List<KhachHangViewModel> listSe = new ArrayList<>();
@@ -100,7 +100,7 @@ public class KhachHangRepo {
                 + "     VALUES\n"
                 + "           (?,?,?,?,?,?)";
         int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, kh.getMa());
             ps.setObject(2, kh.getTen());
             ps.setObject(3, kh.isGioiTinh());
@@ -126,7 +126,7 @@ public class KhachHangRepo {
                 + "      ,[DiaChi] = ?\n"
                 + " WHERE Ma = ?";
         int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, kh.getMa());
             ps.setObject(2, kh.getTen());
             ps.setObject(3, kh.isGioiTinh());
@@ -147,7 +147,7 @@ public class KhachHangRepo {
         String query = "DELETE FROM [dbo].[KhachHang]\n"
                 + "      WHERE Ma = ?";
         int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, ma);
             check = ps.executeUpdate();
         } catch (SQLException e) {
@@ -156,5 +156,45 @@ public class KhachHangRepo {
             Logger.getLogger(KhachHangRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return check > 0;
+    }
+
+    public KhachHangViewModel getoneKH(String idKH) {
+        String query = "SELECT [Id]\n"
+                + "      ,[Ma]\n"
+                + "      ,[TenKH]\n"
+                + "      ,[GioiTinh]\n"
+                + "      ,[NgaySinh]\n"
+                + "      ,[SDT]\n"
+                + "      ,[DiaChi]\n"
+                + "  FROM [dbo].[KhachHang]"
+                + "Where id = ? ";
+        KhachHangViewModel kh = new KhachHangViewModel();
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, idKH);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                kh.setId(idKH);
+                kh.setMa(rs.getString("ma"));
+                kh.setTen(rs.getString("TenKH"));
+                kh.setGioiTinh(rs.getBoolean("GioiTinh"));
+                kh.setNgaySinh(rs.getString("NgaySinh"));
+                kh.setSdt(rs.getString("SDT"));
+                kh.setDiaChi(rs.getString("DiaChi"));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(KhachHangRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return kh;
+    }
+
+    public static void main(String[] args) {
+        String id = "7553B0D2-ACDA-476A-9DF4-3C3C7F1EB12E";
+        KhachHangViewModel kh = new KhachHangRepo().getoneKH(id);
+        System.out.println(kh.toString());
     }
 }

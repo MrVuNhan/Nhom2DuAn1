@@ -59,4 +59,9 @@ public class KhachHangServiceimpl implements KhachHangService {
         }
     }
 
+    @Override
+    public KhachHangViewModel getOneKH(String idKH) {
+        return re.getoneKH(idKH);
+    }
+
 }

@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package view;
 
@@ -14,21 +14,20 @@ import viewmodel.KhachHangViewModel;
 
 /**
  *
- * @author FPTSHOP
+ * @author vungo
  */
-public class KhachHang extends javax.swing.JFrame {
-    
+public class formKH extends javax.swing.JDialog {
+
     private List<KhachHangViewModel> listKH = new ArrayList<>();
     private DefaultTableModel dtm = new DefaultTableModel();
     private KhachHangService ser = new KhachHangServiceimpl();
-  private String maNV;
-     public KhachHang() {
+
+    /**
+     * Creates new form formKH
+     */
+    public formKH(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-       
-    }
-    public KhachHang(String user) {
-        initComponents();
-        maNV = user;
         tbKhachHang.setModel(dtm);
         String[] e = {"Mã KH", "Tên KH", "Giới Tính", "Ngày Sinh", "SDT", "Địa Chỉ"};
         dtm.setColumnIdentifiers(e);
@@ -46,52 +45,33 @@ public class KhachHang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtMa = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtTen = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtSDt = new javax.swing.JTextField();
-        txtNgaySinh = new javax.swing.JTextField();
-        txtDiaChi = new javax.swing.JTextField();
+        radioNam = new javax.swing.JRadioButton();
         btnSua = new javax.swing.JButton();
+        radioNu = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
         btnXoa = new javax.swing.JButton();
+        txtMa = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        txtTen = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbKhachHang = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         txtTim = new javax.swing.JTextField();
+        txtSDt = new javax.swing.JTextField();
         btnTim = new javax.swing.JButton();
+        txtNgaySinh = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        radioNam = new javax.swing.JRadioButton();
-        radioNu = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        txtDiaChi = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Quản Lý Khách Hàng");
-
-        jLabel2.setText("Mã:");
-
-        jLabel3.setText("Tên:");
-
-        jLabel4.setText("SDT:");
-
-        jLabel5.setText("Ngày sinh:");
-
-        jLabel6.setText("Địa chỉ:");
-
-        txtDiaChi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDiaChiActionPerformed(evt);
-            }
-        });
+        radioNam.setText("Nam");
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +79,10 @@ public class KhachHang extends javax.swing.JFrame {
                 btnSuaActionPerformed(evt);
             }
         });
+
+        radioNu.setText("Nữ");
+
+        jLabel2.setText("Mã:");
 
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +97,8 @@ public class KhachHang extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Tên:");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Danh sách khách hàng:");
@@ -135,7 +121,13 @@ public class KhachHang extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbKhachHang);
 
+        jLabel4.setText("SDT:");
+
+        jLabel5.setText("Ngày sinh:");
+
         jLabel8.setText("Tìm kiếm:");
+
+        jLabel6.setText("Địa chỉ:");
 
         btnTim.setText("Tìm");
         btnTim.addActionListener(new java.awt.event.ActionListener() {
@@ -146,18 +138,14 @@ public class KhachHang extends javax.swing.JFrame {
 
         jLabel9.setText("Giới tính:");
 
-        buttonGroup1.add(radioNam);
-        radioNam.setText("Nam");
-
-        buttonGroup1.add(radioNu);
-        radioNu.setText("Nữ");
-
-        jButton1.setText("Quay Lại");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtDiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtDiaChiActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Quản Lý Khách Hàng");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,6 +192,12 @@ public class KhachHang extends javax.swing.JFrame {
                                                     .addGap(18, 18, 18)
                                                     .addComponent(radioNu)))))))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTim))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(176, 176, 176)
                                 .addComponent(btnAdd)
@@ -211,17 +205,8 @@ public class KhachHang extends javax.swing.JFrame {
                                 .addComponent(btnSua)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnXoa)))
-                        .addGap(0, 1, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTim)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(13, 13, 13)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -258,8 +243,7 @@ public class KhachHang extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTim)
-                    .addComponent(jButton1))
+                    .addComponent(btnTim))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -267,34 +251,6 @@ public class KhachHang extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtDiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaChiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDiaChiActionPerformed
-
-    private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
-        int row = tbKhachHang.getSelectedRow();
-        fillData(row);
-    }//GEN-LAST:event_tbKhachHangMouseClicked
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String ma = txtMa.getText();
-        String ten = txtTen.getText();
-        boolean gioiTinh = radioNu.isSelected();
-        String gioiTinh1 = "";
-        if (gioiTinh) {
-            gioiTinh1 = "Nữ";
-        } else {
-            gioiTinh1 = "Nam";
-        }
-        String ns = txtNgaySinh.getText();
-        String sdt = txtSDt.getText();
-        String diaChi = txtDiaChi.getText();
-        domainmodel.KhachHang kh = new domainmodel.KhachHang(ma, ten, gioiTinh, ns, sdt, diaChi);
-        JOptionPane.showMessageDialog(this, ser.add(kh));
-        listKH = ser.getAll();
-        showDataTable(listKH);
-    }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         String ma = txtMa.getText();
@@ -322,24 +278,46 @@ public class KhachHang extends javax.swing.JFrame {
         showDataTable(listKH);
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String ma = txtMa.getText();
+        String ten = txtTen.getText();
+        boolean gioiTinh = radioNu.isSelected();
+        String gioiTinh1 = "";
+        if (gioiTinh) {
+            gioiTinh1 = "Nữ";
+        } else {
+            gioiTinh1 = "Nam";
+        }
+        String ns = txtNgaySinh.getText();
+        String sdt = txtSDt.getText();
+        String diaChi = txtDiaChi.getText();
+        domainmodel.KhachHang kh = new domainmodel.KhachHang(ma, ten, gioiTinh, ns, sdt, diaChi);
+        JOptionPane.showMessageDialog(this, ser.add(kh));
+        listKH = ser.getAll();
+        showDataTable(listKH);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
+        int row = tbKhachHang.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tbKhachHangMouseClicked
+
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         String ma = txtTim.getText();
         List<KhachHangViewModel> listSe = ser.search(listKH, ma);
         showDataTable(listSe);
     }//GEN-LAST:event_btnTimActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       BanHang login = new BanHang(maNV);
-       login.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void txtDiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaChiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDiaChiActionPerformed
     public void showDataTable(List<KhachHangViewModel> list) {
         dtm.setRowCount(0);
         for (KhachHangViewModel x : list) {
             dtm.addRow(x.toDataRow());
         }
     }
-    
+
     public void fillData(int index) {
         KhachHangViewModel kh = listKH.get(index);
         txtMa.setText(kh.getMa());
@@ -372,20 +350,27 @@ public class KhachHang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhachHang().setVisible(true);
+                formKH dialog = new formKH(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -395,8 +380,6 @@ public class KhachHang extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXoa;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -417,4 +400,5 @@ public class KhachHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
+
 }

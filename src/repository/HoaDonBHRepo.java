@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import ulities.DBConnection;
 import viewmodel.HoaDonCTViewModel;
+import viewmodel.KhachHangViewModel;
 import viewmodel.NhanVien;
 
 /**
@@ -24,7 +25,7 @@ import viewmodel.NhanVien;
  * @author FPTSHOP
  */
 public class HoaDonBHRepo {
-    
+
     public List<HoaDonBHViewModel> getAll() {
         String query = "SELECT dbo.HoaDon.Id ,dbo.HoaDon.Ma, dbo.NhanVien.TenNV, dbo.HoaDon.NgayTao, dbo.HoaDon.TrangThai\n"
                 + "FROM     dbo.HoaDon INNER JOIN\n"
@@ -50,7 +51,7 @@ public class HoaDonBHRepo {
         }
         return null;
     }
-    
+
     public List<HoaDonBHViewModel> getAll1() {
         String query = "SELECT dbo.HoaDon.Id ,dbo.HoaDon.Ma, dbo.NhanVien.TenNV, dbo.HoaDon.NgayTao, dbo.HoaDon.TrangThai\n"
                 + "FROM     dbo.HoaDon INNER JOIN\n"
@@ -76,7 +77,7 @@ public class HoaDonBHRepo {
         }
         return null;
     }
-    
+
     public String getOneIDNV(String maNV) {
         String id = null;
         String query = "SELECT [Id]\n"
@@ -93,7 +94,7 @@ public class HoaDonBHRepo {
         }
         return id;
     }
-    
+
     public boolean add(String ma, String idNV) {
         String query = "INSERT INTO [dbo].[HoaDon]\n"
                 + "           (\n"
@@ -119,11 +120,11 @@ public class HoaDonBHRepo {
         }
         return check > 0;
     }
-    
+
     public String getOneIDHD(String maHD) {
         String id = null;
         String query = "SELECT [Id]\n"
-                + "  FROM [dbo].[HoaDon] where ma = ? ";
+                + "  FROM [dbo].[HoaDon] where ma = ?  ";
         NhanVien nv = new NhanVien();
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maHD);
@@ -136,7 +137,7 @@ public class HoaDonBHRepo {
         }
         return id;
     }
-    
+
     public boolean addCTHD(String idHD, String idCTSP, int soLuong, double DonGia) {
         String query = "INSERT INTO [dbo].[ChiTietHD]\n"
                 + "           ("
@@ -154,13 +155,13 @@ public class HoaDonBHRepo {
             ps.setObject(3, soLuong);
             ps.setObject(4, DonGia);
             check = ps.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
     }
-    
+
     public boolean updateSLCT(String idCTSP, int soLuong) {
         String query = "update ChiTietSP\n"
                 + "set SoLuongTon = SoLuongTon - ? \n"
@@ -168,29 +169,62 @@ public class HoaDonBHRepo {
         int check = 0;
         HoaDonCTViewModel hd = new HoaDonCTViewModel();
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
-            
+
             ps.setObject(2, idCTSP);
             ps.setObject(1, soLuong);
             check = ps.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
     }
-    
-    public boolean updateTTHD(String idHD) {
-        String query = "update hoadon \n"
-                + "set TrangThai = ? \n"
-                + "where Id = ?";
-        int check = 0;
-        HoaDonCTViewModel hd = new HoaDonCTViewModel();
+
+    public String getOneIDKH(String ten) {
+        String id = null;
+        String query = "SELECT [Id]\n"
+                + "  FROM [dbo].[KhachHang] where tenKH like ? ";
+        NhanVien nv = new NhanVien();
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
-            
-            ps.setObject(1, 1);
-            ps.setObject(2, idHD);
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getString("Id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return id;
+    }
+
+    public boolean updateTTHD(String idHD, String idKH, 
+            String ten, String dc, String sdt) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET \n"
+                + "      [IdKH] = ?\n"
+                + "      ,[NgayThu] = ?\n"
+                + "      ,[TinhTrang] = ?\n"
+                + "      ,[TenNguoiNhan] = ?\n"
+                + "      ,[DiaChi] =? \n"
+                + "      ,[SDT] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + " WHERE Id=? ";
+        int check = 0;
+        long mil = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(mil);
+
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+
+            ps.setObject(7, 1);
+            ps.setObject(1, idKH);
+            ps.setObject(2, date);
+            ps.setObject(3, 1);
+            ps.setObject(5, dc);
+            ps.setObject(4, ten);
+            ps.setObject(6, sdt);
+            ps.setObject(8, idHD);
             check = ps.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
@@ -215,15 +249,15 @@ public class HoaDonBHRepo {
 //            e.printStackTrace(System.out);
 //        }
 //        return null;
-    
+
     public static void main(String[] args) {
 //        List<HoaDonBHViewModel> list = new HoaDonBHRepo().getAll();
 //        list.forEach(l -> System.out.printf("%s \n", l.getId()));
 
-          String maHD = "hd06";
-          String id = new HoaDonBHRepo().getOneIDHD(maHD);
-          System.out.println(id);
-        
+        String ten = "My";
+        String id = new HoaDonBHRepo().getOneIDKH(ten);
+        System.out.println(id);
+
     }
-    
+
 }
