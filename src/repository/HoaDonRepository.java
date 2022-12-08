@@ -89,6 +89,7 @@ public class HoaDonRepository {
             ps.setObject(6, hd.getDiaChi());
             ps.setObject(7, hd.getSdt());
             ps.setObject(8, hd.getTrangThai());
+            check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }

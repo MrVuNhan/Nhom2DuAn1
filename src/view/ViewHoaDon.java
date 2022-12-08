@@ -45,11 +45,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTen = new javax.swing.JTextField();
-        btnThem = new javax.swing.JButton();
         txtDiaChi = new javax.swing.JTextField();
-        btnXoa = new javax.swing.JButton();
         txtSDT = new javax.swing.JTextField();
-        btnSua = new javax.swing.JButton();
         txtTinhTrang = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtNgayTao = new javax.swing.JTextField();
@@ -73,27 +70,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jLabel9.setText("Trang Thai");
 
         jLabel2.setText("Mã Hóa Đơn");
-
-        btnThem.setText("Thêm ");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Ngay Tao");
 
@@ -192,24 +168,18 @@ public class ViewHoaDon extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel9)))
                                 .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnSua)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnXoa))
-                                    .addComponent(txtSDT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnTimKiem)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnThem))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(radiothanhtoan)
                                         .addGap(18, 18, 18)
-                                        .addComponent(radiohoantra))))))
+                                        .addComponent(radiohoantra))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnTimKiem)))
+                                .addGap(96, 96, 96))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(215, 215, 215)
                         .addComponent(jLabel1)))
@@ -220,8 +190,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8, jLabel9});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSua, btnThem, btnTimKiem, btnXoa});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -231,14 +199,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTimKiem)
                     .addComponent(jLabel2)
-                    .addComponent(btnThem)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa)
-                    .addComponent(btnSua)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,57 +228,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        String ma = txtMa.getText();
-        String ngaytao = txtNgayTao.getText();
-        String ngaythu = txtNgayTao.getText();
-        String tinhtrang = txtTinhTrang.getText();
-        String ten = txtTen.getText();
-        String diachi = txtDiaChi.getText();
-        String sdt = txtSDT.getText();
-        int trangThai = 0;
-        if (radiothanhtoan.isSelected() == true) {
-            trangThai += 0;
-        } else {
-            trangThai += 1;
-        }
-        if (checkMa(ma)) {
-            JOptionPane.showMessageDialog(this, "Trùng mã");
-            return;
-        }
-        HoaDon hd = new HoaDon(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt), trangThai);
-        JOptionPane.showMessageDialog(this, hdsv.add(hd));
-        listhdvm = hdsv.getAll();
-        showDataTable(listhdvm);
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        String Ma = txtMa.getText();
-        JOptionPane.showMessageDialog(this, hdsv.delete(Ma));
-        listhdvm = hdsv.getAll();
-        showDataTable(listhdvm);
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        String ma = txtMa.getText();
-        String ngaytao = txtNgayTao.getText();
-        String ngaythu = txtNgayThu.getText();
-        String tinhtrang = txtTinhTrang.getText();
-        String ten = txtTen.getText();
-        String diachi = txtDiaChi.getText();
-        String sdt = txtSDT.getText();
-        int trangThai = 0;
-        if (radiothanhtoan.isSelected() == true) {
-            trangThai += 0;
-        } else {
-            trangThai += 1;
-        }
-        HoaDon hd = new HoaDon(ma, ngaytao, ngaythu, tinhtrang, ten, diachi, Integer.valueOf(sdt), trangThai);
-        JOptionPane.showMessageDialog(this, hdsv.update(hd, ma));
-        listhdvm = hdsv.getAll();
-        showDataTable(listhdvm);
-    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaActionPerformed
         // TODO add your handling code here:
@@ -375,10 +289,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
