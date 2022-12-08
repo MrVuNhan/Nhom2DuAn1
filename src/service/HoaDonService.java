@@ -13,9 +13,14 @@ import viewmodel.HoaDonViewModel;
  * @author syduong
  */
 public interface HoaDonService {
+
     List<HoaDonViewModel> getAll();
+
     String add(HoaDon hd);
-    String update(HoaDon hd,String ma);
+
+    String update(HoaDon hd, String ma);
+
     String delete(String ma);
+
     List<HoaDonViewModel> search(List<HoaDonViewModel> listTim, String tim);
 }

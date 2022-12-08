@@ -14,7 +14,8 @@ import viewmodel.HoaDonViewModel;
  *
  * @author syduong
  */
-public class HoaDonServiceImpl implements HoaDonService{
+public class HoaDonServiceImpl implements HoaDonService {
+
     private HoaDonRepository re = new HoaDonRepository();
 
     @Override
@@ -25,9 +26,9 @@ public class HoaDonServiceImpl implements HoaDonService{
     @Override
     public String add(HoaDon hd) {
         boolean add = re.add(hd);
-        if(add){
+        if (add) {
             return "thanh cong";
-        }else{
+        } else {
             return "that bai";
         }
     }
@@ -35,9 +36,9 @@ public class HoaDonServiceImpl implements HoaDonService{
     @Override
     public String update(HoaDon hd, String ma) {
         boolean update = re.update(hd, ma);
-        if(update){
+        if (update) {
             return "thanh cong";
-        }else{
+        } else {
             return "that bai";
         }
     }
@@ -45,9 +46,9 @@ public class HoaDonServiceImpl implements HoaDonService{
     @Override
     public String delete(String ma) {
         boolean delete = re.delete(ma);
-        if(delete){
+        if (delete) {
             return "thanh cong";
-        }else{
+        } else {
             return "that bai";
         }
     }
@@ -55,6 +56,6 @@ public class HoaDonServiceImpl implements HoaDonService{
     @Override
     public List<HoaDonViewModel> search(List<HoaDonViewModel> listTim, String tim) {
         return re.search(listTim, tim);
-    }  
+    }
 
 }
