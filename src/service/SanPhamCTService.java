@@ -32,12 +32,27 @@ public interface SanPhamCTService {
     List<String> getalllsp();
 
     List<SanPhamChiTietViewModel> loclsp1(String name);
+
     List<SanPhamChiTietViewModel> locmau(String name);
-     List<SanPhamChiTietViewModel> locchatlieu(String name);
-     List<SanPhamChiTietViewModel> locsize(String name);
-     List<SanPhamChiTietViewModel> locnhacungcap(String name);
-    
+
+    List<SanPhamChiTietViewModel> locchatlieu(String name);
+
+    List<SanPhamChiTietViewModel> locsize(String name);
+
+    List<SanPhamChiTietViewModel> locnhacungcap(String name);
+
+    List<SanPhamChiTietViewModel> searchTenSP(String ten);
+
+    List<SanPhamChiTietViewModel> searchLoaiSP(String ten);
+
+    List<SanPhamChiTietViewModel> searchCL(String ten);
+
+    List<SanPhamChiTietViewModel> searchMau(String ten);
+
+    List<SanPhamChiTietViewModel> searchSz(String ten);
+
+    List<SanPhamChiTietViewModel> searchNsx(String ten);
 
     List<String> getalllsp1();
-    
+
 }

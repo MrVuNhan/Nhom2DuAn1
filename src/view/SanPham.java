@@ -32,6 +32,7 @@ public class SanPham extends javax.swing.JFrame {
         String[] a = {"Id", "Mã SP", "Tên SP"};
         dtm.setColumnIdentifiers(a);
         listSP = ser.getAll();
+        fillData(0);
         showDataTable(listSP);
     }
 

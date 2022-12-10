@@ -10,7 +10,7 @@ package domainmodel;
  */
 public class HoaDonCTBH {
 
-   private String tenSP;
+    private String tenSP;
     private String tenLSP;
     private String tenMS;
     private String tenCL;
@@ -96,5 +96,8 @@ public class HoaDonCTBH {
     public void setDonGia(Double donGia) {
         this.donGia = donGia;
     }
- 
+
+    public int thanhTien() {
+        return (int) (this.sl * this.donGia);
+    }
 }

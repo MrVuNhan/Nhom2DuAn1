@@ -49,6 +49,8 @@ public class HoaDonCT {
         this.donGia = donGia;
     }
 
+    
+
     @Override
     public String toString() {
         return "HoaDonCT{" + "idHD=" + idHD + ", idCTSP=" + idCTSP + ", soLuong=" + soLuong + ", donGia=" + donGia + '}';
