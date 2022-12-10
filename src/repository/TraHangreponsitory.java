@@ -23,7 +23,11 @@ public class TraHangreponsitory {
                 + "dbo.KhachHang.TenKH, dbo.HoaDon.NgayTao, dbo.HoaDon.NgayThu, "
                 + "dbo.HoaDon.DiaChi, dbo.HoaDon.SDT, dbo.HoaDon.TinhTrang\n"
                 + "FROM   dbo.HoaDon INNER JOIN\n"
-                + " dbo.KhachHang ON dbo.HoaDon.IdKH = dbo.KhachHang.Id";
+                + " dbo.KhachHang ON dbo.HoaDon.IdKH = dbo.KhachHang.Id "
+                + "group by dbo.KhachHang.ma,dbo.HoaDon.Ma, \n"
+                + "                dbo.KhachHang.TenKH, dbo.HoaDon.NgayTao, dbo.HoaDon.NgayThu, \n"
+                + "                dbo.HoaDon.DiaChi, dbo.HoaDon.SDT, dbo.HoaDon.TinhTrang\n"
+                + "				order by HoaDon.Ma desc";
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<HoaDonModel> listhoadon = new ArrayList();
@@ -173,7 +177,9 @@ public class TraHangreponsitory {
 
     public static void main(String[] args) {
 
-        String maHD = "hd01";
+        String maHD = "hd03";
+        String soLuong = new TraHangreponsitory().getIDHD(maHD);
+        System.out.println(soLuong);
 
     }
 }

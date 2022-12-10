@@ -7,6 +7,7 @@ package service;
 import domainmodel.HoaDonBH;
 import java.util.List;
 import viewmodel.HoaDonBHViewModel;
+import viewmodel.HoaDonCTBHViewModel;
 import viewmodel.KhachHangViewModel;
 import viewmodel.NhanVien;
 
@@ -30,7 +31,9 @@ public interface HoaDonBHSer {
 
     boolean updateCTSP(String idCTSP, int soLuong);
 
-    boolean updateTTHD(String idHD,String idKH,String ten, String dc, String sdt);
-    
+    boolean updateTTHD(String idHD, String idKH, String ten, String dc, String sdt);
+
     String getIDKH(String tenKH);
+
+ 
 }

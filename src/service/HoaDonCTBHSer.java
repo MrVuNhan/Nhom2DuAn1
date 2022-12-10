@@ -13,5 +13,7 @@ import viewmodel.HoaDonCTBHViewModel;
  */
 public interface HoaDonCTBHSer {
     List<HoaDonCTBHViewModel> getAll();
+    List<HoaDonCTBHViewModel> loclsp(String name);
+    List<String> getalllsp() ;
     
 }

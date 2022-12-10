@@ -8,6 +8,7 @@ import domainmodel.SanPhamCT;
 import java.util.List;
 import repository.SanPhamCTRepo;
 import service.SanPhamCTService;
+import viewmodel.HoaDonCTBHViewModel;
 import viewmodel.SanPhamChiTietViewModel;
 
 /**
@@ -63,4 +64,43 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
         return re.search(listTim, ma);
     }
 
+    @Override
+    public List<SanPhamChiTietViewModel> loclsp(String name) {
+        return re.loclsp(name);
+    }
+
+    @Override
+    public List<String> getalllsp() {
+        return re.getalllsp();
+    }
+   @Override
+    public List<SanPhamChiTietViewModel> loclsp1(String name) {
+        return re.locloaiSP(name);
+    }
+    
+    
+    @Override
+    public List<String> getalllsp1() {
+        return re.getalllsp1();
+    }
+
+    @Override
+    public List<SanPhamChiTietViewModel> locmau(String name) {
+        return  re.locMS(name);
+    }
+
+    @Override
+    public List<SanPhamChiTietViewModel> locchatlieu(String name) {
+        return re.locchatlieu(name);    }
+
+    @Override
+    public List<SanPhamChiTietViewModel> locsize(String name) {
+        return  re.locsize(name);
+    }
+    
+
+    @Override
+    public List<SanPhamChiTietViewModel> locnhacungcap(String name) {
+        return  re.locnhacungcap(name);
+    }
 }

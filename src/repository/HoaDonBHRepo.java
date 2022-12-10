@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ulities.DBConnection;
+import viewmodel.HoaDonCTBHViewModel;
 import viewmodel.HoaDonCTViewModel;
 import viewmodel.KhachHangViewModel;
 import viewmodel.NhanVien;
@@ -230,6 +231,7 @@ public class HoaDonBHRepo {
         }
         return check > 0;
     }
+      
 //    public List<HoaDonBHViewModel> search(List<HoaDonBHViewModel> listTim, String tim){
 //        List<HoaDonBHViewModel> list = new ArrayList<>();
 //        String search ="select * from hoadon where Ma=?";

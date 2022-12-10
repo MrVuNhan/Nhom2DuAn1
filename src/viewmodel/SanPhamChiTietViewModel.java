@@ -30,6 +30,17 @@ public class SanPhamChiTietViewModel {
         this.slt = slt;
     }
 
+    public SanPhamChiTietViewModel(String tenSP, String loaiSP, String mauSac, String chatLieu, String Size, String Nsx, int slt, Double giaBan) {
+        this.tenSP = tenSP;
+        this.loaiSP = loaiSP;
+        this.mauSac = mauSac;
+        this.chatLieu = chatLieu;
+        this.Size = Size;
+        this.Nsx = Nsx;
+        this.slt = slt;
+        this.giaBan = giaBan;
+    }
+
     public SanPhamChiTietViewModel(String id, String tenSP, String loaiSP, String mauSac, String chatLieu, String Size, String Nsx, int slt, Double giaNhap, Double giaBan, String moTa, int trangThai) {
         this.id = id;
         this.tenSP = tenSP;
@@ -159,4 +170,10 @@ public class SanPhamChiTietViewModel {
     public Object[]toDataRow1(){
         return new Object[]{tenSP, loaiSP, mauSac, chatLieu, Size, Nsx, slt, giaBan, moTa, trangThai1(slt),id,giaNhap};
     }
+
+    @Override
+    public String toString() {
+        return "SanPhamChiTietViewModel{" + "tenSP=" + tenSP + ", loaiSP=" + loaiSP + ", mauSac=" + mauSac + ", chatLieu=" + chatLieu + ", Size=" + Size + ", Nsx=" + Nsx + ", slt=" + slt + ", giaNhap=" + giaNhap + ", giaBan=" + giaBan + ", moTa=" + moTa + ", trangThai=" + trangThai + '}';
+    }
+    
 }

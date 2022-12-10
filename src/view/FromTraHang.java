@@ -349,12 +349,14 @@ public class FromTraHang extends javax.swing.JFrame {
         showdatahdct(listhdct);
         String idKH = ser.getoneIDKH(hd.getMaKH());
         String idHD = ser.getOneIDHD(hd.getMahd());
+        System.out.println(idHD);
         String idCTSP = ser.getIDCTHD(idHD);
         int soluongHD = ser.getSoLuong(idHD);
+        System.out.println(soluongHD);
         int soLuong = Integer.parseInt(txtsltl.getText());
         double tongTienTL = soLuong * hd.getDongia();
         double tienThua = hd.tongtien(hd.getSoluong(), hd.getDongia()) - tongTienTL;
-        HoaDonModel hd1 = new HoaDonModel(soLuong);
+        HoaDonModel hd1 = new HoaDonModel();
 
         if (soLuong < 0) {
             JOptionPane.showMessageDialog(this, "So Luong phai > 0");
@@ -375,6 +377,7 @@ public class FromTraHang extends javax.swing.JFrame {
             txtmahd.setText("");
             txttenkh.setText("");
             txtsltl.setText("");
+//            listhdct.remove(row);
             showdatahdct(listhdct);
 //            showdata(listhoadon);
         }

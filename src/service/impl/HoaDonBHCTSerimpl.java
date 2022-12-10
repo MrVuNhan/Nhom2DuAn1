@@ -22,4 +22,15 @@ public class HoaDonBHCTSerimpl implements HoaDonCTBHSer {
         return re.getAll();
     }
 
+    
+
+    @Override
+    public List<HoaDonCTBHViewModel> loclsp(String name) {
+        return  re.loclsp(name);
+    }
+
+    @Override
+    public List<String> getalllsp() {
+        return  re.getalllsp();
+    }
 }

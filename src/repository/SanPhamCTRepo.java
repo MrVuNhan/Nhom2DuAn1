@@ -5,17 +5,20 @@
 package repository;
 
 import domainmodel.SanPhamCT;
+import java.awt.image.SampleModel;
 import java.util.List;
 import viewmodel.SanPhamChiTietViewModel;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ulities.DBConnection;
 import view.SanPhamChiTiet;
+import viewmodel.HoaDonCTBHViewModel;
 
 /**
  *
@@ -216,12 +219,270 @@ public class SanPhamCTRepo {
         }
         return check > 0;
     }
+    public List<SanPhamChiTietViewModel> loclsp(String name) {
+        String query = "SELECT dbo.SanPham.TenSP, dbo.LoaiSanPham.TenLoai, dbo.MauSac.TenMau, dbo.ChatLieu.TenCL, dbo.Size.TenSize, dbo.NhaCungCap.TenNcc, dbo.ChiTietHD.SoLuong, dbo.ChiTietSP.GiaBan\n"
+                + "FROM     dbo.ChatLieu INNER JOIN\n"
+                + "                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
+                + "                  dbo.ChiTietHD ON dbo.ChiTietSP.Id = dbo.ChiTietHD.IdCTSP INNER JOIN\n"
+                + "                  dbo.HoaDon ON dbo.ChiTietHD.IdHD = dbo.HoaDon.Id INNER JOIN\n"
+                + "                  dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
+                + "                  dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
+                + "                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
+                + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
+                + "                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id where TenSP = ?";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            List<SanPhamChiTietViewModel> listBH = new ArrayList<>();
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String tenSP = rs.getString("TenSP");
+                String tenLSP = rs.getString("TenLoai");
+                String tenMs = rs.getString("TenMau");
+                String tenCL = rs.getString("TenCL");
+                String tenSz = rs.getString("TenSize");
+                String tenNsx = rs.getString("TenNcc");
+                int sl = rs.getInt("SoLuong");
+                Double donGia = rs.getDouble("GiaBan");
+                SanPhamChiTietViewModel hd = new SanPhamChiTietViewModel(tenSP, tenLSP, tenMs, tenCL, tenSz, tenNsx, sl, donGia);
+                listBH.add(hd);
+            }
+            return listBH;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public List<SanPhamChiTietViewModel> locloaiSP(String name) {
+        String query = "SELECT dbo.SanPham.TenSP, dbo.LoaiSanPham.TenLoai, dbo.MauSac.TenMau, dbo.ChatLieu.TenCL, dbo.Size.TenSize, dbo.NhaCungCap.TenNcc, dbo.ChiTietHD.SoLuong, dbo.ChiTietSP.GiaBan\n"
+                + "FROM     dbo.ChatLieu INNER JOIN\n"
+                + "                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
+                + "                  dbo.ChiTietHD ON dbo.ChiTietSP.Id = dbo.ChiTietHD.IdCTSP INNER JOIN\n"
+                + "                  dbo.HoaDon ON dbo.ChiTietHD.IdHD = dbo.HoaDon.Id INNER JOIN\n"
+                + "                  dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
+                + "                  dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
+                + "                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
+                + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
+                + "                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id where LoaiSanPham.TenLoai = ? ";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            List<SanPhamChiTietViewModel> listBH = new ArrayList<>();
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String tenSP = rs.getString("TenSP");
+                String tenLSP = rs.getString("TenLoai");
+                String tenMs = rs.getString("TenMau");
+                String tenCL = rs.getString("TenCL");
+                String tenSz = rs.getString("TenSize");
+                String tenNsx = rs.getString("TenNcc");
+                int sl = rs.getInt("SoLuong");
+                Double donGia = rs.getDouble("GiaBan");
+                SanPhamChiTietViewModel hd = new SanPhamChiTietViewModel(tenSP, tenLSP, tenMs, tenCL, tenSz, tenNsx, sl, donGia);
+                listBH.add(hd);
+            }
+            return listBH;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public List<SanPhamChiTietViewModel> locMS(String name) {
+        String query = "SELECT dbo.SanPham.TenSP, dbo.LoaiSanPham.TenLoai, dbo.MauSac.TenMau, dbo.ChatLieu.TenCL, dbo.Size.TenSize, dbo.NhaCungCap.TenNcc, dbo.ChiTietHD.SoLuong, dbo.ChiTietSP.GiaBan\n"
+                + "FROM     dbo.ChatLieu INNER JOIN\n"
+                + "                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
+                + "                  dbo.ChiTietHD ON dbo.ChiTietSP.Id = dbo.ChiTietHD.IdCTSP INNER JOIN\n"
+                + "                  dbo.HoaDon ON dbo.ChiTietHD.IdHD = dbo.HoaDon.Id INNER JOIN\n"
+                + "                  dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
+                + "                  dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
+                + "                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
+                + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
+                + "                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id where mausac.TenMau = ? ";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            List<SanPhamChiTietViewModel> listBH = new ArrayList<>();
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String tenSP = rs.getString("TenSP");
+                String tenLSP = rs.getString("TenLoai");
+                String tenMs = rs.getString("TenMau");
+                String tenCL = rs.getString("TenCL");
+                String tenSz = rs.getString("TenSize");
+                String tenNsx = rs.getString("TenNcc");
+                int sl = rs.getInt("SoLuong");
+                Double donGia = rs.getDouble("GiaBan");
+                SanPhamChiTietViewModel hd = new SanPhamChiTietViewModel(tenSP, tenLSP, tenMs, tenCL, tenSz, tenNsx, sl, donGia);
+                listBH.add(hd);
+            }
+            return listBH;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     public List<SanPhamChiTietViewModel> locchatlieu(String name) {
+        String query = "SELECT dbo.SanPham.TenSP, dbo.LoaiSanPham.TenLoai, dbo.MauSac.TenMau, dbo.ChatLieu.TenCL, dbo.Size.TenSize, dbo.NhaCungCap.TenNcc, dbo.ChiTietHD.SoLuong, dbo.ChiTietSP.GiaBan\n"
+                + "FROM     dbo.ChatLieu INNER JOIN\n"
+                + "                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
+                + "                  dbo.ChiTietHD ON dbo.ChiTietSP.Id = dbo.ChiTietHD.IdCTSP INNER JOIN\n"
+                + "                  dbo.HoaDon ON dbo.ChiTietHD.IdHD = dbo.HoaDon.Id INNER JOIN\n"
+                + "                  dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
+                + "                  dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
+                + "                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
+                + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
+                + "                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id where chatlieu.tenCL = ? ";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            List<SanPhamChiTietViewModel> listBH = new ArrayList<>();
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String tenSP = rs.getString("TenSP");
+                String tenLSP = rs.getString("TenLoai");
+                String tenMs = rs.getString("TenMau");
+                String tenCL = rs.getString("TenCL");
+                String tenSz = rs.getString("TenSize");
+                String tenNsx = rs.getString("TenNcc");
+                int sl = rs.getInt("SoLuong");
+                Double donGia = rs.getDouble("GiaBan");
+                SanPhamChiTietViewModel hd = new SanPhamChiTietViewModel(tenSP, tenLSP, tenMs, tenCL, tenSz, tenNsx, sl, donGia);
+                listBH.add(hd);
+            }
+            return listBH;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+      public List<SanPhamChiTietViewModel> locsize(String name) {
+        String query = "SELECT dbo.SanPham.TenSP, dbo.LoaiSanPham.TenLoai, dbo.MauSac.TenMau, dbo.ChatLieu.TenCL, dbo.Size.TenSize, dbo.NhaCungCap.TenNcc, dbo.ChiTietHD.SoLuong, dbo.ChiTietSP.GiaBan\n"
+                + "FROM     dbo.ChatLieu INNER JOIN\n"
+                + "                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
+                + "                  dbo.ChiTietHD ON dbo.ChiTietSP.Id = dbo.ChiTietHD.IdCTSP INNER JOIN\n"
+                + "                  dbo.HoaDon ON dbo.ChiTietHD.IdHD = dbo.HoaDon.Id INNER JOIN\n"
+                + "                  dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
+                + "                  dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
+                + "                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
+                + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
+                + "                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id where size.tenSize = ?  ";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            List<SanPhamChiTietViewModel> listBH = new ArrayList<>();
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String tenSP = rs.getString("TenSP");
+                String tenLSP = rs.getString("TenLoai");
+                String tenMs = rs.getString("TenMau");
+                String tenCL = rs.getString("TenCL");
+                String tenSz = rs.getString("TenSize");
+                String tenNsx = rs.getString("TenNcc");
+                int sl = rs.getInt("SoLuong");
+                Double donGia = rs.getDouble("GiaBan");
+                SanPhamChiTietViewModel hd = new SanPhamChiTietViewModel(tenSP, tenLSP, tenMs, tenCL, tenSz, tenNsx, sl, donGia);
+                listBH.add(hd);
+            }
+            return listBH;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+       public List<SanPhamChiTietViewModel> locnhacungcap(String name) {
+        String query = "SELECT dbo.SanPham.TenSP, dbo.LoaiSanPham.TenLoai, dbo.MauSac.TenMau, dbo.ChatLieu.TenCL, dbo.Size.TenSize, dbo.NhaCungCap.TenNcc, dbo.ChiTietHD.SoLuong, dbo.ChiTietSP.GiaBan\n"
+                + "FROM     dbo.ChatLieu INNER JOIN\n"
+                + "                  dbo.ChiTietSP ON dbo.ChatLieu.Id = dbo.ChiTietSP.IdCL INNER JOIN\n"
+                + "                  dbo.ChiTietHD ON dbo.ChiTietSP.Id = dbo.ChiTietHD.IdCTSP INNER JOIN\n"
+                + "                  dbo.HoaDon ON dbo.ChiTietHD.IdHD = dbo.HoaDon.Id INNER JOIN\n"
+                + "                  dbo.LoaiSanPham ON dbo.ChiTietSP.IdLSP = dbo.LoaiSanPham.Id INNER JOIN\n"
+                + "                  dbo.MauSac ON dbo.ChiTietSP.IdMS = dbo.MauSac.Id INNER JOIN\n"
+                + "                  dbo.NhaCungCap ON dbo.ChiTietSP.IdNcc = dbo.NhaCungCap.Id INNER JOIN\n"
+                + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id INNER JOIN\n"
+                + "                  dbo.Size ON dbo.ChiTietSP.IdSz = dbo.Size.Id where nhacungcap.TenNcc =? ";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            List<SanPhamChiTietViewModel> listBH = new ArrayList<>();
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String tenSP = rs.getString("TenSP");
+                String tenLSP = rs.getString("TenLoai");
+                String tenMs = rs.getString("TenMau");
+                String tenCL = rs.getString("TenCL");
+                String tenSz = rs.getString("TenSize");
+                String tenNsx = rs.getString("TenNcc");
+                int sl = rs.getInt("SoLuong");
+                Double donGia = rs.getDouble("GiaBan");
+                SanPhamChiTietViewModel hd = new SanPhamChiTietViewModel(tenSP, tenLSP, tenMs, tenCL, tenSz, tenNsx, sl, donGia);
+                listBH.add(hd);
+            }
+            return listBH;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public List<String> getalllsp() {
+        String query = "select sanpham.tensp from sanpham";
+            ArrayList<String> list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               String x = rs.getString(1);
+               list.add(x);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+        public List<String> getalllsp1() {
+        String query = "select TenLoai from Loaisanpham ";
+            ArrayList<String> list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               String x = rs.getString(1);
+               list.add(x);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonCTBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
-        List<SanPhamChiTietViewModel> list = new SanPhamCTRepo().getAll();
+        String name = "Bên Trong";
+        List<SanPhamChiTietViewModel> list = new SanPhamCTRepo().locloaiSP(name);
         for (SanPhamChiTietViewModel x : list) {
-            System.out.println(x.getId());
+            System.out.println(x.toString());
         }
+        
+        
     }
+    
+    
 
 }

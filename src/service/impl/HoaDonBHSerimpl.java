@@ -4,13 +4,11 @@
  */
 package service.impl;
 
-import domainmodel.HoaDonBH;
 import java.util.List;
 import repository.HoaDonBHRepo;
 import service.HoaDonBHSer;
 import viewmodel.HoaDonBHViewModel;
-import viewmodel.KhachHangViewModel;
-import viewmodel.NhanVien;
+import viewmodel.HoaDonCTBHViewModel;
 
 /**
  *
@@ -74,5 +72,7 @@ public class HoaDonBHSerimpl implements HoaDonBHSer {
     public boolean updateTTHD(String idHD, String idKH, String ten, String dc, String sdt) {
         return re.updateTTHD(idHD, idKH, ten, dc, sdt);
     }
+
+    
 
 }
