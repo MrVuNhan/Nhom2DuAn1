@@ -192,11 +192,9 @@ public class ChatLieu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        Menu me = new Menu();
+        SanPhamChiTiet sp = new SanPhamChiTiet();
         this.dispose();
-        me.setVisible(true);
-        ChatLieu cl = new ChatLieu();
-        cl.setVisible(false);
+        sp.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed

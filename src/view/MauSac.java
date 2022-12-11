@@ -200,11 +200,9 @@ public class MauSac extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        Menu me = new Menu();
+        SanPhamChiTiet me = new SanPhamChiTiet();
         this.dispose();
         me.setVisible(true);
-        MauSac ms = new MauSac();
-        ms.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

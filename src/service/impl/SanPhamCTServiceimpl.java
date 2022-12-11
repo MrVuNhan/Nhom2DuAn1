@@ -25,7 +25,16 @@ public class SanPhamCTServiceimpl implements SanPhamCTService {
     }
     
     @Override
-    public String add(SanPhamCT sp) {
+    public String add(SanPhamCT sp) {       
+        if(sp.getSlt() < 0){
+            return "Số lượng phải là số dương";
+        }
+        if(sp.getGiaNhap()<0){
+            return "Giá nhập phải là số dương";
+        }
+        if(sp.getGiaBan()<0){
+            return "Giá bán phải là số dương";
+        }
         boolean add = re.add(sp);
         if (add) {
             return "Thành công";

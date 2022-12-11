@@ -11,6 +11,7 @@ import service.SizeService;
 import service.impl.SizeServiceimpl;
 import viewmodel.SizeViewModel;
 import domainmodel.Size;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -182,11 +183,9 @@ public class SizeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        Menu me = new Menu();
+        SanPhamChiTiet me = new SanPhamChiTiet();
         this.dispose();
         me.setVisible(true);
-        SizeView sz = new SizeView();
-        sz.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tbSizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSizeMouseClicked
@@ -201,10 +200,21 @@ public class SizeView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Trùng mã");
             return;
         }
-        Size sz = new Size(ma, ten);
-        JOptionPane.showMessageDialog(this, ser.add(sz));
-        listSz = ser.getAll();
-        showDataTable(listSz);
+        if (ma.isEmpty()) {
+            txtMa.setBackground(Color.red);
+        } else {
+            txtMa.setBackground(Color.white);
+        }
+        if (ten.isEmpty()) {
+            txtTen.setBackground(Color.red);
+        } else {
+            Size sz = new Size(ma, ten);
+            JOptionPane.showMessageDialog(this, ser.add(sz));
+            listSz = ser.getAll();
+            showDataTable(listSz);
+            txtTen.setBackground(Color.white);
+        }
+
 
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -212,9 +222,15 @@ public class SizeView extends javax.swing.JFrame {
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         Size sz = new Size(ma, ten);
-        JOptionPane.showMessageDialog(this, ser.update(sz, ma));
-        listSz = ser.getAll();
-        showDataTable(listSz);
+        if (ten.isEmpty()) {
+            txtTen.setBackground(Color.red);
+        } else {
+            JOptionPane.showMessageDialog(this, ser.update(sz, ma));
+            listSz = ser.getAll();
+            showDataTable(listSz);
+            txtTen.setBackground(Color.white);
+        }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

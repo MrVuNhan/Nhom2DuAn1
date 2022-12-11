@@ -209,11 +209,9 @@ public class LoaiSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        Menu me = new Menu();
+        SanPhamChiTiet me = new SanPhamChiTiet();
         this.dispose();
         me.setVisible(true);
-        LoaiSanPham lsp = new LoaiSanPham();
-        lsp.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tbLoaiSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLoaiSPMouseClicked

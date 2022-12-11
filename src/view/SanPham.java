@@ -5,6 +5,7 @@
 package view;
 
 import domainmodel.SanPhamH;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ import viewmodel.SanPhamViewModel;
  * @author FPTSHOP
  */
 public class SanPham extends javax.swing.JFrame {
-
+    
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<SanPhamViewModel> listSP = new ArrayList<>();
     private SanPhamSer ser = new SanPhamSerimpl();
@@ -95,7 +96,12 @@ public class SanPham extends javax.swing.JFrame {
             }
         });
 
-        btnThoat.setText("OUT");
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -185,20 +191,37 @@ public class SanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Trùng mã");
             return;
         }
-        SanPhamH sp = new SanPhamH(ma, ten);
-        JOptionPane.showMessageDialog(this, ser.add(sp));
-        listSP = ser.getAll();
-        showDataTable(listSP);
+        if (ma.isEmpty()) {
+            txtMa.setBackground(Color.red);
+        } else {
+            txtMa.setBackground(Color.white);
+        }
+        if (ten.isEmpty()) {
+            txtTen.setBackground(Color.red);
+        } else {
+            SanPhamH sp = new SanPhamH(ma, ten);
+            JOptionPane.showMessageDialog(this, ser.add(sp));
+            listSP = ser.getAll();
+            showDataTable(listSP);
+            txtTen.setBackground(Color.white);
+        }
         
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         String ma = txtMa.getText();
         String ten = txtTen.getText();
         SanPhamH sp = new SanPhamH(ma, ten);
-        JOptionPane.showMessageDialog(this, ser.update(sp, ma));
-        listSP = ser.getAll();
-        showDataTable(listSP);
+        if (ten.isEmpty()) {
+            txtTen.setBackground(Color.red);
+        } else {
+            JOptionPane.showMessageDialog(this, ser.update(sp, ma));
+            listSP = ser.getAll();
+            showDataTable(listSP);
+            txtTen.setBackground(Color.white);
+        }
+        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -214,19 +237,25 @@ public class SanPham extends javax.swing.JFrame {
         int row = tbSP.getSelectedRow();
         fillData(row);
     }//GEN-LAST:event_tbSPMouseClicked
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        SanPhamChiTiet sp = new SanPhamChiTiet();
+        sp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnThoatActionPerformed
     private void showDataTable(List<SanPhamViewModel> list) {
         dtm.setRowCount(0);
         for (SanPhamViewModel x : list) {
             dtm.addRow(x.toDataRow());
         }
     }
-
+    
     private void fillData(int index) {
         SanPhamViewModel sp = listSP.get(index);
         txtMa.setText(sp.getMaSP());
         txtTen.setText(sp.getTenSP());
     }
-
+    
     private boolean checkMa(String ma) {
         for (SanPhamViewModel x : listSP) {
             if (x.getMaSP().equals(ma)) {

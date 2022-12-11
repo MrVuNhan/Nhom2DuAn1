@@ -31,7 +31,6 @@ public class ChatLieuIml implements ChatLieuService {
         } else if (chatLieu.getTen().isEmpty()) {
             return "Ten trong";
         }
-
         boolean test = chatLieuRpo.add(chatLieu);
         if (test) {
             return "Add thành công";

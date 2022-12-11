@@ -35,8 +35,8 @@ public class SizeServiceimpl implements SizeService {
 
     @Override
     public String update(Size sz, String ma) {
-        boolean update= re.update(sz, ma);
-        if (update){
+        boolean update = re.update(sz, ma);
+        if (update) {
             return "Thành công";
         } else {
             return "Thất bại";
