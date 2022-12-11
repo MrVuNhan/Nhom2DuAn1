@@ -21,6 +21,7 @@ public class FormThongKe extends javax.swing.JFrame {
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<ThongKeViewModle> listCl = new ArrayList<>();
     private ThongKeImpl thongKe = new ThongKeImpl();
+    private List<ThongKeViewModle> listSearch = new ArrayList<>();
 
     public FormThongKe() {
         initComponents();
@@ -51,6 +52,7 @@ public class FormThongKe extends javax.swing.JFrame {
         }
         return tien;
     }
+
     private int soLuong(List<ThongKeViewModle> x) {
         int tien = 0;
         for (ThongKeViewModle thke : x) {
@@ -58,6 +60,14 @@ public class FormThongKe extends javax.swing.JFrame {
         }
         return tien;
     }
+
+    private void tongDoan() {
+        DecimalFormat ds = new DecimalFormat("###,###,###,###");
+        showDaTaHD(listSearch);
+        txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+        txtSoLuong.setText(ds.format(soLuong(listSearch)));
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -191,44 +201,92 @@ public class FormThongKe extends javax.swing.JFrame {
         String thang = txtThang.getText();
         String nam = txtNam.getText();
         String all = nam + "-" + thang + "-" + ngay;
-        DecimalFormat ds = new DecimalFormat("###,###,###,###");
         if (ngay.isEmpty() && thang.isEmpty() && nam.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "mời điền ngày tháng năm muốn tìm kiếm");
+            JOptionPane.showMessageDialog(this, "Mời điền ngày tháng năm muốn tìm kiếm");
         } else if (!ngay.isBlank() && thang.isEmpty() && nam.isEmpty()) {
-            List<ThongKeViewModle> listSearch = thongKe.listNgay(ngay);
-            showDaTaHD(listSearch);
-
-            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
+            if (!ngay.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Ngày là số và là số dương ");
+            } else if (Integer.valueOf(ngay) > 31) {
+                JOptionPane.showMessageDialog(this, "Ngày dưới ngày 31");
+            } else {
+                listSearch = thongKe.listNgay(ngay);
+                tongDoan();
+            }
         } else if (!thang.isEmpty() && ngay.isEmpty() && nam.isEmpty()) {
-            List<ThongKeViewModle> listSearch = thongKe.listThang(thang);
-            showDaTaHD(listSearch);
-            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
-            txtSoLuong.setText(ds.format(soLuong(listSearch)));
+            if (!thang.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Tháng là số và là số dương");
+            } else if (Integer.valueOf(thang) > 12) {
+                JOptionPane.showMessageDialog(this, "Tháng chỉ có 12 tháng");
+            } else {
+                listSearch = thongKe.listThang(thang);
+                tongDoan();
+            }
         } else if (!nam.isEmpty() && ngay.isEmpty() && thang.isEmpty()) {
-            List<ThongKeViewModle> listSearch = thongKe.listNam(nam);
-            showDaTaHD(listSearch);
-            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
-            txtSoLuong.setText(ds.format(soLuong(listSearch)));
+            if (!nam.matches("\\d+") || nam.length() != 4) {
+                JOptionPane.showMessageDialog(this, "Năm là số và gồm 4 số");
+            } else {
+                listSearch = thongKe.listNam(nam);
+                tongDoan();
+            }
         } else if (!ngay.isEmpty() && !thang.isEmpty() && nam.isEmpty()) {
-            List<ThongKeViewModle> listSearch = thongKe.listNgayThang(ngay, thang);
-            showDaTaHD(listSearch);
-            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
-            txtSoLuong.setText(ds.format(soLuong(listSearch)));
+            if (!ngay.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Ngày là số");
+            } else if (Integer.valueOf(ngay) > 31) {
+                JOptionPane.showMessageDialog(this, "Ngày từ 1 - 31");
+            } else if (!thang.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Tháng là số");
+            } else if (Integer.valueOf(thang) > 12) {
+                JOptionPane.showMessageDialog(this, "Tháng chỉ có 12 tháng");
+            } else {
+                if (Integer.valueOf(thang) == 2 && Integer.valueOf(ngay) > 29) {
+                    JOptionPane.showMessageDialog(this, "Tháng 2 không có quá ngày 29");
+                } else {
+                    listSearch = thongKe.listNgayThang(ngay, thang);
+                    tongDoan();
+                }
+            }
         } else if (ngay.isEmpty() && !thang.isEmpty() && !nam.isEmpty()) {
-            List<ThongKeViewModle> listSearch = thongKe.listNamThang(thang, nam);
-            showDaTaHD(listSearch);
-            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
-            txtSoLuong.setText(ds.format(soLuong(listSearch)));
+            if (!thang.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Tháng là số và là số dương");
+            } else if (Integer.valueOf(thang) > 12) {
+                JOptionPane.showMessageDialog(this, "Tháng chỉ có 12 tháng");
+            } else if (!nam.matches("\\d+") || nam.length() != 4) {
+                JOptionPane.showMessageDialog(this, "Năm là số và gồm 4 số");
+            } else {
+                listSearch = thongKe.listNamThang(thang, nam);
+                tongDoan();
+            }
         } else if (!ngay.isEmpty() && thang.isEmpty() && !nam.isEmpty()) {
-            List<ThongKeViewModle> listSearch = thongKe.listNamNgay(ngay, nam);
-            showDaTaHD(listSearch);
-            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
-            txtSoLuong.setText(ds.format(soLuong(listSearch)));
+            if (!ngay.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Ngày là số và là số dương");
+            } else if (Integer.valueOf(ngay) > 31) {
+                JOptionPane.showMessageDialog(this, "Ngày dưới ngày 31");
+            } else if (!nam.matches("\\d+") || nam.length() != 4) {
+                JOptionPane.showMessageDialog(this, "Năm là số và gồm 4 số");
+            } else {
+                listSearch = thongKe.listNamNgay(ngay, nam);
+                tongDoan();
+            }
         } else {
-            List<ThongKeViewModle> listSearch = thongKe.listAll(all);
-            showDaTaHD(listSearch);
-            txtDoanhThu.setText(ds.format(thanhTien(listSearch)) + " " + "VNĐ");
-            txtSoLuong.setText(ds.format(soLuong(listSearch)));
+            if (Integer.valueOf(ngay) == 29 && Integer.valueOf(thang) == 2 && Integer.valueOf(nam) % 4 != 0) {
+                JOptionPane.showMessageDialog(this, "Năm " + nam + " không là năm nhuận nên không có ngày 29");
+            } else {
+                if (!ngay.matches("\\d+")) {
+                    JOptionPane.showMessageDialog(this, "Ngày là số");
+                } else if (Integer.valueOf(ngay) > 31) {
+                    JOptionPane.showMessageDialog(this, "Ngày từ 1 - 31");
+                } else if (!thang.matches("\\d+")) {
+                    JOptionPane.showMessageDialog(this, "Tháng là số");
+                } else if (Integer.valueOf(thang) > 12) {
+                    JOptionPane.showMessageDialog(this, "Tháng chỉ có 12 tháng");
+                } else if (!nam.matches("\\d+") || nam.length() != 4) {
+                    JOptionPane.showMessageDialog(this, "Năm là số và gồm 4 số");
+                } else {
+                    listSearch = thongKe.listAll(all);
+                    tongDoan();
+                }
+
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
