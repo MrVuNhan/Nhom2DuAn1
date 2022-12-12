@@ -11,6 +11,19 @@ import javax.swing.table.DefaultTableModel;
 import service.TraHangServisert;
 import service.impl.Trahangimpl;
 import viewmodel.HoaDonModel;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -105,7 +118,7 @@ public class FromTraHang extends javax.swing.JFrame {
         lbThanhToan = new javax.swing.JLabel();
         lbDonGia = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        btnThoat = new javax.swing.JButton();
+        bttxuat = new javax.swing.JButton();
 
         jButton3.setText("jButton3");
 
@@ -283,10 +296,10 @@ public class FromTraHang extends javax.swing.JFrame {
             }
         });
 
-        btnThoat.setText("Thoát");
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+        bttxuat.setText("Xlsx");
+        bttxuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
+                bttxuatActionPerformed(evt);
             }
         });
 
@@ -304,30 +317,27 @@ public class FromTraHang extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(288, 288, 288)
-                                .addComponent(jLabel1)
-                                .addGap(162, 162, 162)
-                                .addComponent(jButton2)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnThoat)
-                .addContainerGap())
+                                .addComponent(jLabel1)))))
+                .addGap(82, 82, 82))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(53, 53, 53)
+                .addComponent(bttxuat, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(245, 245, 245))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 29, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(bttxuat))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnThoat))
         );
 
         pack();
@@ -360,7 +370,7 @@ public class FromTraHang extends javax.swing.JFrame {
 
     private void btthoantraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btthoantraActionPerformed
 
-        row = tbhthoadonduoi.getSelectedRow();
+     row = tbhthoadonduoi.getSelectedRow();
         HoaDonModel hd = listhoadon.get(row);
         showdatahdct(listhdct);
         String idKH = ser.getoneIDKH(hd.getMaKH());
@@ -369,25 +379,31 @@ public class FromTraHang extends javax.swing.JFrame {
         String idCTSP = ser.getIDCTHD(idHD);
         int soluongHD = ser.getSoLuong(idHD);
         System.out.println(soluongHD);
-        int soLuong = Integer.parseInt(txtsltl.getText());
-        double tongTienTL = soLuong * hd.getDongia();
-        double tienThua = hd.tongtien(hd.getSoluong(), hd.getDongia()) - tongTienTL;
-        HoaDonModel hd1 = new HoaDonModel();
+        String soLuong = txtsltl.getText();
 
-        if (soLuong < 0) {
+        HoaDonModel hd1 = new HoaDonModel();
+        if (soLuong.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            txtsltl.setText("");
+        } else if (!soLuong.matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(this, "So Luong phai là số");
+            txtsltl.setText("");
+        } else if (Integer.parseInt(soLuong) < 0) {
             JOptionPane.showMessageDialog(this, "So Luong phai > 0");
             txtsltl.setText("");
 
-        } else if (soLuong > soluongHD) {
+        } else if (Integer.parseInt(soLuong) > soluongHD) {
             JOptionPane.showMessageDialog(this, "Nhập sai ! vui lòng nhập lại");
             txtsltl.setText("");
             lbThanhToan.setText("");
         } else {
-            lbThanhToan.setText(setText(soLuong, hd.getDongia()) + " ");
+            double tongTienTL = Integer.parseInt(soLuong) * hd.getDongia();
+            double tienThua = hd.tongtien(hd.getSoluong(), hd.getDongia()) - tongTienTL;
+            lbThanhToan.setText(setText(Integer.parseInt(soLuong), hd.getDongia()) + " ");
             lbDonGia.setText(setDonGia(hd.getDongia()) + " ");
-            JOptionPane.showMessageDialog(this, ser.update(idKH, idHD, 
-                    hd.getTenkh(), soLuong, tienThua));
-            JOptionPane.showMessageDialog(this, ser.updateCTHD(idHD, soLuong));
+            JOptionPane.showMessageDialog(this, ser.update(idKH, idHD,
+                    hd.getTenkh(), Integer.parseInt(soLuong), tienThua));
+            JOptionPane.showMessageDialog(this, ser.updateCTHD(idHD, Integer.parseInt(soLuong)));
             listhoadon.add(hd1);
             listhdct.remove(hd);
             txtmahd.setText("");
@@ -406,14 +422,98 @@ public class FromTraHang extends javax.swing.JFrame {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        Menu mn = new Menu();
-        mn.setVisible(true);
-        this.dispose();
-        FromTraHang th = new FromTraHang();
-        th.setVisible(false);
-    }//GEN-LAST:event_btnThoatActionPerformed
+    private void bttxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttxuatActionPerformed
+        // TODO add your handling code here:
+         try {
+            XSSFWorkbook xssw = new XSSFWorkbook();
+            XSSFSheet xsss = xssw.createSheet("dsD");
+            XSSFRow xssr = null;
+            Cell cell = null;
 
+            xssr = xsss.createRow(2);
+            cell = xssr.createCell(0, CellType.STRING);
+            cell.setCellValue("listhoadon");
+
+            xssr = xsss.createRow(3);
+            cell = xssr.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+
+            cell = xssr.createCell(1, CellType.STRING);
+            cell.setCellValue("Ma KH");
+
+            cell = xssr.createCell(2, CellType.STRING);
+            cell.setCellValue("Ma HD");
+
+            cell = xssr.createCell(3, CellType.STRING);
+            cell.setCellValue("Ten KH");
+
+            cell = xssr.createCell(4, CellType.STRING);
+            cell.setCellValue("Ngay Tao");
+
+            cell = xssr.createCell(5, CellType.STRING);
+            cell.setCellValue("Ngay Thu");
+
+            cell = xssr.createCell(6, CellType.STRING);
+            cell.setCellValue("Dia Chi");
+
+            cell = xssr.createCell(7, CellType.STRING);
+            cell.setCellValue("SDT");
+
+            cell = xssr.createCell(8, CellType.STRING);
+            cell.setCellValue("Trang thai");
+
+            for (int i = 0; i < listhoadon.size(); i++) {
+                //Modelbook book =arr.get(i);
+                xssr = xsss.createRow(4 + i);
+
+                cell = xssr.createCell(0, CellType.NUMERIC);
+                cell.setCellValue(i + 1);
+
+                cell = xssr.createCell(1, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getMaKH());
+
+                cell = xssr.createCell(2, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getMahd());
+
+                cell = xssr.createCell(3, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getTenkh());
+
+                cell = xssr.createCell(4, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getNgaytao());
+
+                cell = xssr.createCell(5, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getNgaythu());
+
+                cell = xssr.createCell(6, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getDiachi());
+
+                cell = xssr.createCell(7, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getSdt());
+
+                cell = xssr.createCell(8, CellType.STRING);
+                cell.setCellValue(listhoadon.get(i).getTrangthai()==1?"đã thu" : "chưa thu");
+                
+
+            }
+
+            File f = new File("D:\\hoadon.xlsx");
+            try {
+                FileOutputStream fis = new FileOutputStream(f);
+                xssw.write(fis);
+                fis.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "in thanh cong D://hoadon.xlsx");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Loi mo file");   
+    }//GEN-LAST:event_bttxuatActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
@@ -450,8 +550,8 @@ public class FromTraHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btthoantra;
+    private javax.swing.JButton bttxuat;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

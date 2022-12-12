@@ -8,6 +8,7 @@ import java.util.List;
 import repository.loginRepo;
 import service.loginService;
 import viewmodel.NhanVien;
+import viewmodel.QuanLyViewModel;
 
 /**
  *
@@ -20,6 +21,21 @@ public class loginImpl implements loginService {
     @Override
     public List<NhanVien> getALLNV() {
         return login.getALLNV();
+    }
+
+    @Override
+    public List<QuanLyViewModel> getALLQL() {
+        return login. getALLQL();
+    }
+
+    @Override
+    public String updateNV(String newPass, String maNV) {
+         boolean update = login.updatePassNV(newPass, maNV);
+         if(update){
+             return "Update thành công";
+         }else{
+             return "Update không thành công";
+         }
     }
 
     

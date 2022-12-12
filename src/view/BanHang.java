@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import repository.KhachHangRepo;
 import service.ChatLieuService;
 import service.HoaDonBHSer;
 import service.HoaDonCTBHSer;
@@ -18,7 +17,6 @@ import service.LoaiSPService;
 import service.MauSacService;
 import service.NhaCungCapService;
 import service.SanPhamCTService;
-import service.SanPhamSer;
 import service.SizeService;
 import service.impl.ChatLieuIml;
 import service.impl.HoaDonBHCTSerimpl;
@@ -28,18 +26,11 @@ import service.impl.LoaiSPImpl;
 import service.impl.MauSacimpl;
 import service.impl.NhaCungCapIMPL;
 import service.impl.SanPhamCTServiceimpl;
-import service.impl.SanPhamSerimpl;
 import service.impl.SizeServiceimpl;
-import viewmodel.ChatlieuViewModel;
 import viewmodel.HoaDonBHViewModel;
 import viewmodel.HoaDonCTBHViewModel;
 import viewmodel.KhachHangViewModel;
-import viewmodel.LoaiSPViewmodel;
-import viewmodel.MauSacViewmodel;
-import viewmodel.NhaCungCapviewmodel;
 import viewmodel.SanPhamChiTietViewModel;
-import viewmodel.SanPhamViewModel;
-import viewmodel.SizeViewModel;
 
 /**
  *
@@ -131,6 +122,7 @@ public class BanHang extends javax.swing.JFrame {
         loadCBB();
 
         loadCacCbb();
+        
 
     }
 
@@ -152,7 +144,7 @@ public class BanHang extends javax.swing.JFrame {
         }
     }
 
-    public void loadCacCbb() {
+    private void loadCacCbb() {
         //Sản phẩm
         listCbbSP = serSPCT.getAll();
         loadCbbSp(listCbbSP);
@@ -272,7 +264,7 @@ public class BanHang extends javax.swing.JFrame {
         cbbLoaiSp = new javax.swing.JComboBox<>();
         cbbMauSac = new javax.swing.JComboBox<>();
         cbbChatLieu = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        cbbTatCa = new javax.swing.JButton();
         cbbsize = new javax.swing.JComboBox<>();
         cbbNhaSX = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
@@ -581,10 +573,10 @@ public class BanHang extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Tất Cả SP");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cbbTatCa.setText("Tất Cả SP");
+        cbbTatCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cbbTatCaActionPerformed(evt);
             }
         });
 
@@ -613,7 +605,7 @@ public class BanHang extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbbTatCa, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(cbbTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
@@ -639,7 +631,7 @@ public class BanHang extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jButton2))
+                    .addComponent(cbbTatCa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbbTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -864,25 +856,25 @@ public class BanHang extends javax.swing.JFrame {
     private void cbbTenSpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTenSpActionPerformed
 
         String tenSP = (String) cbbTenSp.getSelectedItem();
-        listSPCT = serSPCT.loclsp(tenSP);
+        listSPCT = serSPCT.searchTenSP(tenSP);
         loadTable(listSPCT);
     }//GEN-LAST:event_cbbTenSpActionPerformed
 
     private void cbbLoaiSpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLoaiSpActionPerformed
         String loaiSP = (String) cbbLoaiSp.getSelectedItem();
-        listSPCT = serSPCT.loclsp1(loaiSP);
+        listSPCT = serSPCT.searchLoaiSP(loaiSP);
         loadTable(listSPCT);
     }//GEN-LAST:event_cbbLoaiSpActionPerformed
 
     private void cbbMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMauSacActionPerformed
         String mau = (String) cbbMauSac.getSelectedItem();
-        listSPCT = serSPCT.locmau(mau);
+        listSPCT = serSPCT.searchMau(mau);
         loadTable(listSPCT);
     }//GEN-LAST:event_cbbMauSacActionPerformed
 
     private void cbbChatLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChatLieuActionPerformed
         String chatlieu = (String) cbbChatLieu.getSelectedItem();
-        listSPCT = serSPCT.locchatlieu(ma);
+        listSPCT = serSPCT.searchCL(chatlieu);
         loadTable(listSPCT);
     }//GEN-LAST:event_cbbChatLieuActionPerformed
 
@@ -897,27 +889,27 @@ public class BanHang extends javax.swing.JFrame {
 
     private void cbbsizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbsizeActionPerformed
         String size = (String) cbbsize.getSelectedItem();
-        listSPCT = serSPCT.locsize(size);
+        listSPCT = serSPCT.searchSz(size);
         loadTable(listSPCT);
     }//GEN-LAST:event_cbbsizeActionPerformed
 
     private void cbbNhaSXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNhaSXActionPerformed
         // TODO add your handling code here:
         String mau = (String) cbbNhaSX.getSelectedItem();
-        listSPCT = serSPCT.locnhacungcap(mau);
+        listSPCT = serSPCT.searchNsx(mau);
         loadTable(listSPCT);
     }//GEN-LAST:event_cbbNhaSXActionPerformed
 
     private void btttkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btttkActionPerformed
-       String tenSP = txttk.getText();
-        listSPCT = serSPCT.loclsp(tenSP);
+        String tenSP = txttk.getText();
+        listSPCT = serSPCT.searchTenSP(tenSP);
         loadTable(listSPCT);
     }//GEN-LAST:event_btttkActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cbbTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTatCaActionPerformed
         listSPCT = serSPCT.getAll();
         loadTable(listSPCT);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cbbTatCaActionPerformed
 
     public void loadTable(List<SanPhamChiTietViewModel> list) {
         dtm.setRowCount(0);
@@ -1013,10 +1005,10 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbLoaiSp;
     private javax.swing.JComboBox<String> cbbMauSac;
     private javax.swing.JComboBox<String> cbbNhaSX;
+    private javax.swing.JButton cbbTatCa;
     private javax.swing.JComboBox<String> cbbTenSp;
     private javax.swing.JComboBox<String> cbbsize;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

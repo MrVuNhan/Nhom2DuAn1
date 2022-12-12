@@ -21,10 +21,16 @@ public class NhanVien extends javax.swing.JFrame {
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<NhanVienViewModel> listNv = new ArrayList<>();
     private NhanVienService nvsv = new NhanVienServiceImpl();
+    private String maQL;
 
     public NhanVien() {
         initComponents();
+    }
+
+    public NhanVien(String user) {
+        initComponents();
         setLocationRelativeTo(null);
+        maQL = user;
         loadTable.setModel(dtm);
         String[] header = {"Mã Nhân Viên", "Tên Nhân Viên", "Giới Tính", "Ngày Sinh", "SDT", "Địa Chỉ", "Email", "Ngày Công", "Lương", "Trạng Thái"};
         dtm.setColumnIdentifiers(header);

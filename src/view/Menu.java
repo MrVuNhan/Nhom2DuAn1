@@ -45,9 +45,9 @@ public class Menu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btthoadon = new javax.swing.JButton();
-        bttkhachhang = new javax.swing.JButton();
         bttnhanvien = new javax.swing.JButton();
         bttthongke = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,14 +98,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        bttkhachhang.setBackground(new java.awt.Color(255, 204, 153));
-        bttkhachhang.setText("Khách Hàng");
-        bttkhachhang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttkhachhangActionPerformed(evt);
-            }
-        });
-
         bttnhanvien.setBackground(new java.awt.Color(255, 204, 153));
         bttnhanvien.setText("Nhân Viên");
         bttnhanvien.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +114,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Đổi Mật Khẩu");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -133,13 +132,14 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btthoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(bttkhachhang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bttthongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(bttnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                        .addComponent(bttthongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bttnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(46, 46, 46))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,12 +147,12 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(bttnhanvien))
+                    .addComponent(jButton2))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSanPham)
-                    .addComponent(bttkhachhang))
+                    .addComponent(jButton3)
+                    .addComponent(bttnhanvien))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btthoadon)
@@ -186,13 +186,14 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThoat)
-                .addGap(103, 103, 103))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnThoat)
+                        .addGap(103, 103, 103))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +237,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void bttnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnhanvienActionPerformed
-        // TODO add your handling code here:
+        NhanVien login = new NhanVien(ma);
+        login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bttnhanvienActionPerformed
 
     private void btthoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btthoadonActionPerformed
@@ -247,18 +250,17 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btthoadonActionPerformed
 
-    private void bttkhachhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttkhachhangActionPerformed
-
-        KhachHang login = new KhachHang();
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_bttkhachhangActionPerformed
-
     private void bttthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttthongkeActionPerformed
-        FormThongKe login = new FormThongKe();
+       // FormThongKe login = new FormThongKe(ma);
+       // login.setVisible(true);
+       // this.dispose();
+    }//GEN-LAST:event_bttthongkeActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        DoiMatKhauFrom login = new DoiMatKhauFrom(ma);
         login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_bttthongkeActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,11 +301,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btthoadon;
-    private javax.swing.JButton bttkhachhang;
     private javax.swing.JButton bttnhanvien;
     private javax.swing.JButton bttthongke;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

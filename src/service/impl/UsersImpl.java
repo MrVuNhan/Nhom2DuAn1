@@ -16,18 +16,28 @@ public class UsersImpl implements UsersSeverces {
 
     UsersRepository us = new UsersRepository();
 
+//    @Override
+//    public QuanLyViewModel getOne(String user, String password) {
+//        return us.getOne(user, password);
+//    }
+//
+//    @Override
+//    public String upPass(QuanLyViewModel ql, String Ma) {
+//        boolean A = us.upPass(ql, Ma);
+//        if (A) {
+//            return "Đỏi mật khẩu thành công";
+//        } else {
+//            return "Đổi mật khẩu thất bại";
+//        }
+//    }
+
     @Override
     public QuanLyViewModel getOne(String user, String password) {
-        return us.getOne(user, password);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public String upPass(QuanLyViewModel ql, String Ma) {
-        boolean A = us.upPass(ql, Ma);
-        if (A) {
-            return "Đỏi mật khẩu thành công";
-        } else {
-            return "Đổi mật khẩu thất bại";
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

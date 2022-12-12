@@ -18,11 +18,12 @@ public class QuanLyViewModel {
     private String ngayLamQuanLy;
     private String matKhau;
     private int trangthai;
+    private boolean gioitinh;
 
     public QuanLyViewModel() {
     }
 
-    public QuanLyViewModel(String id, String ma, String ten, String sdt, String email, String ngayVao, String ngayLamQuanLy, String matKhau, int trangthai) {
+    public QuanLyViewModel(String id, String ma, String ten, String sdt, String email, String ngayVao, String ngayLamQuanLy, String matKhau, int trangthai, boolean gioitinh) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -32,7 +33,18 @@ public class QuanLyViewModel {
         this.ngayLamQuanLy = ngayLamQuanLy;
         this.matKhau = matKhau;
         this.trangthai = trangthai;
+        this.gioitinh = gioitinh;
     }
+
+    public boolean isGioitinh() {
+        return gioitinh;
+    }
+
+    public void setGioitinh(boolean gioitinh) {
+        this.gioitinh = gioitinh;
+    }
+
+    
 
     public QuanLyViewModel(String ma) {
         this.ma = ma;
@@ -109,5 +121,14 @@ public class QuanLyViewModel {
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
+
+    @Override
+    public String toString() {
+        return "QuanLyViewModel{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", sdt=" + sdt + ", email=" + email + ", ngayVao=" + ngayVao + ", ngayLamQuanLy=" + ngayLamQuanLy + ", matKhau=" + matKhau + ", trangthai=" + trangthai + ", gioitinh=" + gioitinh + '}';
+    }
+
+    
+
+   
     
 }

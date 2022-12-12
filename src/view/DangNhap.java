@@ -10,24 +10,27 @@ import javax.swing.JOptionPane;
 import service.impl.loginImpl;
 import service.loginService;
 import viewmodel.NhanVien;
+import viewmodel.QuanLyViewModel;
 
 /**
  *
  * @author FPTSHOP
  */
 public class DangNhap extends javax.swing.JFrame {
-    
+
     private loginService login = new loginImpl();
     private boolean showPass = false;
     private List<NhanVien> listNV = new ArrayList<>();
-    
+    private List<QuanLyViewModel> listql = new ArrayList<>();
+
     public DangNhap() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Đăng nhập hệ thống");
         listNV = login.getALLNV();
+        listql = login.getALLQL();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,25 +84,24 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                                .addComponent(showPasss, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10))))
+                                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addComponent(showPasss, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(btnLog)
                         .addGap(18, 18, 18)
                         .addComponent(btnCan)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +116,7 @@ public class DangNhap extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(showPasss, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLog)
                     .addComponent(btnCan))
@@ -153,6 +155,14 @@ public boolean checkLoginNV(String ma, String matKhau) {
         }
         return false;
     }
+public boolean checkLoginQL(String ma, String matKhau) {
+        for (QuanLyViewModel ql : listql) {
+            if (ma.equalsIgnoreCase(ql.getMa()) && matKhau.equalsIgnoreCase(ql.getMatKhau())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean validateForm() {
         if (txtName.getText().isEmpty() && txtPass.getText().isEmpty()) {
@@ -160,25 +170,28 @@ public boolean checkLoginNV(String ma, String matKhau) {
         }
         return true;
     }
-    
+
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-        if (validateForm()) {
+             if (validateForm()) {
             String user = txtName.getText();
             String pass = txtPass.getText();
             if (checkLoginNV(user, pass)) {
-                JOptionPane.showMessageDialog(this, "Login successfully!");
+                JOptionPane.showMessageDialog(this, "Đăng nhập với role Nhân Viên !");
                 Menu fnv = new Menu(user);
                 fnv.setVisible(true);
                 this.dispose();
-            }   else{
-                 JOptionPane.showMessageDialog(this, "Login Loi!");
-            }         
+            } else if (checkLoginQL(user, pass)) {
+                JOptionPane.showMessageDialog(this, "Đăng nhập với role Quản Lý !");
+                Menu fnv = new Menu(user);
+                fnv.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Đăng Nhâp không thành công");
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Username or Pass incorrect!");
-            
-        }
-        
 
+        }
     }//GEN-LAST:event_btnLogActionPerformed
 
     private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed

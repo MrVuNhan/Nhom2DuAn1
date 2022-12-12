@@ -6,8 +6,8 @@ package view;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import repository.QuanLyRepo;
-import service.impl.UsersImpl;
+import service.impl.loginImpl;
+import service.loginService;
 import viewmodel.QuanLyViewModel;
 
 /**
@@ -16,11 +16,17 @@ import viewmodel.QuanLyViewModel;
  */
 public class DoiMatKhauFrom extends javax.swing.JFrame {
 
-    private UsersImpl use = new UsersImpl();
+    private loginService use = new loginImpl();
+    private String maNV;
 
     public DoiMatKhauFrom() {
         initComponents();
+    }
+
+    public DoiMatKhauFrom(String user) {
+        initComponents();
         setLocationRelativeTo(null);
+        maNV = user;
     }
 
     @SuppressWarnings("unchecked")
@@ -29,17 +35,14 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnXacNhan = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtTK = new javax.swing.JTextField();
         txtOldMK = new javax.swing.JPasswordField();
         txtNewMK = new javax.swing.JPasswordField();
         txtNew2MK = new javax.swing.JPasswordField();
-        btnQuayLai = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,11 +51,8 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 0, 51)));
 
-        jLabel3.setText("Tên Tài Khoản :");
-
         jLabel2.setText("Mật Khẩu Cũ :");
 
-        btnXacNhan.setIcon(new javax.swing.ImageIcon("D:\\PhamThiTuoi\\Nhom2 (1)\\Nhom2\\src\\icons\\check-mark-3-16.png")); // NOI18N
         btnXacNhan.setText("Xác Nhận");
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,23 +60,16 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon("D:\\PhamThiTuoi\\Nhom2 (1)\\Nhom2\\src\\icons\\x-mark-2-16.png")); // NOI18N
-        jButton2.setText("Hủy");
+        jButton2.setText("Thoát");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Mật Khẩu Mới :");
 
         jLabel6.setText("Nhập Lại Mật khẩu Mới :");
-
-        btnQuayLai.setText("Quay Lại ?");
-        btnQuayLai.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                btnQuayLaiAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -95,26 +88,18 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnQuayLai)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtTK)
-                                .addComponent(txtOldMK)
-                                .addComponent(txtNewMK)
-                                .addComponent(txtNew2MK, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtOldMK)
+                            .addComponent(txtNewMK)
+                            .addComponent(txtNew2MK, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtOldMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,9 +115,7 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacNhan)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnQuayLai)
-                .addContainerGap())
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,17 +146,13 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnQuayLaiAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnQuayLaiAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnQuayLaiAncestorAdded
-
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        String user = txtTK.getText();
+
         String oldPass = txtOldMK.getText();
         String newPass = txtNewMK.getText();
         String newPass2 = txtNew2MK.getText();
-        QuanLyViewModel a = use.getOne(user, oldPass);
-        if (user.isEmpty() || oldPass.isEmpty() || newPass.isEmpty() || newPass2.isEmpty()) {
+
+        if (oldPass.isEmpty() || newPass.isEmpty() || newPass2.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Mời điền đủ giữ liệu");
         } else if (oldPass.equalsIgnoreCase(newPass2)) {
             JOptionPane.showMessageDialog(rootPane, "Mật khẩu mới trùng với mật khẩu cũ");
@@ -184,15 +163,19 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
             txtNew2MK.requestFocus();
             txtNew2MK.setBackground(Color.YELLOW);
         } else {
-            if (user.equals(a.getMa()) && oldPass.equals(a.getMatKhau())) {
-                QuanLyViewModel ss = new QuanLyViewModel(user);
-                JOptionPane.showMessageDialog(rootPane, use.upPass(ss, user));
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Mật khẩu sai hoặc pass đang sai");
-            }
+           JOptionPane.showMessageDialog(this,  use.updateNV(newPass, maNV));
+            txtOldMK.setText("");
+            txtNewMK.setText("");
+            txtNew2MK.setText("");
         }
 
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Menu login = new Menu(maNV);
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,18 +213,15 @@ public class DoiMatKhauFrom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnQuayLai;
     private javax.swing.JButton btnXacNhan;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtNew2MK;
     private javax.swing.JPasswordField txtNewMK;
     private javax.swing.JPasswordField txtOldMK;
-    private javax.swing.JTextField txtTK;
     // End of variables declaration//GEN-END:variables
 }
