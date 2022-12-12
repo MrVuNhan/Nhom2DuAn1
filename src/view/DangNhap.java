@@ -155,7 +155,8 @@ public boolean checkLoginNV(String ma, String matKhau) {
         }
         return false;
     }
-public boolean checkLoginQL(String ma, String matKhau) {
+
+    public boolean checkLoginQL(String ma, String matKhau) {
         for (QuanLyViewModel ql : listql) {
             if (ma.equalsIgnoreCase(ql.getMa()) && matKhau.equalsIgnoreCase(ql.getMatKhau())) {
                 return true;
@@ -172,12 +173,12 @@ public boolean checkLoginQL(String ma, String matKhau) {
     }
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-             if (validateForm()) {
+        if (validateForm()) {
             String user = txtName.getText();
             String pass = txtPass.getText();
             if (checkLoginNV(user, pass)) {
                 JOptionPane.showMessageDialog(this, "Đăng nhập với role Nhân Viên !");
-                Menu fnv = new Menu(user);
+                MenuNhanVien fnv = new MenuNhanVien(user);
                 fnv.setVisible(true);
                 this.dispose();
             } else if (checkLoginQL(user, pass)) {

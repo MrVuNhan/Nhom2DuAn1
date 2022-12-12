@@ -24,10 +24,11 @@ public class KhachHang extends javax.swing.JFrame {
   private String maNV;
      public KhachHang() {
         initComponents();
-       
+         setLocationRelativeTo(null);
     }
     public KhachHang(String user) {
         initComponents();
+        setLocationRelativeTo(null);
         maNV = user;
         tbKhachHang.setModel(dtm);
         String[] e = {"Mã KH", "Tên KH", "Giới Tính", "Ngày Sinh", "SDT", "Địa Chỉ"};

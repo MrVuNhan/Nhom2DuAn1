@@ -122,7 +122,6 @@ public class BanHang extends javax.swing.JFrame {
         loadCBB();
 
         loadCacCbb();
-        
 
     }
 
@@ -795,6 +794,7 @@ public class BanHang extends javax.swing.JFrame {
             listDSMH.remove(row);
             lisHDBH = serHDBH.getAll();
             loadTable1(lisHDBH);
+
         }
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -817,11 +817,10 @@ public class BanHang extends javax.swing.JFrame {
         int SoLuong = Integer.valueOf(JOptionPane.showInputDialog("Nhập số lượng"));
         if (SoLuong > sp.getSlt()) {
             JOptionPane.showMessageDialog(this, "Nhập lại số lượng");
-        
-        }else if(SoLuong< 0){
+
+        } else if (SoLuong < 0) {
             JOptionPane.showMessageDialog(this, "Nhập lại số lượng");
-        }
-        else {
+        } else {
             int SLT = sp.getSlt() - SoLuong;
             SanPhamChiTietViewModel sp1 = new SanPhamChiTietViewModel(sp.getId(), sp.getTenSP(),
                     sp.getLoaiSP(), sp.getMauSac(), sp.getChatLieu(), sp.getSize(),
