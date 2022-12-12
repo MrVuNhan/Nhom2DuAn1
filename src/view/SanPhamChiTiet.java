@@ -260,7 +260,7 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         btnLocNss = new javax.swing.JButton();
         btnTatCa = new javax.swing.JButton();
         lbSLT = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnEx = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -535,7 +535,12 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Excel");
+        btnEx.setText("Excel");
+        btnEx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -613,13 +618,13 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
                                                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                         .addComponent(jLabel17)
-                                                        .addGap(25, 25, 25))))))
+                                                        .addGap(21, 21, 21))))))
                                     .addComponent(jLabel1))))
                         .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(btnEx)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel16)
@@ -714,7 +719,7 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1)))
+                                .addComponent(btnEx)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnTatCa, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -778,22 +783,21 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         if (slt.isEmpty()) {
             txtSLT.setBackground(Color.red);
         } else if (!slt.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Số lượng tồn phải là số");
+            JOptionPane.showMessageDialog(this, "Kiểm tra lại số lượng");
         } else {
             txtSLT.setBackground(Color.white);
         }
-
         if (gn.isEmpty()) {
             txtGN.setBackground(Color.red);
         } else if (!gn.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Giá nhập phải là số");
+            JOptionPane.showMessageDialog(this, "Kiểm tra lại giá nhập");
         } else {
             txtGN.setBackground(Color.white);
         }
         if (gb.isEmpty()) {
             txtGB.setBackground(Color.red);
         } else if (!gb.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Giá bán phải là số");
+            JOptionPane.showMessageDialog(this, "Kiểm tra lại giá bán");
         } else {
             txtGB.setBackground(Color.white);
         }
@@ -966,6 +970,109 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
         loadTable(listSPCT);
     }//GEN-LAST:event_btnTatCaActionPerformed
 
+    private void btnExActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExActionPerformed
+        try {
+            XSSFWorkbook xssw = new XSSFWorkbook();
+            XSSFSheet xsss = xssw.createSheet("dsD");
+            XSSFRow xssr = null;
+            Cell cell = null;
+
+            xssr = xsss.createRow(2);
+            cell = xssr.createCell(0, CellType.STRING);
+            cell.setCellValue("ListSanPham");
+
+            xssr = xsss.createRow(3);
+            cell = xssr.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+
+            cell = xssr.createCell(1, CellType.STRING);
+            cell.setCellValue("Ten SP");
+
+            cell = xssr.createCell(2, CellType.STRING);
+            cell.setCellValue("Loai SP");
+
+            cell = xssr.createCell(3, CellType.STRING);
+            cell.setCellValue("Mau sac");
+
+            cell = xssr.createCell(4, CellType.STRING);
+            cell.setCellValue("Chat lieu");
+
+            cell = xssr.createCell(5, CellType.STRING);
+            cell.setCellValue("Size");
+
+            cell = xssr.createCell(6, CellType.STRING);
+            cell.setCellValue("Nha san xuat");
+
+            cell = xssr.createCell(7, CellType.NUMERIC);
+            cell.setCellValue("So luong ton");
+
+            cell = xssr.createCell(8, CellType.NUMERIC);
+            cell.setCellValue("Gia nhap");
+
+            cell = xssr.createCell(9, CellType.NUMERIC);
+            cell.setCellValue("Gia ban");
+
+            cell = xssr.createCell(10, CellType.STRING);
+            cell.setCellValue("Mo ta");
+
+            for (int i = 0; i < listSPCT.size(); i++) {
+                //Modelbook book =arr.get(i);
+                xssr = xsss.createRow(4 + i);
+
+                cell = xssr.createCell(0, CellType.NUMERIC);
+                cell.setCellValue(i + 1);
+
+                cell = xssr.createCell(1, CellType.STRING);
+                cell.setCellValue(listSPCT.get(i).getTenSP());
+
+                cell = xssr.createCell(2, CellType.STRING);
+                cell.setCellValue(listSPCT.get(i).getLoaiSP());
+
+                cell = xssr.createCell(3, CellType.STRING);
+                cell.setCellValue(listSPCT.get(i).getMauSac());
+
+                cell = xssr.createCell(4, CellType.STRING);
+                cell.setCellValue(listSPCT.get(i).getChatLieu());
+
+                cell = xssr.createCell(5, CellType.STRING);
+                cell.setCellValue(listSPCT.get(i).getSize());
+
+                cell = xssr.createCell(6, CellType.STRING);
+                cell.setCellValue(listSPCT.get(i).getNsx());
+
+                cell = xssr.createCell(7, CellType.NUMERIC);
+                cell.setCellValue(listSPCT.get(i).getSlt());
+
+                cell = xssr.createCell(8, CellType.NUMERIC);
+                cell.setCellValue(listSPCT.get(i).getGiaNhap());
+
+                cell = xssr.createCell(9, CellType.NUMERIC);
+                cell.setCellValue(listSPCT.get(i).getGiaBan());
+
+                cell = xssr.createCell(10, CellType.STRING);
+                cell.setCellValue(listSPCT.get(i).getMoTa());
+
+            }
+
+            File f = new File("D:\\SanPham.xlsx");
+            try {
+                FileOutputStream fis = new FileOutputStream(f);
+                xssw.write(fis);
+                fis.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "In thanh cong");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Loi mo file");
+        }
+    }//GEN-LAST:event_btnExActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1006,6 +1113,7 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCL;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnEx;
     private javax.swing.JButton btnLSP;
     private javax.swing.JButton btnLocCL;
     private javax.swing.JButton btnLocLSP;
@@ -1031,7 +1139,6 @@ public class SanPhamChiTiet extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbNhaSX;
     private javax.swing.JComboBox<String> cbbSize;
     private javax.swing.JComboBox<String> cbbTenSp;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
