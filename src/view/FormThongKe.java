@@ -442,7 +442,7 @@ public class FormThongKe extends javax.swing.JFrame {
                 
             }
 
-            File f = new File("D:\\hoadon.xlsx");
+            File f = new File("D:\\thongKe.xlsx");
             try {
                 FileOutputStream fis = new FileOutputStream(f);
                 xssw.write(fis);
