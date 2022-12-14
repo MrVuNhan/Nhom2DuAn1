@@ -21,7 +21,7 @@ public class KhachHang extends javax.swing.JFrame {
     private List<KhachHangViewModel> listKH = new ArrayList<>();
     private DefaultTableModel dtm = new DefaultTableModel();
     private KhachHangService ser = new KhachHangServiceimpl();
-  private String maNV;
+    private String maNV;
      public KhachHang() {
         initComponents();
          setLocationRelativeTo(null);

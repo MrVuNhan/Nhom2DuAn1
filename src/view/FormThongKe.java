@@ -37,7 +37,8 @@ public class FormThongKe extends javax.swing.JFrame {
     private List<ThongKeViewModle> listCl = new ArrayList<>();
     private ThongKeImpl thongKe = new ThongKeImpl();
     private List<ThongKeViewModle> listSearch = new ArrayList<>();
-
+    private String ma;
+    
     public FormThongKe() {
         initComponents();
         setLocationRelativeTo(null);

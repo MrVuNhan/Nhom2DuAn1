@@ -4,12 +4,8 @@
  */
 package service;
 
-import domainmodel.HoaDonBH;
 import java.util.List;
 import viewmodel.HoaDonBHViewModel;
-import viewmodel.HoaDonCTBHViewModel;
-import viewmodel.KhachHangViewModel;
-import viewmodel.NhanVien;
 
 /**
  *
@@ -20,6 +16,8 @@ public interface HoaDonBHSer {
     List<HoaDonBHViewModel> getAll();
 
     List<HoaDonBHViewModel> getAll1();
+    
+    List<HoaDonBHViewModel> getTT(int trangThai);
 
     String add(String ma, String IDNV);
 

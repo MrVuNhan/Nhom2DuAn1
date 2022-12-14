@@ -232,6 +232,7 @@ public class BanHang extends javax.swing.JFrame {
         radioDa = new javax.swing.JRadioButton();
         radioChua = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -308,11 +309,29 @@ public class BanHang extends javax.swing.JFrame {
 
         buttonGroup1.add(radioDa);
         radioDa.setText("Đã thanh toán");
+        radioDa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioDaActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(radioChua);
         radioChua.setText("Chưa thanh toán");
+        radioChua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioChuaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Danh sách hóa đơn:");
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Tất Cả");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -326,16 +345,19 @@ public class BanHang extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(jLabel4))
+                                .addComponent(jLabel4)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(radioDa, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(radioChua)
-                                .addGap(59, 59, 59)
-                                .addComponent(btnTaoHoaDon)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnTaoHoaDon))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -351,7 +373,8 @@ public class BanHang extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioChua)
                     .addComponent(radioDa)
-                    .addComponent(btnTaoHoaDon))
+                    .addComponent(btnTaoHoaDon)
+                    .addComponent(jRadioButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -760,7 +783,7 @@ public class BanHang extends javax.swing.JFrame {
     }
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         int row = tbMuaHang.getSelectedRow();
-        fillData1(row);
+//        fillData1(row);
 //        lisHDBH = serHDBH.getAll();
         int row1 = tbHoaDon.getSelectedRow();
         SanPhamChiTietViewModel sp = listDSMH.get(row);
@@ -776,8 +799,10 @@ public class BanHang extends javax.swing.JFrame {
             checkLB2();
         } else {
             double tt = Double.valueOf(tienKD) - sp.getSlt() * sp.getGiaBan();
-            String tienThua = String.valueOf(tt);
-            lbTienThua.setText(tienThua);
+//            String tienThua = String.valueOf(tt);
+//            lbTienThua.setText(tienThua);
+//            double tienThua = Double.valueOf(tt);
+            lbTienThua.setText(String.valueOf(tt));
             System.out.println(hds.getMa());
             String idHD = serHDBH.getIDHD(hds.getMa());
             String idKH = serHDBH.getIDKH((String) cbbKH.getSelectedItem());
@@ -791,9 +816,14 @@ public class BanHang extends javax.swing.JFrame {
             } else {
                 System.out.println("cn khong tk");
             }
-            listDSMH.remove(row);
+            loadTableDSMH(listDSMH);
             lisHDBH = serHDBH.getAll();
             loadTable1(lisHDBH);
+            txtKhachDua.setText("");
+            txtNgTao.setText("");
+            txtTenNV.setText("");
+            txtMa.setText("");
+           
 
         }
 
@@ -804,7 +834,7 @@ public class BanHang extends javax.swing.JFrame {
         System.out.println(idNV);
         String maHD = null;
         for (int i = lisHDBH.size() + 1; i < lisHDBH.size() + 2; i++) {
-            maHD = "HD0" + i;
+            maHD = "HD" + i;
         }
         JOptionPane.showMessageDialog(this, serHDBH.add(maHD, idNV));
         lisHDBH = serHDBH.getAll();
@@ -839,7 +869,9 @@ public class BanHang extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_tbSanPhamMouseClicked
-
+  private void loadTT(List<HoaDonBHViewModel> lists){
+      
+  }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Menu login = new Menu(ma);
         login.setVisible(true);
@@ -884,6 +916,8 @@ public class BanHang extends javax.swing.JFrame {
     private void tbMuaHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMuaHangMouseClicked
         int row = tbMuaHang.getSelectedRow();
         fillData1(row);
+        loadTableDSMH(listDSMH);
+       
     }//GEN-LAST:event_tbMuaHangMouseClicked
 
     private void cbbsizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbsizeActionPerformed
@@ -909,6 +943,21 @@ public class BanHang extends javax.swing.JFrame {
         listSPCT = serSPCT.getAll();
         loadTable(listSPCT);
     }//GEN-LAST:event_cbbTatCaActionPerformed
+
+    private void radioDaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDaActionPerformed
+        lisHDBH = serHDBH.getTT(1);
+        loadTable1(lisHDBH);
+    }//GEN-LAST:event_radioDaActionPerformed
+
+    private void radioChuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioChuaActionPerformed
+        lisHDBH = serHDBH.getTT(0);
+        loadTable1(lisHDBH);
+    }//GEN-LAST:event_radioChuaActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+         lisHDBH = serHDBH.getAll();
+        loadTable1(lisHDBH);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     public void loadTable(List<SanPhamChiTietViewModel> list) {
         dtm.setRowCount(0);
@@ -1026,6 +1075,7 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

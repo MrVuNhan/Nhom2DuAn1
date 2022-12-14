@@ -4,7 +4,6 @@
  */
 package repository;
 
-import domainmodel.HoaDonBH;
 import java.util.List;
 import viewmodel.HoaDonBHViewModel;
 import java.sql.SQLException;
@@ -16,9 +15,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ulities.DBConnection;
-import viewmodel.HoaDonCTBHViewModel;
 import viewmodel.HoaDonCTViewModel;
-import viewmodel.KhachHangViewModel;
 import viewmodel.NhanVien;
 
 /**
@@ -30,8 +27,9 @@ public class HoaDonBHRepo {
     public List<HoaDonBHViewModel> getAll() {
         String query = "SELECT dbo.HoaDon.Id ,dbo.HoaDon.Ma, dbo.NhanVien.TenNV, dbo.HoaDon.NgayTao, dbo.HoaDon.TrangThai\n"
                 + "FROM     dbo.HoaDon INNER JOIN\n"
-                + "                  dbo.NhanVien ON dbo.HoaDon.IdNV = dbo.NhanVien.Id ";
-//                + "where HoaDon.trangThai = 0 ";
+                + "                  dbo.NhanVien ON dbo.HoaDon.IdNV = dbo.NhanVien.Id "
+                + "group by dbo.HoaDon.Id ,dbo.HoaDon.Ma, dbo.NhanVien.TenNV, dbo.HoaDon.NgayTao, dbo.HoaDon.TrangThai\n"
+                + "								 order by HoaDon.Ma desc ";
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<HoaDonBHViewModel> listBH = new ArrayList<>();
@@ -41,6 +39,37 @@ public class HoaDonBHRepo {
                 String tenNV = rs.getString("tenNV");
                 Date ngayTao = rs.getDate("ngayTao");
                 int trangThai = rs.getInt("trangThai");
+                HoaDonBHViewModel hd = new HoaDonBHViewModel(id, ma, tenNV, ngayTao, trangThai);
+                listBH.add(hd);
+            }
+            return listBH;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonBHRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<HoaDonBHViewModel> getTT(int trangThai) {
+        String query = "SELECT dbo.HoaDon.Id ,dbo.HoaDon.Ma, dbo.NhanVien.TenNV, dbo.HoaDon.NgayTao, dbo.HoaDon.TrangThai\n"
+                + "FROM     dbo.HoaDon INNER JOIN\n"
+                + "                  dbo.NhanVien ON dbo.HoaDon.IdNV = dbo.NhanVien.Id "
+                + "where HoaDon.TrangThai = ? "
+                + "group by dbo.HoaDon.Id ,dbo.HoaDon.Ma, dbo.NhanVien.TenNV, dbo.HoaDon.NgayTao, dbo.HoaDon.TrangThai\n"
+                + "								 order by HoaDon.Ma desc ";
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setObject(1, trangThai);
+            ResultSet rs = ps.executeQuery();
+            
+            List<HoaDonBHViewModel> listBH = new ArrayList<>();
+            while (rs.next()) {
+                String id = rs.getString("Id");
+                String ma = rs.getString("Ma");
+                String tenNV = rs.getString("tenNV");
+                Date ngayTao = rs.getDate("ngayTao");
+
                 HoaDonBHViewModel hd = new HoaDonBHViewModel(id, ma, tenNV, ngayTao, trangThai);
                 listBH.add(hd);
             }
@@ -198,7 +227,7 @@ public class HoaDonBHRepo {
         return id;
     }
 
-    public boolean updateTTHD(String idHD, String idKH, 
+    public boolean updateTTHD(String idHD, String idKH,
             String ten, String dc, String sdt) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET \n"
@@ -231,7 +260,7 @@ public class HoaDonBHRepo {
         }
         return check > 0;
     }
-      
+
 //    public List<HoaDonBHViewModel> search(List<HoaDonBHViewModel> listTim, String tim){
 //        List<HoaDonBHViewModel> list = new ArrayList<>();
 //        String search ="select * from hoadon where Ma=?";
@@ -251,7 +280,6 @@ public class HoaDonBHRepo {
 //            e.printStackTrace(System.out);
 //        }
 //        return null;
-
     public static void main(String[] args) {
 //        List<HoaDonBHViewModel> list = new HoaDonBHRepo().getAll();
 //        list.forEach(l -> System.out.printf("%s \n", l.getId()));

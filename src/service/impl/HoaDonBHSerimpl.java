@@ -73,6 +73,10 @@ public class HoaDonBHSerimpl implements HoaDonBHSer {
         return re.updateTTHD(idHD, idKH, ten, dc, sdt);
     }
 
+    @Override
+    public List<HoaDonBHViewModel> getTT(int trangThai) {
+return re.getTT(trangThai);}
+
     
 
 }

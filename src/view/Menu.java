@@ -266,9 +266,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btthoadonActionPerformed
 
     private void bttthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttthongkeActionPerformed
-        // FormThongKe login = new FormThongKe(ma);
-        // login.setVisible(true);
-        // this.dispose();
+//         FormThongKe login = new FormThongKe(ma);
+//         login.setVisible(true);
+//         this.dispose();
     }//GEN-LAST:event_bttthongkeActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
