@@ -4,20 +4,26 @@
  */
 package viewmodel;
 
+import java.util.Date;
+
 /**
  *
- * @author lenovo
+ * @author FPTSHOP
  */
 public class NhanVien {
 
-    private String id,ma, ten, sdt, diachi, emailString, ngaysinh, matkhau;
-    private int gioiTinh, trangThai;
+    private String id, ma, ten, sdt, diachi, emailString, ngaysinh, matkhau;
+    private int ngayCong;
+    private int GioiTinh, trangThai;
+
+    private boolean gioiTinh1, trangThai1;
+    private double luong;
+    private Date ngayVao;
 
     public NhanVien() {
     }
 
-    public NhanVien(String id, String ma, String ten, String sdt, String diachi, String emailString, String ngaysinh, String matkhau, int gioiTinh, int trangThai) {
-        this.id = id;
+    public NhanVien(String ma, String ten, String sdt, String diachi, String emailString, String ngaysinh, String matkhau, int ngayCong, boolean gioiTinh1, boolean trangThai1, double luong, Date ngayVao) {
         this.ma = ma;
         this.ten = ten;
         this.sdt = sdt;
@@ -25,8 +31,82 @@ public class NhanVien {
         this.emailString = emailString;
         this.ngaysinh = ngaysinh;
         this.matkhau = matkhau;
-        this.gioiTinh = gioiTinh;
+        this.ngayCong = ngayCong;
+        this.gioiTinh1 = gioiTinh1;
+        this.trangThai1 = trangThai1;
+        this.luong = luong;
+        this.ngayVao = ngayVao;
+    }
+
+    public NhanVien(String ma, String ten, String sdt, String diachi, String emailString, String ngaysinh, String matkhau, int ngayCong, int GioiTinh, int trangThai, double luong) {
+        this.ma = ma;
+        this.ten = ten;
+        this.sdt = sdt;
+        this.diachi = diachi;
+        this.emailString = emailString;
+        this.ngaysinh = ngaysinh;
+        this.matkhau = matkhau;
+        this.ngayCong = ngayCong;
+        this.GioiTinh = GioiTinh;
         this.trangThai = trangThai;
+        this.luong = luong;
+
+    }
+
+    public int getNgayCong() {
+        return ngayCong;
+    }
+
+    public void setNgayCong(int ngayCong) {
+        this.ngayCong = ngayCong;
+    }
+
+    public double getLuong() {
+        return luong;
+    }
+
+    public void setLuong(double luong) {
+        this.luong = luong;
+    }
+
+    public Date getNgayVao() {
+        return ngayVao;
+    }
+
+    public int getGioiTinh() {
+        return GioiTinh;
+    }
+
+    public void setGioiTinh(int GioiTinh) {
+        this.GioiTinh = GioiTinh;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public boolean isGioiTinh1() {
+        return gioiTinh1;
+    }
+
+    public void setGioiTinh1(boolean gioiTinh1) {
+        this.gioiTinh1 = gioiTinh1;
+    }
+
+    public boolean isTrangThai1() {
+        return trangThai1;
+    }
+
+    public void setTrangThai1(boolean trangThai1) {
+        this.trangThai1 = trangThai1;
+    }
+
+    public void setNgayVao(Date ngayVao) {
+        this.ngayVao = ngayVao;
     }
 
     public NhanVien(String ma, String ten) {
@@ -41,8 +121,6 @@ public class NhanVien {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     public String getMa() {
         return ma;
@@ -100,24 +178,8 @@ public class NhanVien {
         this.matkhau = matkhau;
     }
 
-    public int getGioiTinh() {
-        return gioiTinh;
-    }
-
-    public void setGioiTinh(int gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
-
     public String gtinh() {
-        if (gioiTinh == 1) {
+        if (gioiTinh1 == true) {
             return "Nam";
         } else {
             return "Nữ";
@@ -125,7 +187,7 @@ public class NhanVien {
     }
 
     public String tthai() {
-        if (trangThai == 1) {
+        if (trangThai1 == true) {
             return "Còn Làm";
         } else {
             return "Nghỉ Làm";
@@ -138,7 +200,6 @@ public class NhanVien {
 
     @Override
     public String toString() {
-        return "NhanVien{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", sdt=" + sdt + ", diachi=" + diachi + ", emailString=" + emailString + ", ngaysinh=" + ngaysinh + ", matkhau=" + matkhau + ", gioiTinh=" + gioiTinh + ", trangThai=" + trangThai + '}';
+        return "NhanVien{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", sdt=" + sdt + ", diachi=" + diachi + ", emailString=" + emailString + ", ngaysinh=" + ngaysinh + ", matkhau=" + matkhau + ", gioiTinh=" + gioiTinh1 + ", trangThai=" + trangThai1 + '}';
     }
-    
 }

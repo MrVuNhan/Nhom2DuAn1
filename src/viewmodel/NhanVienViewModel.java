@@ -4,15 +4,18 @@
  */
 package viewmodel;
 
+import java.util.Date;
+
 /**
  *
  * @author lenovo
  */
 public class NhanVienViewModel {
 
-    private String ma, ten;
+    private String id, ma, ten;
     private boolean gioitinh;
     private String ngaySinh, sdt, diaChi, email;
+    private String mk;
     private int ngayCong;
     private double luong;
     private int trangThai;
@@ -20,7 +23,8 @@ public class NhanVienViewModel {
     public NhanVienViewModel() {
     }
 
-    public NhanVienViewModel(String ma, String ten, boolean gioitinh, String ngaySinh, String sdt, String diaChi, String email, int ngayCong, double luong, int trangThai) {
+    public NhanVienViewModel(String id, String ma, String ten, boolean gioitinh, String ngaySinh, String sdt, String diaChi, String email, String mk, int ngayCong, double luong, int trangThai) {
+        this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.gioitinh = gioitinh;
@@ -28,6 +32,21 @@ public class NhanVienViewModel {
         this.sdt = sdt;
         this.diaChi = diaChi;
         this.email = email;
+        this.mk = mk;
+        this.ngayCong = ngayCong;
+        this.luong = luong;
+        this.trangThai = trangThai;
+    }
+
+    public NhanVienViewModel(String ma, String ten, boolean gioitinh, String ngaySinh, String sdt, String diaChi, String email, String mk, int ngayCong, double luong, int trangThai) {
+        this.ma = ma;
+        this.ten = ten;
+        this.gioitinh = gioitinh;
+        this.ngaySinh = ngaySinh;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.email = email;
+        this.mk = mk;
         this.ngayCong = ngayCong;
         this.luong = luong;
         this.trangThai = trangThai;
@@ -43,6 +62,22 @@ public class NhanVienViewModel {
 
     public String getTen() {
         return ten;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMk() {
+        return mk;
+    }
+
+    public void setMk(String mk) {
+        this.mk = mk;
     }
 
     public void setTen(String ten) {
@@ -112,13 +147,15 @@ public class NhanVienViewModel {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    public String gtinh(boolean gioiTinh){
-        if (gioiTinh ==true) {
+
+    public String gtinh(boolean gioiTinh) {
+        if (gioiTinh == true) {
             return "Nam";
-        }else{
+        } else {
             return "Nữ";
         }
     }
+
     public double lg() {
         return ngayCong * 90000;
     }
@@ -132,6 +169,6 @@ public class NhanVienViewModel {
     }
 
     public Object[] toDataRow() {
-        return new Object[]{ma, ten, gtinh(gioitinh), ngaySinh, sdt, diaChi, email, ngayCong, lg(), tthai()};
+        return new Object[]{ma, ten, gtinh(gioitinh), ngaySinh, sdt, diaChi, email, ngayCong, lg(), tthai(),mk};
     }
 }

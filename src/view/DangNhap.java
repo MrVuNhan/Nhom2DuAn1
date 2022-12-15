@@ -183,7 +183,7 @@ public boolean checkLoginNV(String ma, String matKhau) {
                 this.dispose();
             } else if (checkLoginQL(user, pass)) {
                 JOptionPane.showMessageDialog(this, "Đăng nhập với role Quản Lý !");
-                MenuNhanVien fnv = new MenuNhanVien(user);
+                Menu fnv = new Menu(user);
                 fnv.setVisible(true);
                 this.dispose();
             } else {
